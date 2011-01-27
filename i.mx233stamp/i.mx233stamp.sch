@@ -1,0 +1,127 @@
+EESchema Schematic File Version 2  date Thu 20 Jan 2011 08:06:53 AM COT
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:special
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:micron_ddr_512Mb
+LIBS:iMX23
+LIBS:sdmmc
+LIBS:usbconn
+LIBS:fsusb20
+LIBS:r_pack2
+LIBS:pasives-connectors
+LIBS:EEPROM
+LIBS:PWR
+LIBS:i.mx233stamp-cache
+EELAYER 24  0
+EELAYER END
+$Descr A4 11700 8267
+Sheet 1 3
+Title ""
+Date "20 jan 2011"
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+Wire Wire Line
+	4750 3200 5250 3200
+Wire Wire Line
+	5250 2900 4750 2900
+Wire Wire Line
+	4750 2650 5250 2650
+Wire Wire Line
+	4750 3850 5250 3850
+Wire Wire Line
+	4750 3550 5250 3550
+Wire Wire Line
+	4750 3350 5250 3350
+Wire Wire Line
+	4750 2550 5250 2550
+Wire Wire Line
+	4750 2250 5250 2250
+Wire Bus Line
+	4750 1900 5250 1900
+Wire Bus Line
+	4750 2050 5250 2050
+Wire Wire Line
+	4750 2350 5250 2350
+Wire Wire Line
+	4750 3450 5250 3450
+Wire Wire Line
+	4750 3750 5250 3750
+Wire Wire Line
+	4750 2800 5250 2800
+Wire Wire Line
+	5250 3100 4750 3100
+$Sheet
+S 5250 1600 1150 2500
+U 4D30B991
+F0 "DDR" 60
+F1 "DDR1.sch" 60
+F2 "DDR_A[0..12]" I L 5250 1900 60 
+F3 "DDR_DQ[0..15]" B L 5250 2050 60 
+F4 "DDR_BA0" I L 5250 3750 60 
+F5 "DDR_BA1" I L 5250 3850 60 
+F6 "DDR_CE0" I L 5250 2250 60 
+F7 "DDR_CASN" I L 5250 2550 60 
+F8 "DDR_CKE" I L 5250 3550 60 
+F9 "DDR_CLKN" I L 5250 3450 60 
+F10 "DDR_CLK" I L 5250 3350 60 
+F11 "DDR_DQM0" I L 5250 3100 60 
+F12 "DDR_DQM1" I L 5250 3200 60 
+F13 "DDR_DQS0" I L 5250 2800 60 
+F14 "DDR_DQS1" I L 5250 2900 60 
+F15 "DDR_RASN" I L 5250 2650 60 
+F16 "DDR_WEN" I L 5250 2350 60 
+$EndSheet
+$Sheet
+S 3150 1600 1600 2500
+U 4D30AC69
+F0 "i.MX233" 60
+F1 "i.MX233.sch" 60
+F2 "DDR_A[0..12]" O R 4750 1900 60 
+F3 "DDR_DQ[0..15]" B R 4750 2050 60 
+F4 "DDR_WEN" O R 4750 2350 60 
+F5 "DDR_RASN" O R 4750 2650 60 
+F6 "DDR_DQS1" O R 4750 2900 60 
+F7 "DDR_DQS0" O R 4750 2800 60 
+F8 "DDR_DQM1" O R 4750 3200 60 
+F9 "DDR_DQM0" O R 4750 3100 60 
+F10 "DDR_CLK" O R 4750 3350 60 
+F11 "DDR_CLKN" O R 4750 3450 60 
+F12 "DDR_CKE" O R 4750 3550 60 
+F13 "DDR_CASN" O R 4750 2550 60 
+F14 "DDR_CE0" O R 4750 2250 60 
+F15 "DDR_BA1" O R 4750 3850 60 
+F16 "DDR_BA0" O R 4750 3750 60 
+$EndSheet
+$EndSCHEMATC

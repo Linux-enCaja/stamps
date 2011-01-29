@@ -1,0 +1,17 @@
+Cmp-Mod V01 Created by CvPCB (2010-10-01 BZR 2513)-testing date = Fri 14 Jan 2011 04:09:59 PM COT
+
+BeginCmp
+TimeStamp = /4D30AC69/4D30ACAB;
+Reference = U1;
+ValeurCmp = IMX23;
+IdModule  = fpBGA169;
+EndCmp
+
+BeginCmp
+TimeStamp = /4D30B991/4D30BA6E;
+Reference = U2;
+ValeurCmp = MT46V32M16TG;
+IdModule  = TSOP-66;
+EndCmp
+
+EndListe

@@ -1,4 +1,4 @@
-update=mié 26 ene 2011 16:41:38 COT
+update=vie 28 ene 2011 09:56:44 COT
 version=1
 last_client=eeschema
 [general]
@@ -47,7 +47,7 @@ LibName16=../modules/R_PACK4-0402
 LibName17=../modules/stdpass
 [eeschema]
 version=1
-LibDir=../../../libkicad
+LibDir=
 NetFmt=1
 HPGLSpd=20
 HPGLDm=15
@@ -81,9 +81,9 @@ LabSize=60
 PrintMonochrome=1
 ShowSheetReferenceAndTitleBlock=1
 [eeschema/libraries]
-LibName1=transistor-npn
-LibName2=ipc-7351-transistor
-LibName3=switch-misc
+LibName1=../components/transistor-npn
+LibName2=../components/ipc-7351-transistor
+LibName3=../components/switch-misc
 LibName4=power
 LibName5=device
 LibName6=transistors
@@ -123,4 +123,4 @@ LibName39=../components/r_pack2
 LibName40=../components/pasives-connectors
 LibName41=../components/EEPROM
 LibName42=../components/PWR
-LibName43=m25p32
+LibName43=../components/m25p32

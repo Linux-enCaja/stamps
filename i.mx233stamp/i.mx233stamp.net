@@ -1,539 +1,829 @@
-# EESchema Netlist Version 1.1 created  Thu 20 Jan 2011 08:06:44 AM COT
+# EESchema Netlist Version 1.1 created  lun 31 ene 2011 14:38:59 COT
 (
- ( /4D30B991/4D379408 0603  C30 1uF {Lib=CAP}
-  (    1 N-000205 )
-  (    2 GND )
+ ( /4D30AC69/4D42D643 PIN_ARRAY_2X1 BT1 BATTERY
+  ( 1 VDD_BATT )
+  ( 2 GND )
  )
- ( /4D30B991/4D3793C2 0402  C27 100nF {Lib=CAP}
-  (    1 N-000205 )
-  (    2 GND )
+ ( /4D30AC69/4D377896 SM0603 C20 100nF
+  ( 1 VDDIO_3V3 )
+  ( 2 GND )
  )
- ( /4D30B991/4D3793C1 0402  C28 100nF {Lib=CAP}
-  (    1 N-000205 )
-  (    2 GND )
+ ( /4D30AC69/4D377897 SM0603 C21 1uF
+  ( 1 VDDIO_3V3 )
+  ( 2 GND )
  )
- ( /4D30B991/4D3793C0 0402  C29 100nF {Lib=CAP}
-  (    1 N-000205 )
-  (    2 GND )
+ ( /4D30AC69/4D42D632 SM0603 C22 0.01uF
+  ( 1 VDDIO_3V3 )
+  ( 2 GND )
  )
- ( /4D30B991/4D3793B4 0402  C26 100nF {Lib=CAP}
-  (    1 N-000205 )
-  (    2 GND )
+ ( /4D30AC69/4D42D64E SM0603 C23 0.1uF
+  ( 1 VDD_XTAL )
+  ( 2 GND )
  )
- ( /4D30B991/4D3793B0 0402  C25 100nF {Lib=CAP}
-  (    1 N-000205 )
-  (    2 GND )
+ ( /4D30AC69/4D42D631 SM0603 C24 0.1uF
+  ( 1 VDDIO_3V3 )
+  ( 2 GND )
  )
- ( /4D30B991/4D3793AB 0402  C24 100nF {Lib=CAP}
-  (    1 N-000205 )
-  (    2 GND )
+ ( /4D30AC69/4D42D630 SM0603 C25 1uF
+  ( 1 VDDIO_3V3 )
+  ( 2 GND )
  )
- ( /4D30B991/4D3793A3 0402  C23 100nF {Lib=CAP}
-  (    1 N-000205 )
-  (    2 GND )
+ ( /4D30AC69/4D4054E0 SM0603 C26 1uF
+  ( 1 /i.MX233/VAG )
+  ( 2 GND )
  )
- ( /4D30B991/4D379387 0402  C22 100nF {Lib=CAP}
-  (    1 N-000205 )
-  (    2 GND )
+ ( /4D30AC69/4D42D62F SM0603 C27 33uF
+  ( 1 VDDIO_3V3 )
+  ( 2 GND )
  )
- ( /4D30B991/4D34DB06 R_PACK4-0402  RP5 R_PACK4 {Lib=R_PACK4}
-  (    1 ? )
-  (    2 ? )
-  (    3 ? )
-  (    4 ? )
-  (    5 ? )
-  (    6 ? )
-  (    7 ? )
-  (    8 ? )
+ ( /4D30AC69/4D42D64B SM0603 C28 0.1uF
+  ( 1 VDDA )
+  ( 2 GND )
  )
- ( /4D30B991/4D34DA16 R_PACK4-0402  RP3 R_PACK4 {Lib=R_PACK4}
-  (    1 /i.MX233/DDR_A8 )
-  (    2 /DDR/DDR_A9 )
-  (    3 /i.MX233/DDR_A10 )
-  (    4 /i.MX233/DDR_A11 )
-  (    5 /DDR/R_DDR_A11 )
-  (    6 /DDR/R_DDR_A10 )
-  (    7 /DDR/R_DDR_A9 )
-  (    8 /DDR/R_DDR_A8 )
+ ( /4D30AC69/4D42D64A SM0603 C29 1uF
+  ( 1 VDDA )
+  ( 2 GND )
  )
- ( /4D30B991/4D34DA15 R_PACK4-0402  RP4 R_PACK4 {Lib=R_PACK4}
-  (    1 ? )
-  (    2 ? )
-  (    3 ? )
-  (    4 ? )
-  (    5 ? )
-  (    6 ? )
-  (    7 ? )
-  (    8 ? )
+ ( /4D30AC69/4D42D629 SM0603 C30 0.01uF
+  ( 1 VDDA )
+  ( 2 GND )
  )
- ( /4D30B991/4D34DA06 R_PACK4-0402  RP2 R_PACK4 {Lib=R_PACK4}
-  (    1 /i.MX233/DDR_A4 )
-  (    2 /DDR/DDR_A5 )
-  (    3 /DDR/DDR_A6 )
-  (    4 /DDR/DDR_A7 )
-  (    5 /DDR/R_DDR_A7 )
-  (    6 /DDR/R_DDR_A6 )
-  (    7 /DDR/R_DDR_A5 )
-  (    8 /DDR/R_DDR_A4 )
+ ( /4D30AC69/4D42D62A SM0603 C31 0.1uF
+  ( 1 VDDA )
+  ( 2 GND )
  )
- ( /4D30B991/4D3449EB R_PACK4-0402  RP1 R_PACK4 {Lib=R_PACK4}
-  (    1 /DDR/DDR_A0 )
-  (    2 /i.MX233/DDR_A1 )
-  (    3 /i.MX233/DDR_A2 )
-  (    4 /i.MX233/DDR_A3 )
-  (    5 /DDR/R_DDR_A3 )
-  (    6 /DDR/R_DDR_A2 )
-  (    7 /DDR/R_DDR_A1 )
-  (    8 /DDR/R_DDR_A0 )
+ ( /4D30AC69/4D42D647 SM0603 C32 0.1uF
+  ( 1 VDD5V )
+  ( 2 GND )
  )
- ( /4D30B991/4D30BA6E TSOP-66  U2 MT46V32M16TG {Lib=MT46V32M16TG}
-  (    1 N-000206 )
-  (    2 /i.MX233/DDR_DQ0 )
-  (    3 N-000206 )
-  (    4 /DDR/DDR_DQ1 )
-  (    5 /DDR/DDR_DQ2 )
-  (    6 GND )
-  (    7 /DDR/DDR_DQ3 )
-  (    8 /i.MX233/DDR_DQ4 )
-  (    9 N-000206 )
-  (   10 /DDR/DDR_DQ5 )
-  (   11 /DDR/DDR_DQ6 )
-  (   12 GND )
-  (   13 /i.MX233/DDR_DQ7 )
-  (   14 ? )
-  (   15 N-000206 )
-  (   16 ? )
-  (   17 ? )
-  (   18 N-000206 )
-  (   19 ? )
-  (   20 ? )
-  (   21 ? )
-  (   22 ? )
-  (   23 ? )
-  (   24 ? )
-  (   25 ? )
-  (   26 ? )
-  (   27 ? )
-  (   28 /DDR/R_DDR_A10 )
-  (   29 /DDR/R_DDR_A0 )
-  (   30 /DDR/R_DDR_A1 )
-  (   31 /DDR/R_DDR_A2 )
-  (   32 /DDR/R_DDR_A3 )
-  (   33 N-000206 )
-  (   34 GND )
-  (   35 /DDR/R_DDR_A4 )
-  (   36 /DDR/R_DDR_A5 )
-  (   37 /DDR/R_DDR_A6 )
-  (   38 /DDR/R_DDR_A7 )
-  (   39 /DDR/R_DDR_A8 )
-  (   40 /DDR/R_DDR_A9 )
-  (   41 /DDR/R_DDR_A11 )
-  (   42 ? )
-  (   43 ? )
-  (   44 ? )
-  (   45 ? )
-  (   46 ? )
-  (   47 ? )
-  (   48 GND )
-  (   49 ? )
-  (   50 ? )
-  (   51 ? )
-  (   52 GND )
-  (   53 ? )
-  (   54 /DDR/DDR_DQ8 )
-  (   55 N-000206 )
-  (   56 /DDR/DDR_DQ9 )
-  (   57 /DDR/DDR_DQ10 )
-  (   58 GND )
-  (   59 /DDR/DDR_DQ11 )
-  (   60 /DDR/DDR_DQ12 )
-  (   61 N-000206 )
-  (   62 /DDR/DDR_DQ13 )
-  (   63 /DDR/DDR_DQ14 )
-  (   64 GND )
-  (   65 /DDR/DDR_DQ15 )
-  (   66 GND )
+ ( /4D30AC69/4D42D62B SM0603 C33 1uF
+  ( 1 VDDA )
+  ( 2 GND )
  )
- ( /4D30AC69/4D377897 0603  C21 1uF {Lib=CAP}
-  (    1 N-000079 )
-  (    2 GND )
+ ( /4D30AC69/4D42D646 SM0603 C34 4.7uF
+  ( 1 N-000067 )
+  ( 2 GND )
  )
- ( /4D30AC69/4D377896 0402  C20 100nF {Lib=CAP}
-  (    1 N-000079 )
-  (    2 GND )
+ ( /4D30AC69/4D42D62C SM0603 C35 33uF
+  ( 1 VDDA )
+  ( 2 GND )
  )
- ( /4D30AC69/4D3777AE 0402  C19 100nF {Lib=CAP}
-  (    1 ? )
-  (    2 GND )
+ ( /4D30AC69/4D42D626 SM0603 C36 0.01uF
+  ( 1 VDDD )
+  ( 2 GND )
  )
- ( /4D30AC69/4D3776EC 0402  C17 100nF {Lib=CAP}
-  (    1 N-000073 )
-  (    2 GND )
+ ( /4D30AC69/4D42D625 SM0603 C37 0.1uF
+  ( 1 VDDD )
+  ( 2 GND )
  )
- ( /4D30AC69/4D3776EB 0402  C18 100nF {Lib=CAP}
-  (    1 N-000073 )
-  (    2 GND )
+ ( /4D30AC69/4D42D624 SM0603 C38 1uF
+  ( 1 VDDD )
+  ( 2 GND )
  )
- ( /4D30AC69/4D37762A 0402  C4 100nF {Lib=CAP}
-  (    1 N-000081 )
-  (    2 GND )
+ ( /4D30AC69/4D42D623 SM0603 C39 33uF
+  ( 1 VDDD )
+  ( 2 GND )
  )
- ( /4D30AC69/4D377625 0402  C3 100nF {Lib=CAP}
-  (    1 N-000081 )
-  (    2 GND )
+ ( /4D30AC69/4D42D640 SM1206POL C40 33uF_Ceramic
+  ( 1 N-000066 )
+  ( 2 GND )
  )
- ( /4D30AC69/4D3775BB 0402  C16 100nF {Lib=CAP}
-  (    1 N-000074 )
-  (    2 GND )
+ ( /4D30AC69/4D42D63E SM0603 C41 0.1uF
+  ( 1 VDD_BATT )
+  ( 2 GND )
  )
- ( /4D30AC69/4D3775B9 0402  C15 100nF {Lib=CAP}
-  (    1 N-000074 )
-  (    2 GND )
+ ( /4D30AC69/4D42D619 SM0603 C42 1uF
+  ( 1 VDDM_2V5 )
+  ( 2 GND )
  )
- ( /4D30AC69/4D37757D 0805  C14 33uF {Lib=CAP}
-  (    1 N-000072 )
-  (    2 GND )
+ ( /4D30AC69/4D42D63D SM0603 C43 1uF
+  ( 1 VDD_BATT )
+  ( 2 GND )
  )
- ( /4D30AC69/4D37757C 0402  C11 10nF {Lib=CAP}
-  (    1 N-000072 )
-  (    2 GND )
+ ( /4D30AC69/4D42D620 SM0603 C44 0.1uF
+  ( 1 VDDM_2V5 )
+  ( 2 GND )
  )
- ( /4D30AC69/4D37757B 0603  C13 1uF {Lib=CAP}
-  (    1 N-000072 )
-  (    2 GND )
+ ( /4D30AC69/4D42D63C SM0603 C45 0.01uF
+  ( 1 VDD_BATT )
+  ( 2 GND )
  )
- ( /4D30AC69/4D37757A 0402  C12 100nF {Lib=CAP}
-  (    1 N-000072 )
-  (    2 GND )
+ ( /4D30AC69/4D42D61F SM0603 C46 0.1uF
+  ( 1 VDDM_2V5 )
+  ( 2 GND )
  )
- ( /4D30AC69/4D377575 0402  C8 100nF {Lib=CAP}
-  (    1 N-000076 )
-  (    2 GND )
+ ( /4D30AC69/4D42D61B SM0603 C47 0.1uF
+  ( 1 VDDIO_3V3 )
+  ( 2 GND )
  )
- ( /4D30AC69/4D377574 0603  C9 1uF {Lib=CAP}
-  (    1 N-000076 )
-  (    2 GND )
+ ( /4D30AC69/4D42D638 SM1206POL C48 33uF_Ceramic
+  ( 1 N-000031 )
+  ( 2 GND )
  )
- ( /4D30AC69/4D377573 0402  C7 10nF {Lib=CAP}
-  (    1 N-000076 )
-  (    2 GND )
+ ( /4D30AC69/4D42D61C SM0603 C49 0.1uF
+  ( 1 VDDIO_3V3 )
+  ( 2 GND )
  )
- ( /4D30AC69/4D377572 0805  C10 33uF {Lib=CAP}
-  (    1 N-000076 )
-  (    2 GND )
+ ( /4D30AC69/4D42D637 SM0603 C50 1uF
+  ( 1 VDD4P2 )
+  ( 2 GND )
  )
- ( /4D30AC69/4D3771EF 0805  C6 33uF {Lib=CAP}
-  (    1 N-000081 )
-  (    2 GND )
+ ( /4D30AC69/4D42D617 SM0603 C51 0.1uF
+  ( 1 VDDD )
+  ( 2 GND )
  )
- ( /4D30AC69/4D377151 0402  C1 10nF {Lib=CAP}
-  (    1 N-000081 )
-  (    2 GND )
+ ( /4D30AC69/4D404D35 SM0603 C52 20_pF
+  ( 1 GND )
+  ( 2 /i.MX233/XTAL0 )
  )
- ( /4D30AC69/4D377147 0603  C5 1uF {Lib=CAP}
-  (    1 N-000081 )
-  (    2 GND )
+ ( /4D30AC69/4D404D44 SM0603 C53 20_pF
+  ( 1 GND )
+  ( 2 /i.MX233/XTALI )
  )
- ( /4D30AC69/4D377120 0402  C2 100nF {Lib=CAP}
-  (    1 N-000081 )
-  (    2 GND )
+ ( /4D30AC69/4D4053B0 SM0603 C54 50pF
+  ( 1 /i.MX233/V_OUT )
+  ( 2 GND )
  )
- ( /4D30AC69/4D343822 header20x2_smd_100mil  P2 CONN_20X2 {Lib=CONN_20X2}
-  (    1 ? )
-  (    2 ? )
-  (    3 ? )
-  (    4 ? )
-  (    5 ? )
-  (    6 ? )
-  (    7 ? )
-  (    8 ? )
-  (    9 /i.MX233/LCD_WR )
-  (   10 ? )
-  (   11 /i.MX233/LCD_VSYNC )
-  (   12 ? )
-  (   13 /i.MX233/LCD_RS )
-  (   14 ? )
-  (   15 /i.MX233/LCD_RESET )
-  (   16 ? )
-  (   17 /i.MX233/LCD_HSYNC )
-  (   18 ? )
-  (   19 /i.MX233/LCD_ENABLE )
-  (   20 ? )
-  (   21 /i.MX233/LCD_DOTCK )
-  (   22 /i.MX233/LCD_D8 )
-  (   23 /i.MX233/LCD_D17 )
-  (   24 /i.MX233/LCD_D7 )
-  (   25 /i.MX233/LCD_D16 )
-  (   26 /i.MX233/LCD_D6 )
-  (   27 /i.MX233/LCD_D15 )
-  (   28 /i.MX233/LCD_D5 )
-  (   29 /i.MX233/LCD_D14 )
-  (   30 /i.MX233/LCD_D4 )
-  (   31 /i.MX233/LCD_D13 )
-  (   32 /i.MX233/LCD_D3 )
-  (   33 /i.MX233/LCD_D12 )
-  (   34 /i.MX233/LCD_D2 )
-  (   35 /i.MX233/LCD_D11 )
-  (   36 /i.MX233/LCD_D1 )
-  (   37 /i.MX233/LCD_D10 )
-  (   38 /i.MX233/LCD_D0 )
-  (   39 /i.MX233/LCD_D9 )
-  (   40 /i.MX233/LCD_CS )
+ ( /4D30AC69/4D42D636 SM0603 C55 0.1uF
+  ( 1 VDD4P2 )
+  ( 2 GND )
  )
- ( /4D30AC69/4D34381F header20x2_smd_100mil  P1 CONN_20X2 {Lib=CONN_20X2}
-  (    1 /i.MX233/GPMI_D00 )
-  (    2 /i.MX233/GPMI_ALE )
-  (    3 /i.MX233/GPMI_D01 )
-  (    4 /i.MX233/GPMI_CE0N )
-  (    5 /i.MX233/GPMI_D02 )
-  (    6 /i.MX233/GPMI_CE1N )
-  (    7 /i.MX233/GPMI_D03 )
-  (    8 /i.MX233/GPMI_CE2N )
-  (    9 /i.MX233/GPMI_D04 )
-  (   10 /i.MX233/GPMI_CLE )
-  (   11 /i.MX233/GPMI_D05 )
-  (   12 ? )
-  (   13 /i.MX233/GPMI_D06 )
-  (   14 ? )
-  (   15 /i.MX233/GPMI_D07 )
-  (   16 ? )
-  (   17 /i.MX233/GPMI_D08 )
-  (   18 ? )
-  (   19 /i.MX233/GPMI_D09 )
-  (   20 ? )
-  (   21 /i.MX233/GPMI_D10 )
-  (   22 ? )
-  (   23 /i.MX233/GPMI_D11 )
-  (   24 ? )
-  (   25 /i.MX233/GPMI_D12 )
-  (   26 ? )
-  (   27 /i.MX233/GPMI_D13 )
-  (   28 ? )
-  (   29 /i.MX233/GPMI_D14 )
-  (   30 ? )
-  (   31 ? )
-  (   32 ? )
-  (   33 ? )
-  (   34 ? )
-  (   35 ? )
-  (   36 ? )
-  (   37 ? )
-  (   38 ? )
-  (   39 ? )
-  (   40 ? )
+ ( /4D30AC69/4D42D616 SM0603 C56 0.1uF
+  ( 1 VDDD )
+  ( 2 GND )
  )
- ( /4D30AC69/4D339582 MSOP10-0.5  IC1 FSUSB20 {Lib=FSUSB20}
-  (    1 ? )
-  (    2 /i.MX233/DPb )
-  (    3 /i.MX233/DPa )
-  (    4 /i.MX233/USB_DP )
-  (    5 ? )
-  (    6 /i.MX233/USB_DM )
-  (    7 /i.MX233/DMa )
-  (    8 /i.MX233/DMb )
-  (    9 ? )
-  (   10 ? )
+ ( /4D30AC69/4D40783C SM0603 C57 0.1uF
+  ( 1 /i.MX233/PSWITCH )
+  ( 2 GND )
  )
- ( /4D30AC69/4D3394B7 $noname  J3 USBA-PLUG {Lib=USBA-PLUG}
-  (    1 ? )
-  (    2 /i.MX233/DMb )
-  (    3 /i.MX233/DPb )
-  (    4 ? )
-  (    5 GNDPWR )
+ ( /4D30AC69/4D405793 SM0603 C58 8pF
+  ( 1 /i.MX2331 )
+  ( 2 GND )
  )
- ( /4D30AC69/4D31D9D7 USBA  J2 USBA_RECEPTACLE {Lib=USBA_RECEPTACLE}
-  (    1 ? )
-  (    2 /i.MX233/DMa )
-  (    3 /i.MX233/DPa )
-  (    4 ? )
-  (    5 GNDPWR )
+ ( /4D30AC69/4D405798 SM0603 C59 8pF
+  ( 1 /i.MX2332 )
+  ( 2 GND )
  )
- ( /4D30AC69/4D31CD4E TFC014A-YS  J1 MICROSD12P {Lib=MICROSD12P}
-  (    1 /i.MX233/SSPI_DATA2 )
-  (    2 /i.MX233/SSPI_DATA3 )
-  (    3 /i.MX233/SSPI_CMD )
-  (    4 ? )
-  (    5 /i.MX233/SSPI_SCK )
-  (    6 GND )
-  (    7 /i.MX233/SSPI_DATA0 )
-  (    8 /i.MX233/SSPI_DATA1 )
+ ( /4D30AC69/4D40865C SM0603 C60 0.1uF
+  ( 1 N-000034 )
+  ( 2 GND )
+ )
+ ( /4D30B991/4D417911 SM0603 C61 0.1uF
+  ( 1 VDDM_2V5 )
+  ( 2 GND )
+ )
+ ( /4D30B991/4D41790C SM0603 C62 0.1uF
+  ( 1 VDDM_2V5 )
+  ( 2 GND )
+ )
+ ( /4D30B991/4D417905 SM0603 C63 0.1uF
+  ( 1 VDDM_2V5 )
+  ( 2 GND )
+ )
+ ( /4D30B991/4D417828 SM0603 C64 0.1uF
+  ( 1 VDDM_2V5 )
+  ( 2 GND )
+ )
+ ( /4D30B991/4D41782F SM0603 C65 0.1uF
+  ( 1 VDDM_2V5 )
+  ( 2 GND )
+ )
+ ( /4D30B991/4D417834 SM0603 C66 0.1uF
+  ( 1 VDDM_2V5 )
+  ( 2 GND )
+ )
+ ( /4D30B991/4D41783A SM0603 C67 0.1uF
+  ( 1 VDDM_2V5 )
+  ( 2 GND )
+ )
+ ( /4D30B991/4D409658 SM0603 C68 0.1uF
+  ( 1 GND )
+  ( 2 VDDIO_3V3 )
+ )
+ ( /4D30B991/4D417845 SM0603 C69 1uF
+  ( 1 VDDM_2V5 )
+  ( 2 GND )
+ )
+ ( /4D30B991/4D417A8B SM0603 C70 0.1uF
+  ( 1 VDDM_2V5 )
+  ( 2 N-000180 )
+ )
+ ( /4D30B991/4D417A94 SM0603 C71 0.1uF
+  ( 1 N-000180 )
+  ( 2 GND )
+ )
+ ( /4D30AC69/4D42D63A D6 D1 10BQ015
+  ( 1 VDD_BATT )
+  ( 2 VDD4P2 )
+ )
+ ( /4D30AC69/4D339582 MSOP10-0.5 IC1 FSUSB20
+  ( 1 N-000170 )
+  ( 2 /i.MX233/DPb )
+  ( 3 /i.MX233/DPa )
+  ( 4 /i.MX233/USB_DP )
+  ( 5 GND )
+  ( 6 /i.MX233/USB_DM )
+  ( 7 /i.MX233/DMa )
+  ( 8 /i.MX233/DMb )
+  ( 9 N-000168 )
+  ( 10 VDDIO_3V3 )
+ )
+ ( /4D30AC69/4D31CD4E TFC014A-YS J1 MICROSD12P
+  ( 1 ? )
+  ( 2 /i.MX2333 )
+  ( 3 /i.MX2334 )
+  ( 4 VDDIO_3V3 )
+  ( 5 /i.MX2335 )
+  ( 6 GND )
+  ( 7 /i.MX2336 )
+  ( 8 ? )
   ( CASE GNDPWR )
  )
- ( /4D30AC69/4D30FAD8 fpBGA169  U1 IMX23 {Lib=IMX23}
-  (   A1 /i.MX233/USB_DM )
-  (   A2 GND )
-  (   A3 ? )
-  (   A4 ? )
-  (   A5 ? )
-  (   A6 ? )
-  (   A7 ? )
-  (   A8 ? )
-  (   A9 ? )
-  (  A10 ? )
-  (  A11 ? )
-  (  A12 ? )
-  (  A13 ? )
-  (   B1 ? )
-  (   B2 /i.MX233/USB_DP )
-  (   B3 ? )
-  (   B4 ? )
-  (   B5 ? )
-  (   B6 ? )
-  (   B7 ? )
-  (   B8 ? )
-  (   B9 ? )
-  (  B10 ? )
-  (  B11 ? )
-  (  B12 ? )
-  (  B13 ? )
-  (   C1 ? )
-  (   C2 ? )
-  (   C3 ? )
-  (   C4 ? )
-  (   C5 ? )
-  (   C6 ? )
-  (   C7 ? )
-  (   C8 GND )
-  (   C9 ? )
-  (  C10 ? )
-  (  C11 ? )
-  (  C12 ? )
-  (  C13 ? )
-  (   D1 ? )
-  (   D2 ? )
-  (   D3 /i.MX233/LCD_D0 )
-  (   D4 GND )
-  (   D5 ? )
-  (   D6 GND )
-  (   D7 ? )
-  (   D8 ? )
-  (   D9 ? )
-  (  D10 ? )
-  (  D11 ? )
-  (  D12 /i.MX233/SSPI_SCK )
-  (  D13 ? )
-  (   E1 /i.MX233/LCD_D17 )
-  (   E2 /i.MX233/LCD_D1 )
-  (   E3 /i.MX233/LCD_D16 )
-  (   E4 /i.MX233/LCD_D2 )
-  (   E5 /i.MX233/LCD_D15 )
-  (   E6 ? )
-  (   E7 ? )
-  (   E8 ? )
-  (   E9 GND )
-  (  E10 /i.MX233/SSPI_DATA3 )
-  (  E11 ? )
-  (  E12 ? )
-  (  E13 ? )
-  (   F1 /i.MX233/LCD_D3 )
-  (   F2 /i.MX233/LCD_D14 )
-  (   F3 /i.MX233/LCD_D4 )
-  (   F4 /i.MX233/LCD_D13 )
-  (   F5 /i.MX233/LCD_D5 )
-  (   F6 ? )
-  (   F7 ? )
-  (   F8 /i.MX233/GPMI_CE1N )
-  (   F9 /i.MX233/SSPI_DATA1 )
-  (  F10 /i.MX233/SSPI_DATA2 )
-  (  F11 ? )
-  (  F12 /DDR/DDR_A6 )
-  (  F13 /DDR/DDR_A9 )
-  (   G1 /i.MX233/LCD_D12 )
-  (   G2 /i.MX233/LCD_D6 )
-  (   G3 ? )
-  (   G4 /i.MX233/LCD_D11 )
-  (   G5 /i.MX233/LCD_D7 )
-  (   G6 ? )
-  (   G7 ? )
-  (   G8 /i.MX233/GPMI_CE0N )
-  (   G9 /i.MX233/SSPI_DATA0 )
-  (  G10 /i.MX233/DDR_A4 )
-  (  G11 /DDR/DDR_A7 )
-  (  G12 /DDR/DDR_A5 )
-  (  G13 /i.MX233/DDR_A8 )
-  (   H1 /i.MX233/LCD_D10 )
-  (   H2 /i.MX233/LCD_D8 )
-  (   H3 /i.MX233/LCD_D9 )
-  (   H4 /i.MX233/LCD_CS )
-  (   H5 /i.MX233/LCD_ENABLE )
-  (   H6 ? )
-  (   H7 ? )
-  (   H8 ? )
-  (   H9 /i.MX233/SSPI_CMD )
-  (  H10 /i.MX233/DDR_A11 )
-  (  H11 ? )
-  (  H12 ? )
-  (  H13 ? )
-  (   J1 /i.MX233/LCD_VSYNC )
-  (   J2 /i.MX233/LCD_HSYNC )
-  (   J3 /i.MX233/LCD_RS )
-  (   J4 /i.MX233/LCD_WR )
-  (   J5 /i.MX233/LCD_RESET )
-  (   J6 ? )
-  (   J7 GND )
-  (   J8 ? )
-  (   J9 GND )
-  (  J10 ? )
-  (  J11 ? )
-  (  J12 /i.MX233/DDR_A10 )
-  (  J13 /i.MX233/DDR_A2 )
-  (   K1 /i.MX233/LCD_DOTCK )
-  (   K2 /i.MX233/GPMI_D00 )
-  (   K3 /i.MX233/GPMI_CLE )
-  (   K4 /i.MX233/GPMI_ALE )
-  (   K5 /i.MX233/GPMI_CE2N )
-  (   K6 /DDR/DDR_DQ13 )
-  (   K7 /DDR/DDR_DQ11 )
-  (   K8 ? )
-  (   K9 /DDR/DDR_DQ5 )
-  (  K10 /i.MX233/DDR_DQ0 )
-  (  K11 /i.MX233/DDR_A3 )
-  (  K12 /i.MX233/DDR_A1 )
-  (  K13 /DDR/DDR_A0 )
-  (   L1 /i.MX233/GPMI_D01 )
-  (   L2 /i.MX233/GPMI_D02 )
-  (   L3 /i.MX233/GPMI_D03 )
-  (   L4 /i.MX233/GPMI_D05 )
-  (   L5 /i.MX233/GPMI_D04 )
-  (   L6 ? )
-  (   L7 /DDR/DDR_DQ12 )
-  (   L8 ? )
-  (   L9 /i.MX233/DDR_DQ7 )
-  (  L10 ? )
-  (  L11 /DDR/DDR_DQ6 )
-  (  L12 ? )
-  (  L13 ? )
-  (   M1 /i.MX233/GPMI_D07 )
-  (   M2 /i.MX233/GPMI_D06 )
-  (   M3 /i.MX233/GPMI_D08 )
-  (   M4 /i.MX233/GPMI_D09 )
-  (   M5 /i.MX233/GPMI_D10 )
-  (   M6 ? )
-  (   M7 /DDR/DDR_DQ15 )
-  (   M8 /DDR/DDR_DQ10 )
-  (   M9 ? )
-  (  M10 /DDR/DDR_DQ1 )
-  (  M11 /i.MX233/DDR_DQ4 )
-  (  M12 ? )
-  (  M13 ? )
-  (   N1 /i.MX233/GPMI_D11 )
-  (   N2 /i.MX233/GPMI_D12 )
-  (   N3 /i.MX233/GPMI_D13 )
-  (   N4 /i.MX233/GPMI_D14 )
-  (   N5 ? )
-  (   N6 ? )
-  (   N7 /DDR/DDR_DQ14 )
-  (   N8 /DDR/DDR_DQ9 )
-  (   N9 /DDR/DDR_DQ8 )
-  (  N10 /DDR/DDR_DQ3 )
-  (  N11 /DDR/DDR_DQ2 )
-  (  N12 ? )
-  (  N13 ? )
+ ( /4D30AC69/4D31D9D7 USBA J2 USBA_RECEPTACLE
+  ( 1 VBUS )
+  ( 2 /i.MX233/DMa )
+  ( 3 /i.MX233/DPa )
+  ( 4 GND )
+  ( 5 GNDPWR )
+ )
+ ( /4D30AC69/4D3394B7 $noname$ J3 USBA-PLUG
+  ( 1 VBUS_HOST )
+  ( 2 /i.MX233/DMb )
+  ( 3 /i.MX233/DPb )
+  ( 4 N-000165 )
+  ( 5 GNDPWR )
+ )
+ ( /4D30AC69/4D41A28D 0603 L1 15uH
+  ( 1 N-000108 )
+  ( 2 N-000115 )
+ )
+ ( /4D30AC69/4D41B822 0603 L2 15uH
+  ( 1 N-000165 )
+  ( 2 GND )
+ )
+ ( /4D30AC69/4D343822 PIN_ARRAY_20X2 P2 CONN_20X2
+  ( 1 /i.MX2337 )
+  ( 2 /i.MX2338 )
+  ( 3 GND )
+  ( 4 /i.MX2339 )
+  ( 5 VDDIO_3V3 )
+  ( 6 /i.MX23310 )
+  ( 7 /i.MX233/V_OUT )
+  ( 8 VDDIO_3V3 )
+  ( 9 /i.MX233/LCD_WR )
+  ( 10 /i.MX233/LRADC0 )
+  ( 11 /i.MX23311 )
+  ( 12 /i.MX233/LRADC1 )
+  ( 13 /i.MX233/LCD_RS )
+  ( 14 /i.MX233/LRADC2 )
+  ( 15 /i.MX23312 )
+  ( 16 /i.MX233/LRADC3 )
+  ( 17 /i.MX23313 )
+  ( 18 /i.MX233/LRADC4 )
+  ( 19 /i.MX23314 )
+  ( 20 /i.MX233/LRADC5 )
+  ( 21 /i.MX23315 )
+  ( 22 /i.MX233/LCD_D8 )
+  ( 23 /i.MX233/LCD_D17 )
+  ( 24 /i.MX233/LCD_D7 )
+  ( 25 /i.MX233/LCD_D16 )
+  ( 26 /i.MX233/LCD_D6 )
+  ( 27 /i.MX233/LCD_D15 )
+  ( 28 /i.MX233/LCD_D5 )
+  ( 29 /i.MX233/LCD_D14 )
+  ( 30 /i.MX233/LCD_D4 )
+  ( 31 /i.MX233/LCD_D13 )
+  ( 32 /i.MX233/LCD_D3 )
+  ( 33 /i.MX233/LCD_D12 )
+  ( 34 /i.MX233/LCD_D2 )
+  ( 35 /i.MX233/LCD_D11 )
+  ( 36 /i.MX233/LCD_D1 )
+  ( 37 /i.MX233/LCD_D10 )
+  ( 38 /i.MX233/LCD_D0 )
+  ( 39 /i.MX233/LCD_D9 )
+  ( 40 /i.MX233/LCD_CS )
+ )
+ ( /4D30AC69/4D470605 PIN_ARRAY_30X2 P3 CONN_25X2
+  ( 1 /i.MX23316 )
+  ( 2 /i.MX23317 )
+  ( 3 /i.MX23318 )
+  ( 4 /i.MX23319 )
+  ( 5 /i.MX23320 )
+  ( 6 /i.MX23321 )
+  ( 7 /i.MX23322 )
+  ( 8 /i.MX23323 )
+  ( 9 /i.MX23324 )
+  ( 10 /i.MX23325 )
+  ( 11 /i.MX23326 )
+  ( 12 /i.MX233/I2C_SDA )
+  ( 13 /i.MX23327 )
+  ( 14 /i.MX233/I2C_SCL )
+  ( 15 /i.MX23328 )
+  ( 16 /i.MX23329 )
+  ( 17 /i.MX23330 )
+  ( 18 /i.MX23331 )
+  ( 19 /i.MX23332 )
+  ( 20 /i.MX2335 )
+  ( 21 /i.MX23333 )
+  ( 22 /i.MX2336 )
+  ( 23 /i.MX23334 )
+  ( 24 /i.MX23335 )
+  ( 25 /i.MX23336 )
+  ( 26 /i.MX23337 )
+  ( 27 /i.MX23338 )
+  ( 28 /i.MX23339 )
+  ( 29 /i.MX23340 )
+  ( 30 /i.MX2334 )
+  ( 31 /i.MX23341 )
+  ( 32 /i.MX23342 )
+  ( 33 /i.MX233/PWM0 )
+  ( 34 VDDIO_3V3 )
+  ( 35 /i.MX233/PWM1 )
+  ( 36 /i.MX23343 )
+  ( 37 /i.MX233/PWM2 )
+  ( 38 /i.MX233/PSWITCH )
+  ( 39 /i.MX233/PWM3 )
+  ( 40 GND )
+  ( 41 /i.MX233/LCD_D00 )
+  ( 42 N-000028 )
+  ( 43 /i.MX233/LCD_D01 )
+  ( 44 N-000063 )
+  ( 45 /i.MX233/LCD_D02 )
+  ( 46 N-000051 )
+  ( 47 /i.MX233/LCD_D03 )
+  ( 48 N-000049 )
+  ( 49 /i.MX233/LCD_RS )
+  ( 50 N-000020 )
+ )
+ ( /4D30AC69/4D408387 $noname$ Q1 MMDT3904
+  ( 1 GND )
+  ( 2 N-000034 )
+  ( 3 /i.MX233/XTAL0 )
+  ( 4 GND )
+  ( 5 GND )
+  ( 6 /i.MX233/XTALI )
+ )
+ ( /4D30AC69/4D42D645 SM0603 R1 1
+  ( 1 VDD5V )
+  ( 2 N-000067 )
+ )
+ ( /4D30AC69/4D42D641 SM0603 R2 0.1
+  ( 1 VDD_BATT )
+  ( 2 N-000066 )
+ )
+ ( /4D30AC69/4D42D639 SM0603 R3 0.1
+  ( 1 VDD4P2 )
+  ( 2 N-000031 )
+ )
+ ( /4D30AC69/4D407823 SM0603 R4 1K
+  ( 1 N-000039 )
+  ( 2 /i.MX233/PSWITCH )
+ )
+ ( /4D30AC69/4D405DA2 SM0603 R5 10K
+  ( 1 N-000037 )
+  ( 2 N-000039 )
+ )
+ ( /4D30AC69/4D407830 SM0603 R6 100K
+  ( 1 N-000039 )
+  ( 2 GND )
+ )
+ ( /4D30AC69/4D41B6BD SM0603 R7 R
+  ( 1 N-000168 )
+  ( 2 GND )
+ )
+ ( /4D30AC69/4D41B6E4 SM0603 R8 R
+  ( 1 N-000170 )
+  ( 2 /i.MX23321 )
+ )
+ ( /4D30AC69/4D41B6CC SM0603 R9 R
+  ( 1 N-000170 )
+  ( 2 GND )
+ )
+ ( /4D30AC69/4D41D6E1 SM0603 R10 47K
+  ( 1 N-000025 )
+  ( 2 /i.MX233/LCD_RS )
+ )
+ ( /4D30AC69/4D41D7CE SM0603 R11 47K
+  ( 1 /i.MX233/LCD_D02 )
+  ( 2 GND )
+ )
+ ( /4D30AC69/4D41D6DC SM0603 R12 47K
+  ( 1 /i.MX233/LCD_D03 )
+  ( 2 GND )
+ )
+ ( /4D30AC69/4D408680 SM0603 R13 1K
+  ( 1 N-000034 )
+  ( 2 N-000035 )
+ )
+ ( /4D30AC69/4D41D7D7 SM0603 R14 47K
+  ( 1 /i.MX233/LCD_D00 )
+  ( 2 GND )
+ )
+ ( /4D30AC69/4D41D6D1 SM0603 R15 47K
+  ( 1 N-000025 )
+  ( 2 /i.MX233/LCD_D01 )
+ )
+ ( /4D30AC69/4D40866C SM0603 R16 1K
+  ( 1 N-000034 )
+  ( 2 GND )
+ )
+ ( /4D30AC69/4D41D840 SM0603 R17 1.2K
+  ( 1 VDDIO_3V3 )
+  ( 2 N-000028 )
+ )
+ ( /4D30AC69/4D41D845 SM0603 R18 1.2K
+  ( 1 GND )
+  ( 2 N-000063 )
+ )
+ ( /4D30AC69/4D41D85E SM0603 R19 1.2K
+  ( 1 VDDIO_3V3 )
+  ( 2 N-000051 )
+ )
+ ( /4D30AC69/4D41D86A SM0603 R20 1.2K
+  ( 1 VDDIO_3V3 )
+  ( 2 N-000049 )
+ )
+ ( /4D30AC69/4D41D86D SM0603 R21 1.2K
+  ( 1 VDDIO_3V3 )
+  ( 2 N-000020 )
+ )
+ ( /4D30B991/4D41DFB8 SM0603 R22 R
+  ( 1 /DDR/DDR_CLK )
+  ( 2 /DDR/DDR_CLKN )
+ )
+ ( /4D30B991/4D418363 SM0603 R23 47K
+  ( 1 /i.MX23344 )
+  ( 2 GND )
+ )
+ ( /4D30B991/4D417A9C SM0603 R24 1K_1%
+  ( 1 VDDM_2V5 )
+  ( 2 N-000180 )
+ )
+ ( /4D30B991/4D417AA2 SM0603 R25 1K_1%
+  ( 1 N-000180 )
+  ( 2 GND )
+ )
+ ( /4D30AC69/4D42FA3D SM0603 R26 10K
+  ( 1 /i.MX23345 )
+  ( 2 GND )
+ )
+ ( /4D30AC69/4D42FA4C SM0603 R27 22
+  ( 1 /i.MX23314 )
+  ( 2 /i.MX23345 )
+ )
+ ( /4D30AC69/4D42F86F $noname$ RP1 22
+  ( 1 N-000099 )
+  ( 2 N-000057 )
+  ( 3 N-000103 )
+  ( 4 N-000056 )
+  ( 5 /i.MX233/LCD_D12 )
+  ( 6 /i.MX233/LCD_D13 )
+  ( 7 /i.MX233/LCD_D14 )
+  ( 8 /i.MX233/LCD_D15 )
+ )
+ ( /4D30AC69/4D42F86B $noname$ RP2 22
+  ( 1 N-000102 )
+  ( 2 N-000055 )
+  ( 3 N-000104 )
+  ( 4 N-000054 )
+  ( 5 /i.MX233/LCD_D8 )
+  ( 6 /i.MX233/LCD_D9 )
+  ( 7 /i.MX233/LCD_D10 )
+  ( 8 /i.MX233/LCD_D11 )
+ )
+ ( /4D30AC69/4D42F868 $noname$ RP3 22
+  ( 1 N-000097 )
+  ( 2 N-000053 )
+  ( 3 N-000098 )
+  ( 4 N-000052 )
+  ( 5 /i.MX233/LCD_D4 )
+  ( 6 /i.MX233/LCD_D5 )
+  ( 7 /i.MX233/LCD_D6 )
+  ( 8 /i.MX233/LCD_D7 )
+ )
+ ( /4D30AC69/4D42F7AC $noname$ RP4 22
+  ( 1 N-000096 )
+  ( 2 N-000061 )
+  ( 3 N-000095 )
+  ( 4 N-000062 )
+  ( 5 /i.MX233/LCD_D0 )
+  ( 6 /i.MX233/LCD_D1 )
+  ( 7 /i.MX233/LCD_D2 )
+  ( 8 /i.MX233/LCD_D3 )
+ )
+ ( /4D30AC69/4D42F900 $noname$ RP5 22
+  ( 1 N-000060 )
+  ( 2 N-000047 )
+  ( 3 N-000058 )
+  ( 4 N-000094 )
+  ( 5 /i.MX233/LCD_D16 )
+  ( 6 /i.MX233/LCD_D17 )
+  ( 7 /i.MX23313 )
+  ( 8 /i.MX23311 )
+ )
+ ( /4D30AC69/4D40740C PUSH_BUTT_SHAPE1 SW1 SW_PUSH
+  ( 1 VDDIO_3V3 )
+  ( 2 N-000037 )
+ )
+ ( /4D30AC69/4D4073A8 PUSH_BUTT_SHAPE1 SW2 SW_PUSH
+  ( 1 N-000039 )
+  ( 2 VDD_XTAL )
+ )
+ ( /4D30AC69/4D40868E PUSH_BUTT_SHAPE1 SW3 SW_PUSH
+  ( 1 VDD_BATT )
+  ( 2 N-000035 )
+ )
+ ( /4D30AC69/4D30FAD8 fpBGA169 U1 IMX23
+  ( A1 /i.MX233/USB_DM )
+  ( A2 GND )
+  ( A3 /i.MX233/VAG )
+  ( A4 /i.MX233/XTALI )
+  ( A5 /i.MX233/XTAL0 )
+  ( A6 /i.MX2339 )
+  ( A7 ? )
+  ( A8 /i.MX233/LRADC0 )
+  ( A9 VDD4P2 )
+  ( A10 /i.MX233/LRADC4 )
+  ( A11 VDD_BATT )
+  ( A12 N-000108 )
+  ( A13 GND )
+  ( B1 VDD_BATT )
+  ( B2 /i.MX233/USB_DP )
+  ( B3 /i.MX233/PSWITCH )
+  ( B4 /i.MX2332 )
+  ( B5 /i.MX23310 )
+  ( B6 ? )
+  ( B7 ? )
+  ( B8 ? )
+  ( B9 /i.MX233/LRADC1 )
+  ( B10 /i.MX233/LRADC5 )
+  ( B11 VDD_BATT )
+  ( B12 VDDA )
+  ( B13 N-000115 )
+  ( C1 /i.MX2338 )
+  ( C2 VDD_XTAL )
+  ( C3 /i.MX233/PWM0 )
+  ( C4 /i.MX2331 )
+  ( C5 /i.MX233/I2C_SCL )
+  ( C6 /i.MX233/I2C_SDA )
+  ( C7 VDDA )
+  ( C8 GND )
+  ( C9 /i.MX233/LRADC2 )
+  ( C10 VDDM_2V5 )
+  ( C11 /i.MX233/V_OUT )
+  ( C12 ? )
+  ( C13 VDDIO_3V3 )
+  ( D1 /i.MX2337 )
+  ( D2 /i.MX233/PWM1 )
+  ( D3 N-000062 )
+  ( D4 GND )
+  ( D5 VDDD )
+  ( D6 GND )
+  ( D7 ? )
+  ( D8 VDDD )
+  ( D9 /i.MX233/LRADC3 )
+  ( D10 /i.MX23342 )
+  ( D11 /i.MX233/PWM3 )
+  ( D12 /i.MX2335 )
+  ( D13 VDDD )
+  ( E1 N-000058 )
+  ( E2 N-000095 )
+  ( E3 N-000094 )
+  ( E4 N-000061 )
+  ( E5 N-000099 )
+  ( E6 ? )
+  ( E7 ? )
+  ( E8 ? )
+  ( E9 GND )
+  ( E10 /i.MX23335 )
+  ( E11 VDDIO_3V3 )
+  ( E12 /i.MX23343 )
+  ( E13 VDD5V )
+  ( F1 N-000096 )
+  ( F2 N-000057 )
+  ( F3 N-000052 )
+  ( F4 N-000103 )
+  ( F5 N-000098 )
+  ( F6 ? )
+  ( F7 ? )
+  ( F8 /i.MX23321 )
+  ( F9 /i.MX23337 )
+  ( F10 /i.MX23339 )
+  ( F11 /i.MX23344 )
+  ( F12 /DDR/DDR_A6 )
+  ( F13 /DDR/DDR_A9 )
+  ( G1 N-000056 )
+  ( G2 N-000053 )
+  ( G3 VDDIO_3V3 )
+  ( G4 N-000102 )
+  ( G5 N-000097 )
+  ( G6 ? )
+  ( G7 /i.MX2333 )
+  ( G8 /i.MX23319 )
+  ( G9 /i.MX2336 )
+  ( G10 /i.MX233/DDR_A4 )
+  ( G11 /DDR/DDR_A7 )
+  ( G12 /DDR/DDR_A5 )
+  ( G13 /DDR/DDR_A8 )
+  ( H1 N-000055 )
+  ( H2 N-000054 )
+  ( H3 N-000104 )
+  ( H4 /i.MX233/LCD_CS )
+  ( H5 /i.MX23345 )
+  ( H6 ? )
+  ( H7 ? )
+  ( H8 /i.MX23329 )
+  ( H9 /i.MX2334 )
+  ( H10 /i.MX233/DDR_A11 )
+  ( H11 /i.MX233/PWM2 )
+  ( H12 ? )
+  ( H13 /i.MX233/DDR_A12 )
+  ( J1 N-000060 )
+  ( J2 N-000047 )
+  ( J3 /i.MX233/LCD_RS )
+  ( J4 /i.MX233/LCD_WR )
+  ( J5 /i.MX23312 )
+  ( J6 ? )
+  ( J7 GND )
+  ( J8 /i.MX23331 )
+  ( J9 GND )
+  ( J10 /DDR/DDR_CE0 )
+  ( J11 /DDR/DDR_WEN )
+  ( J12 /DDR/DDR_A10 )
+  ( J13 /DDR/DDR_A2 )
+  ( K1 /i.MX23315 )
+  ( K2 /i.MX23316 )
+  ( K3 /i.MX23325 )
+  ( K4 /i.MX23317 )
+  ( K5 /i.MX23323 )
+  ( K6 /DDR/DDR_DQ13 )
+  ( K7 /DDR/DDR_DQ11 )
+  ( K8 /DDR/DDR_DQS1 )
+  ( K9 /i.MX233/DDR_DQ5 )
+  ( K10 /i.MX233/DDR_DQ0 )
+  ( K11 /DDR/DDR_A3 )
+  ( K12 /i.MX233/DDR_A1 )
+  ( K13 /i.MX233/DDR_A0 )
+  ( L1 /i.MX23318 )
+  ( L2 /i.MX23320 )
+  ( L3 /i.MX23322 )
+  ( L4 /i.MX23326 )
+  ( L5 /i.MX23324 )
+  ( L6 VDDM_2V5 )
+  ( L7 /DDR/DDR_DQ12 )
+  ( L8 VDDM_2V5 )
+  ( L9 /DDR/DDR_DQ7 )
+  ( L10 VDDM_2V5 )
+  ( L11 /DDR/DDR_DQ6 )
+  ( L12 /i.MX233/DDR_BA1 )
+  ( L13 /DDR/DDR_BA0 )
+  ( M1 /i.MX23328 )
+  ( M2 /i.MX23327 )
+  ( M3 /i.MX23330 )
+  ( M4 /i.MX23332 )
+  ( M5 /i.MX23333 )
+  ( M6 /DDR/DDR_CLK )
+  ( M7 /DDR/DDR_DQ15 )
+  ( M8 /DDR/DDR_DQ10 )
+  ( M9 /DDR/DDR_DQM1 )
+  ( M10 /DDR/DDR_DQ1 )
+  ( M11 /DDR/DDR_DQ4 )
+  ( M12 /DDR/DDR_DQM0 )
+  ( M13 /i.MX23344 )
+  ( N1 /i.MX23334 )
+  ( N2 /i.MX23336 )
+  ( N3 /i.MX23338 )
+  ( N4 /i.MX23340 )
+  ( N5 /i.MX23341 )
+  ( N6 /DDR/DDR_CLKN )
+  ( N7 /i.MX23346 )
+  ( N8 /DDR/DDR_DQ9 )
+  ( N9 /DDR/DDR_DQ8 )
+  ( N10 /i.MX233/DDR_DQ3 )
+  ( N11 /DDR/DDR_DQ2 )
+  ( N12 /DDR/DDR_DQS0 )
+  ( N13 /DDR/DDR_RASN )
+ )
+ ( /4D30B991/4D30BA6E TSOP-66 U2 MT46V32M16TG
+  ( 1 VDDM_2V5 )
+  ( 2 /i.MX233/DDR_DQ0 )
+  ( 3 VDDM_2V5 )
+  ( 4 /DDR/DDR_DQ1 )
+  ( 5 /DDR/DDR_DQ2 )
+  ( 6 GND )
+  ( 7 /i.MX233/DDR_DQ3 )
+  ( 8 /DDR/DDR_DQ4 )
+  ( 9 VDDM_2V5 )
+  ( 10 /i.MX233/DDR_DQ5 )
+  ( 11 /DDR/DDR_DQ6 )
+  ( 12 GND )
+  ( 13 /DDR/DDR_DQ7 )
+  ( 14 ? )
+  ( 15 VDDM_2V5 )
+  ( 16 /DDR/DDR_DQS0 )
+  ( 17 ? )
+  ( 18 VDDM_2V5 )
+  ( 19 ? )
+  ( 20 /DDR/DDR_DQM0 )
+  ( 21 /DDR/DDR_WEN )
+  ( 22 /i.MX23344 )
+  ( 23 /DDR/DDR_RASN )
+  ( 24 /DDR/DDR_CE0 )
+  ( 25 ? )
+  ( 26 /DDR/DDR_BA0 )
+  ( 27 /i.MX233/DDR_BA1 )
+  ( 28 /DDR/DDR_A10 )
+  ( 29 /i.MX233/DDR_A0 )
+  ( 30 /i.MX233/DDR_A1 )
+  ( 31 /DDR/DDR_A2 )
+  ( 32 /DDR/DDR_A3 )
+  ( 33 VDDM_2V5 )
+  ( 34 GND )
+  ( 35 /i.MX233/DDR_A4 )
+  ( 36 /DDR/DDR_A5 )
+  ( 37 /DDR/DDR_A6 )
+  ( 38 /DDR/DDR_A7 )
+  ( 39 /DDR/DDR_A8 )
+  ( 40 /DDR/DDR_A9 )
+  ( 41 /i.MX233/DDR_A11 )
+  ( 42 /i.MX233/DDR_A12 )
+  ( 43 ? )
+  ( 44 /i.MX23344 )
+  ( 45 /DDR/DDR_CLK )
+  ( 46 /DDR/DDR_CLKN )
+  ( 47 /DDR/DDR_DQM1 )
+  ( 48 GND )
+  ( 49 N-000180 )
+  ( 50 ? )
+  ( 51 /DDR/DDR_DQS1 )
+  ( 52 GND )
+  ( 53 ? )
+  ( 54 /DDR/DDR_DQ8 )
+  ( 55 VDDM_2V5 )
+  ( 56 /DDR/DDR_DQ9 )
+  ( 57 /DDR/DDR_DQ10 )
+  ( 58 GND )
+  ( 59 /DDR/DDR_DQ11 )
+  ( 60 /DDR/DDR_DQ12 )
+  ( 61 VDDM_2V5 )
+  ( 62 /DDR/DDR_DQ13 )
+  ( 63 /i.MX23346 )
+  ( 64 GND )
+  ( 65 /DDR/DDR_DQ15 )
+  ( 66 GND )
+ )
+ ( /4D30B991/4D40953F $noname$ U3 M25P32
+  ( 1 /i.MX23335 )
+  ( 2 /i.MX2336 )
+  ( 3 /i.MX23337 )
+  ( 4 GND )
+  ( 5 /i.MX2334 )
+  ( 6 /i.MX2335 )
+  ( 7 /i.MX23339 )
+  ( 8 VDDIO_3V3 )
+ )
+ ( /4D30AC69/4D404CE3 $noname$ X1 24_MHz
+  ( 1 /i.MX233/XTAL0 )
+  ( 2 /i.MX233/XTALI )
+ )
+ ( /4D30AC69/4D405747 $noname$ X2 32.768_KHz
+  ( 1 /i.MX2332 )
+  ( 2 /i.MX2331 )
  )
 )
 *
 { Allowed footprints by component:
-$component C30
+$component C20
+ SM*
+ C?
+ C1-1
+$endlist
+$component C21
+ SM*
+ C?
+ C1-1
+$endlist
+$component C22
+ SM*
+ C?
+ C1-1
+$endlist
+$component C23
+ SM*
+ C?
+ C1-1
+$endlist
+$component C24
+ SM*
+ C?
+ C1-1
+$endlist
+$component C25
+ SM*
+ C?
+ C1-1
+$endlist
+$component C26
  SM*
  C?
  C1-1
@@ -553,528 +843,406 @@ $component C29
  C?
  C1-1
 $endlist
-$component C26
+$component C30
  SM*
  C?
  C1-1
 $endlist
-$component C25
+$component C31
  SM*
  C?
  C1-1
 $endlist
-$component C24
+$component C32
  SM*
  C?
  C1-1
 $endlist
-$component C23
+$component C33
  SM*
  C?
  C1-1
 $endlist
-$component C22
+$component C34
  SM*
  C?
  C1-1
 $endlist
-$component C21
+$component C35
  SM*
  C?
  C1-1
 $endlist
-$component C20
+$component C36
  SM*
  C?
  C1-1
 $endlist
-$component C19
+$component C37
  SM*
  C?
  C1-1
 $endlist
-$component C17
+$component C38
  SM*
  C?
  C1-1
 $endlist
-$component C18
+$component C39
  SM*
  C?
  C1-1
 $endlist
-$component C4
+$component C40
+ CP*
+ SM*
+$endlist
+$component C41
  SM*
  C?
  C1-1
 $endlist
-$component C3
+$component C42
  SM*
  C?
  C1-1
 $endlist
-$component C16
+$component C43
  SM*
  C?
  C1-1
 $endlist
-$component C15
+$component C44
  SM*
  C?
  C1-1
 $endlist
-$component C14
+$component C45
  SM*
  C?
  C1-1
 $endlist
-$component C11
+$component C46
  SM*
  C?
  C1-1
 $endlist
-$component C13
+$component C47
  SM*
  C?
  C1-1
 $endlist
-$component C12
+$component C48
+ CP*
+ SM*
+$endlist
+$component C49
  SM*
  C?
  C1-1
 $endlist
-$component C8
+$component C50
  SM*
  C?
  C1-1
 $endlist
-$component C9
+$component C51
  SM*
  C?
  C1-1
 $endlist
-$component C7
+$component C52
  SM*
  C?
  C1-1
 $endlist
-$component C10
+$component C53
  SM*
  C?
  C1-1
 $endlist
-$component C6
+$component C54
  SM*
  C?
  C1-1
 $endlist
-$component C1
+$component C55
  SM*
  C?
  C1-1
 $endlist
-$component C5
+$component C56
  SM*
  C?
  C1-1
 $endlist
-$component C2
+$component C57
  SM*
  C?
  C1-1
+$endlist
+$component C58
+ SM*
+ C?
+ C1-1
+$endlist
+$component C59
+ SM*
+ C?
+ C1-1
+$endlist
+$component C60
+ SM*
+ C?
+ C1-1
+$endlist
+$component C61
+ SM*
+ C?
+ C1-1
+$endlist
+$component C62
+ SM*
+ C?
+ C1-1
+$endlist
+$component C63
+ SM*
+ C?
+ C1-1
+$endlist
+$component C64
+ SM*
+ C?
+ C1-1
+$endlist
+$component C65
+ SM*
+ C?
+ C1-1
+$endlist
+$component C66
+ SM*
+ C?
+ C1-1
+$endlist
+$component C67
+ SM*
+ C?
+ C1-1
+$endlist
+$component C68
+ SM*
+ C?
+ C1-1
+$endlist
+$component C69
+ SM*
+ C?
+ C1-1
+$endlist
+$component C70
+ SM*
+ C?
+ C1-1
+$endlist
+$component C71
+ SM*
+ C?
+ C1-1
+$endlist
+$component D1
+ D?
+ S*
+$endlist
+$component R1
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R2
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R3
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R4
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R5
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R6
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R7
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R8
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R9
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R10
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R11
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R12
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R13
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R14
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R15
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R16
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R17
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R18
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R19
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R20
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R21
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R22
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R23
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R24
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R25
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R26
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R27
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
 $endlist
 $endfootprintlist
 }
-{ Pin List by Nets
-Net 28 "/i.MX233/LCD_D10" "LCD_D10"
- U1 H1
- P2 37
-Net 29 "/i.MX233/LCD_D15" "LCD_D15"
- U1 E5
- P2 27
-Net 30 "/i.MX233/LCD_D13" "LCD_D13"
- U1 F4
- P2 31
-Net 31 "/i.MX233/LCD_D12" "LCD_D12"
- U1 G1
- P2 33
-Net 32 "/i.MX233/LCD_D4" "LCD_D4"
- U1 F3
- P2 30
-Net 33 "/i.MX233/LCD_D5" "LCD_D5"
- P2 28
- U1 F5
-Net 34 "/i.MX233/LCD_D7" "LCD_D7"
- U1 G5
- P2 24
-Net 35 "/i.MX233/LCD_D6" "LCD_D6"
- P2 26
- U1 G2
-Net 36 "/i.MX233/LCD_D2" "LCD_D2"
- U1 E4
- P2 34
-Net 37 "/i.MX233/LCD_D3" "LCD_D3"
- U1 F1
- P2 32
-Net 38 "/i.MX233/LCD_D1" "LCD_D1"
- U1 E2
- P2 36
-Net 43 "/i.MX233/LCD_HSYNC" "LCD_HSYNC"
- P2 17
- U1 J2
-Net 44 "/i.MX233/LCD_CS" "LCD_CS"
- U1 H4
- P2 40
-Net 45 "/i.MX233/LCD_D17" "LCD_D17"
- P2 23
- U1 E1
-Net 46 "/i.MX233/LCD_D16" "LCD_D16"
- P2 25
- U1 E3
-Net 47 "/i.MX233/LCD_D8" "LCD_D8"
- U1 H2
- P2 22
-Net 48 "/i.MX233/LCD_D11" "LCD_D11"
- U1 G4
- P2 35
-Net 52 "/i.MX233/GPMI_CLE" "GPMI_CLE"
- U1 K3
- P1 10
-Net 53 "/i.MX233/GPMI_CE2N" "GPMI_CE2N"
- P1 8
- U1 K5
-Net 54 "/i.MX233/GPMI_CE1N" "GPMI_CE1N"
- P1 6
- U1 F8
-Net 55 "/i.MX233/GPMI_CE0N" "GPMI_CE0N"
- P1 4
- U1 G8
-Net 56 "/i.MX233/LCD_D9" "LCD_D9"
- U1 H3
- P2 39
-Net 57 "/i.MX233/LCD_D14" "LCD_D14"
- P2 29
- U1 F2
-Net 58 "/i.MX233/LCD_D0" "LCD_D0"
- P2 38
- U1 D3
-Net 72 "" ""
- C11 1
- C13 1
- C14 1
- C12 1
-Net 73 "" ""
- C17 1
- C18 1
-Net 74 "" ""
- C16 1
- C15 1
-Net 76 "" ""
- C7 1
- C10 1
- C9 1
- C8 1
-Net 77 "GND" "GND"
- U2 6
- U2 48
- U2 66
- U1 E9
- U1 C8
- U1 J9
- J1 6
- C26 2
- C25 2
- C24 2
- U1 J7
- U1 A2
- C23 2
- U2 52
- U1 D6
- C30 2
- U1 D4
- C28 2
- U2 64
- C29 2
- C27 2
- C22 2
- U2 34
- C2 2
- C5 2
- C1 2
- C6 2
- C19 2
- C20 2
- C21 2
- U2 12
- C14 2
- C10 2
- C7 2
- C9 2
- C8 2
- C12 2
- C13 2
- C11 2
- U2 58
- C15 2
- C16 2
- C3 2
- C4 2
- C18 2
- C17 2
-Net 79 "" ""
- C20 1
- C21 1
-Net 80 "GNDPWR" "GNDPWR"
- J2 5
- J1 CASE
- J3 5
-Net 81 "" ""
- C6 1
- C2 1
- C5 1
- C3 1
- C4 1
- C1 1
-Net 83 "/i.MX233/SSPI_SCK" "SSPI_SCK"
- J1 5
- U1 D12
-Net 99 "/i.MX233/SSPI_DATA0" "SSPI_DATA0"
- U1 G9
- J1 7
-Net 100 "/i.MX233/SSPI_DATA1" "SSPI_DATA1"
- U1 F9
- J1 8
-Net 112 "/i.MX233/SSPI_DATA2" "SSPI_DATA2"
- J1 1
- U1 F10
-Net 113 "/i.MX233/SSPI_DATA3" "SSPI_DATA3"
- J1 2
- U1 E10
-Net 118 "/i.MX233/SSPI_CMD" "SSPI_CMD"
- U1 H9
- J1 3
-Net 124 "/i.MX233/GPMI_D11" "GPMI_D11"
- U1 N1
- P1 23
-Net 125 "/i.MX233/GPMI_D07" "GPMI_D07"
- P1 15
- U1 M1
-Net 126 "/i.MX233/GPMI_D01" "GPMI_D01"
- U1 L1
- P1 3
-Net 127 "/i.MX233/LCD_DOTCK" "LCD_DOTCK"
- U1 K1
- P2 21
-Net 128 "/i.MX233/LCD_VSYNC" "LCD_VSYNC"
- U1 J1
- P2 11
-Net 136 "/i.MX233/DMb" "DMb"
- J3 2
- IC1 8
-Net 137 "/i.MX233/USB_DP" "USB_DP"
- U1 B2
- IC1 4
-Net 138 "/i.MX233/USB_DM" "USB_DM"
- U1 A1
- IC1 6
-Net 147 "/i.MX233/GPMI_D10" "GPMI_D10"
- P1 21
- U1 M5
-Net 148 "/i.MX233/GPMI_D04" "GPMI_D04"
- U1 L5
- P1 9
-Net 149 "/i.MX233/LCD_RESET" "LCD_RESET"
- P2 15
- U1 J5
-Net 150 "/i.MX233/LCD_ENABLE" "LCD_ENABLE"
- U1 H5
- P2 19
-Net 164 "/i.MX233/LCD_RS" "LCD_RS"
- P2 13
- U1 J3
-Net 169 "/i.MX233/GPMI_D12" "GPMI_D12"
- P1 25
- U1 N2
-Net 170 "/i.MX233/GPMI_D06" "GPMI_D06"
- P1 13
- U1 M2
-Net 171 "/i.MX233/GPMI_D02" "GPMI_D02"
- P1 5
- U1 L2
-Net 172 "/i.MX233/GPMI_D00" "GPMI_D00"
- U1 K2
- P1 1
-Net 176 "/i.MX233/GPMI_D14" "GPMI_D14"
- U1 N4
- P1 29
-Net 177 "/i.MX233/GPMI_D09" "GPMI_D09"
- U1 M4
- P1 19
-Net 178 "/i.MX233/GPMI_D05" "GPMI_D05"
- U1 L4
- P1 11
-Net 179 "/i.MX233/GPMI_ALE" "GPMI_ALE"
- P1 2
- U1 K4
-Net 180 "/i.MX233/LCD_WR" "LCD_WR"
- P2 9
- U1 J4
-Net 184 "/i.MX233/GPMI_D13" "GPMI_D13"
- P1 27
- U1 N3
-Net 185 "/i.MX233/GPMI_D08" "GPMI_D08"
- P1 17
- U1 M3
-Net 186 "/i.MX233/GPMI_D03" "GPMI_D03"
- U1 L3
- P1 7
-Net 187 "/i.MX233/DPb" "DPb"
- J3 3
- IC1 2
-Net 188 "/i.MX233/DPa" "DPa"
- J2 3
- IC1 3
-Net 189 "/i.MX233/DMa" "DMa"
- J2 2
- IC1 7
-Net 190 "/DDR/R_DDR_A8" "R_DDR_A8"
- RP3 8
- U2 39
-Net 191 "/DDR/R_DDR_A10" "R_DDR_A10"
- RP3 6
- U2 28
-Net 192 "/DDR/R_DDR_A9" "R_DDR_A9"
- RP3 7
- U2 40
-Net 193 "/DDR/R_DDR_A4" "R_DDR_A4"
- U2 35
- RP2 8
-Net 194 "/DDR/R_DDR_A5" "R_DDR_A5"
- RP2 7
- U2 36
-Net 195 "/DDR/R_DDR_A7" "R_DDR_A7"
- U2 38
- RP2 5
-Net 196 "/DDR/R_DDR_A6" "R_DDR_A6"
- RP2 6
- U2 37
-Net 197 "/DDR/R_DDR_A2" "R_DDR_A2"
- U2 31
- RP1 6
-Net 198 "/DDR/R_DDR_A3" "R_DDR_A3"
- RP1 5
- U2 32
-Net 199 "/DDR/R_DDR_A1" "R_DDR_A1"
- U2 30
- RP1 7
-Net 200 "/DDR/R_DDR_A0" "R_DDR_A0"
- U2 29
- RP1 8
-Net 204 "/DDR/R_DDR_A11" "R_DDR_A11"
- U2 41
- RP3 5
-Net 205 "" ""
- C30 1
- C27 1
- C23 1
- C24 1
- C25 1
- C26 1
- C29 1
- C28 1
- C22 1
-Net 206 "" ""
- U2 33
- U2 15
- U2 61
- U2 9
- U2 1
- U2 55
- U2 3
- U2 18
-Net 242 "/DDR/DDR_DQ3" "DDR_DQ3"
- U2 7
- U1 N10
-Net 243 "/DDR/DDR_DQ2" "DDR_DQ2"
- U1 N11
- U2 5
-Net 244 "/DDR/DDR_DQ1" "DDR_DQ1"
- U1 M10
- U2 4
-Net 245 "/i.MX233/DDR_DQ0" "DDR_DQ0"
- U1 K10
- U2 2
-Net 247 "/i.MX233/DDR_A11" "DDR_A11"
- RP3 4
- U1 H10
-Net 248 "/i.MX233/DDR_A10" "DDR_A10"
- RP3 3
- U1 J12
-Net 249 "/DDR/DDR_A9" "DDR_A9"
- RP3 2
- U1 F13
-Net 250 "/i.MX233/DDR_A8" "DDR_A8"
- U1 G13
- RP3 1
-Net 251 "/DDR/DDR_A7" "DDR_A7"
- U1 G11
- RP2 4
-Net 252 "/DDR/DDR_A6" "DDR_A6"
- RP2 3
- U1 F12
-Net 253 "/DDR/DDR_A5" "DDR_A5"
- U1 G12
- RP2 2
-Net 254 "/i.MX233/DDR_A4" "DDR_A4"
- U1 G10
- RP2 1
-Net 255 "/i.MX233/DDR_A3" "DDR_A3"
- RP1 4
- U1 K11
-Net 256 "/i.MX233/DDR_A2" "DDR_A2"
- U1 J13
- RP1 3
-Net 257 "/i.MX233/DDR_A1" "DDR_A1"
- RP1 2
- U1 K12
-Net 258 "/DDR/DDR_A0" "DDR_A0"
- U1 K13
- RP1 1
-Net 259 "/DDR/DDR_DQ15" "DDR_DQ15"
- U1 M7
- U2 65
-Net 260 "/DDR/DDR_DQ14" "DDR_DQ14"
- U1 N7
- U2 63
-Net 261 "/DDR/DDR_DQ13" "DDR_DQ13"
- U2 62
- U1 K6
-Net 262 "/DDR/DDR_DQ12" "DDR_DQ12"
- U2 60
- U1 L7
-Net 263 "/DDR/DDR_DQ11" "DDR_DQ11"
- U1 K7
- U2 59
-Net 264 "/DDR/DDR_DQ10" "DDR_DQ10"
- U1 M8
- U2 57
-Net 265 "/DDR/DDR_DQ9" "DDR_DQ9"
- U1 N8
- U2 56
-Net 266 "/DDR/DDR_DQ8" "DDR_DQ8"
- U2 54
- U1 N9
-Net 267 "/i.MX233/DDR_DQ7" "DDR_DQ7"
- U2 13
- U1 L9
-Net 268 "/DDR/DDR_DQ6" "DDR_DQ6"
- U1 L11
- U2 11
-Net 269 "/DDR/DDR_DQ5" "DDR_DQ5"
- U2 10
- U1 K9
-Net 270 "/i.MX233/DDR_DQ4" "DDR_DQ4"
- U1 M11
- U2 8
-}
-#End

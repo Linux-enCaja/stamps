@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date jue 27 ene 2011 16:12:42 COT
+EESchema Schematic File Version 2  date lun 31 ene 2011 15:30:54 COT
 LIBS:transistor-npn
 LIBS:ipc-7351-transistor
 LIBS:switch-misc
@@ -46,9 +46,9 @@ LIBS:i.mx233stamp-cache
 EELAYER 24  0
 EELAYER END
 $Descr A4 11700 8267
-Sheet 1 4
+Sheet 1 3
 Title ""
-Date "27 jan 2011"
+Date "31 jan 2011"
 Rev ""
 Comp ""
 Comment1 ""
@@ -56,12 +56,6 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-$Sheet
-S 3200 4600 3200 1000
-U 4D41BD76
-F0 "POWER" 60
-F1 "POWER.sch" 60
-$EndSheet
 Wire Wire Line
 	4750 2150 5250 2150
 Wire Wire Line
@@ -126,7 +120,7 @@ F13 "DDR_DQS0" I L 5250 3100 60
 F14 "DDR_DQS1" I L 5250 3200 60 
 F15 "DDR_RASN" I L 5250 2950 60 
 F16 "DDR_WEN" I L 5250 2750 60 
-F17 "SSPI_DATA3" I L 5250 2050 60 
+F17 "SSPI_DATA4" I L 5250 2050 60 
 F18 "SSPI_DATA2" I L 5250 1950 60 
 F19 "SSPI_SCK" I L 5250 2150 60 
 F20 "SSPI_CMD" I L 5250 2250 60 
@@ -153,7 +147,7 @@ F13 "DDR_CASN" O R 4750 2850 60
 F14 "DDR_CE0" O R 4750 2650 60 
 F15 "DDR_BA1" O R 4750 4050 60 
 F16 "DDR_BA0" O R 4750 3950 60 
-F17 "SSPI_DATA3" O R 4750 2050 60 
+F17 "SSPI_DATA4" O R 4750 2050 60 
 F18 "SSPI_SCK" O R 4750 2150 60 
 F19 "SSPI_CMD" O R 4750 2250 60 
 F20 "SSPI_DATA0" O R 4750 1750 60 

@@ -1,4 +1,4 @@
-update=vie 28 ene 2011 09:56:44 COT
+update=mié 02 feb 2011 13:44:25 COT
 version=1
 last_client=eeschema
 [general]
@@ -124,3 +124,4 @@ LibName40=../components/pasives-connectors
 LibName41=../components/EEPROM
 LibName42=../components/PWR
 LibName43=../components/m25p32
+LibName44=/home/sebastian/proyecto/stamps/components/w_analog

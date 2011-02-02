@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date mar 01 feb 2011 16:06:23 COT
+EESchema Schematic File Version 2  date mar 01 feb 2011 13:47:04 COT
 LIBS:transistor-npn
 LIBS:ipc-7351-transistor
 LIBS:switch-misc
@@ -43,7 +43,6 @@ LIBS:EEPROM
 LIBS:PWR
 LIBS:m25p32
 LIBS:PROpendous-cache
-LIBS:w_analog
 LIBS:i.mx233stamp-cache
 EELAYER 24  0
 EELAYER END

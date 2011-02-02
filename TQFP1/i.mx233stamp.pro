@@ -1,4 +1,4 @@
-update=vie 28 ene 2011 12:24:30 COT
+update=mar 01 feb 2011 15:23:21 COT
 version=1
 last_client=eeschema
 [general]
@@ -124,4 +124,5 @@ LibName40=../components/pasives-connectors
 LibName41=../components/EEPROM
 LibName42=../components/PWR
 LibName43=../components/m25p32
-LibName44=/home/sebastian/proyecto/stamps1/components/PROpendous-cache
+LibName44=/home/sebastian/proyecto/stamps/components/PROpendous-cache
+LibName45=/home/sebastian/proyecto/stamps/components/w_analog

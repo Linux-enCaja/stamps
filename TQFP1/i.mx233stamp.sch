@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date mié 02 feb 2011 11:11:23 COT
+EESchema Schematic File Version 2  date mié 02 feb 2011 11:38:00 COT
 LIBS:transistor-npn
 LIBS:ipc-7351-transistor
 LIBS:switch-misc

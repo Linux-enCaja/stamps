@@ -124,4 +124,4 @@ LibName40=../components/pasives-connectors
 LibName41=../components/EEPROM
 LibName42=../components/PWR
 LibName43=../components/m25p32
-LibName44=/home/sebastian/proyecto/stamps/components/w_analog
+LibName44=../components/w_analog

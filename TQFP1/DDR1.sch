@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Wed 02 Feb 2011 03:17:46 PM COT
+EESchema Schematic File Version 2  date Fri 04 Feb 2011 10:10:14 AM COT
 LIBS:transistor-npn
 LIBS:ipc-7351-transistor
 LIBS:switch-misc
@@ -42,13 +42,15 @@ LIBS:pasives-connectors
 LIBS:EEPROM
 LIBS:PWR
 LIBS:m25p32
+LIBS:PROpendous-cache
+LIBS:w_analog
 LIBS:i.mx233stamp-cache
 EELAYER 25  0
 EELAYER END
 $Descr A4 11700 8267
 Sheet 2 3
 Title ""
-Date "2 feb 2011"
+Date "4 feb 2011"
 Rev ""
 Comp ""
 Comment1 ""
@@ -393,7 +395,7 @@ L R R22
 U 1 1 4D41DFB8
 P 5950 3450
 F 0 "R22" V 6030 3450 50  0000 C CNN
-F 1 "R" V 5950 3450 50  0000 C CNN
+F 1 "110" V 5950 3450 50  0000 C CNN
 	1    5950 3450
 	1    0    0    -1  
 $EndComp

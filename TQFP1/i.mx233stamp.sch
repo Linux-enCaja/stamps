@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Wed 02 Feb 2011 03:17:46 PM COT
+EESchema Schematic File Version 2  date Fri 04 Feb 2011 10:10:14 AM COT
 LIBS:transistor-npn
 LIBS:ipc-7351-transistor
 LIBS:switch-misc
@@ -42,13 +42,15 @@ LIBS:pasives-connectors
 LIBS:EEPROM
 LIBS:PWR
 LIBS:m25p32
+LIBS:PROpendous-cache
+LIBS:w_analog
 LIBS:i.mx233stamp-cache
 EELAYER 25  0
 EELAYER END
 $Descr A4 11700 8267
 Sheet 1 3
 Title ""
-Date "2 feb 2011"
+Date "4 feb 2011"
 Rev ""
 Comp ""
 Comment1 ""

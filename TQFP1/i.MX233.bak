@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Thu 10 Feb 2011 01:05:35 PM COT
+EESchema Schematic File Version 2  date Thu 10 Feb 2011 11:25:22 AM COT
 LIBS:transistor-npn
 LIBS:ipc-7351-transistor
 LIBS:switch-misc
@@ -58,8 +58,6 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-NoConn ~ 2900 4850
-NoConn ~ 2900 4750
 $Comp
 L VDDIO_3V3 #PWR012
 U 1 1 4D53024C
@@ -1063,11 +1061,11 @@ USB_DP
 Text Label 17350 3000 0    60   ~ 0
 USB_DM
 $Comp
-L VDD5V #PWR019
+L VDDD #PWR019
 U 1 1 4D484E4D
 P 17350 2900
 F 0 "#PWR019" H 17350 3000 30  0001 C CNN
-F 1 "VDD5V" H 17350 3000 30  0000 C CNN
+F 1 "VDDD" H 17350 3000 30  0000 C CNN
 	1    17350 2900
 	1    0    0    -1  
 $EndComp

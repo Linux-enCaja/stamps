@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPCB (2011-01-25 BZR 2758)-stable date = Wed 09 Feb 2011 04:06:15 PM COT
+Cmp-Mod V01 Created by CvPCB (2011-01-25 BZR 2758)-stable date = Mon 14 Feb 2011 04:23:57 PM COT
 
 BeginCmp
 TimeStamp = /4D30AC69/4D42D643;
@@ -361,7 +361,7 @@ BeginCmp
 TimeStamp = /4D30AC69/4D471898;
 Reference = J1;
 ValeurCmp = MICROSD12P;
-IdModule  = MEMORY_CARD_microSD_TF-08;
+IdModule  = J1;
 EndCmp
 
 BeginCmp

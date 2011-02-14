@@ -1,4 +1,5 @@
-EESchema Schematic File Version 2  date Thu 10 Feb 2011 01:05:35 PM COT
+EESchema Schematic File Version 2  date Mon 14 Feb 2011 06:01:49 PM COT
+LIBS:microsd
 LIBS:transistor-npn
 LIBS:ipc-7351-transistor
 LIBS:switch-misc
@@ -50,7 +51,7 @@ EELAYER END
 $Descr A4 11700 8267
 Sheet 1 3
 Title ""
-Date "10 feb 2011"
+Date "14 feb 2011"
 Rev ""
 Comp ""
 Comment1 ""

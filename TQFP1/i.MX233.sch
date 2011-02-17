@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Tue 15 Feb 2011 11:52:39 AM COT
+EESchema Schematic File Version 2  date Wed 16 Feb 2011 10:56:53 AM COT
 LIBS:microsd
 LIBS:transistor-npn
 LIBS:ipc-7351-transistor
@@ -51,7 +51,7 @@ EELAYER END
 $Descr A2 23400 16535
 Sheet 3 3
 Title ""
-Date "14 feb 2011"
+Date "16 feb 2011"
 Rev ""
 Comp ""
 Comment1 ""
@@ -59,6 +59,10 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+Wire Wire Line
+	2750 12550 3800 12550
+Wire Wire Line
+	7400 11750 7900 11750
 Connection ~ 12900 10700
 Wire Wire Line
 	12800 10700 13850 10700
@@ -262,15 +266,7 @@ Wire Wire Line
 	6700 10600 6550 10600
 Wire Wire Line
 	6550 10600 6550 10450
-Wire Wire Line
-	7400 11750 8350 11750
-Wire Wire Line
-	8350 11750 8350 11400
 Connection ~ 7900 11750
-Wire Wire Line
-	8350 11000 8350 10600
-Wire Wire Line
-	8350 10600 7100 10600
 Connection ~ 7900 10600
 Wire Wire Line
 	7600 10600 7600 10450
@@ -285,12 +281,6 @@ Connection ~ 1600 12600
 Connection ~ 3300 12550
 Wire Wire Line
 	3300 12550 3300 12650
-Connection ~ 3450 12150
-Wire Wire Line
-	3800 12150 2750 12150
-Connection ~ 3450 12550
-Wire Wire Line
-	2750 12550 3800 12550
 Connection ~ 3100 12550
 Connection ~ 3100 12150
 Wire Wire Line
@@ -689,11 +679,6 @@ Wire Wire Line
 Wire Wire Line
 	1450 1750 1550 1750
 Wire Wire Line
-	8050 7600 6400 7600
-Connection ~ 7800 7600
-Wire Wire Line
-	7800 8000 7800 8150
-Wire Wire Line
 	1900 10700 1900 10950
 Connection ~ 10650 5450
 Wire Wire Line
@@ -898,6 +883,11 @@ Wire Wire Line
 Wire Wire Line
 	13850 10700 13850 10650
 Connection ~ 13850 10650
+Wire Wire Line
+	7900 10600 7100 10600
+Wire Wire Line
+	3800 12150 2750 12150
+NoConn ~ 6400 7600
 $Comp
 L GND #PWR012
 U 1 1 4D59B301
@@ -1619,15 +1609,6 @@ F 1 "1uF" H 7950 11100 50  0000 L CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C55
-U 1 1 4D42D636
-P 8350 11200
-F 0 "C55" H 8400 11300 50  0000 L CNN
-F 1 "0.1uF" H 8400 11100 50  0000 L CNN
-	1    8350 11200
-	1    0    0    -1  
-$EndComp
-$Comp
 L GND #PWR053
 U 1 1 4D42D635
 P 7900 11900
@@ -1715,15 +1696,6 @@ P 3800 12350
 F 0 "C35" H 3850 12450 50  0000 L CNN
 F 1 "33uF" H 3850 12250 50  0000 L CNN
 	1    3800 12350
-	1    0    0    -1  
-$EndComp
-$Comp
-L C C33
-U 1 1 4D42D62B
-P 3450 12350
-F 0 "C33" H 3500 12450 50  0000 L CNN
-F 1 "1uF" H 3500 12250 50  0000 L CNN
-	1    3450 12350
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -2301,26 +2273,6 @@ F 1 "1uF" H 1950 11050 50  0000 L CNN
 $EndComp
 Text Label 6638 7750 0    60   ~ 0
 VAG
-Text Label 8050 7600 0    60   ~ 0
-V_OUT
-$Comp
-L GND #PWR078
-U 1 1 4D4053BE
-P 7800 8150
-F 0 "#PWR078" H 7800 8150 30  0001 C CNN
-F 1 "GND" H 7800 8080 30  0001 C CNN
-	1    7800 8150
-	1    0    0    -1  
-$EndComp
-$Comp
-L C C54
-U 1 1 4D4053B0
-P 7800 7800
-F 0 "C54" H 7850 7900 50  0000 L CNN
-F 1 "50pF" H 7850 7700 50  0000 L CNN
-	1    7800 7800
-	1    0    0    -1  
-$EndComp
 $Comp
 L GND #PWR079
 U 1 1 4D4050B1

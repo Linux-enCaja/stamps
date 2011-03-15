@@ -1,0 +1,22 @@
+update=Mon 14 Mar 2011 06:45:15 PM COT
+last_client=cvpcb
+[pcbnew]
+[pcbnew/libraries]
+LibName1=/home/sebastian/proyecto/stamps/components/ref-packages
+LibName2=/home/sebastian/proyecto/stamps/components/M-PAD
+LibName3=sockets
+LibName4=connect
+LibName5=discret
+LibName6=pin_array
+LibName7=divers
+LibName8=libcms
+LibName9=display
+LibName10=valves
+LibName11=led
+LibName12=dip_sockets
+LibDir=
+[cvpcb]
+version=1
+NetIExt=.net
+[cvpcb/libraries]
+EquName1=devcms

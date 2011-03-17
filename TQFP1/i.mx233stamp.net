@@ -1,4 +1,4 @@
-# EESchema Netlist Version 1.1 created  Tue 15 Mar 2011 01:44:03 PM COT
+# EESchema Netlist Version 1.1 created  Thu 17 Mar 2011 12:03:55 PM COT
 (
  ( /4D30B991/4D7E71FA $noname  R8 10k {Lib=R}
   (    1 VDDIO_3V3 )
@@ -163,7 +163,7 @@
   (    2 N-000060 )
  )
  ( /4D30AC69/4D7EAC77 $noname  C4 .1uF {Lib=C}
-  (    1 N-000070 )
+  (    1 N-000069 )
   (    2 N-000058 )
  )
  ( /4D30AC69/4D7E9F78 $noname  P4 CONN_4 {Lib=CONN_4}
@@ -174,19 +174,19 @@
  )
  ( /4D30AC69/4D7E9EF6 $noname  D5 LED {Lib=LED}
   (    1 VDDIO_3V3 )
-  (    2 N-000069 )
+  (    2 N-000068 )
  )
  ( /4D30AC69/4D7E9EED $noname  R31 1k {Lib=R}
-  (    1 N-000069 )
+  (    1 N-000068 )
   (    2 /i.MX233/PWM1 )
  )
  ( /4D30AC69/4D7E9E03 $noname  R28 1k {Lib=R}
-  (    1 N-000067 )
+  (    1 N-000066 )
   (    2 GND )
  )
  ( /4D30AC69/4D7E9DFD $noname  D3 LED {Lib=LED}
   (    1 /i.MX233/GPMI_D06 )
-  (    2 N-000067 )
+  (    2 N-000066 )
  )
  ( /4D30AC69/4D7E9D93 $noname  R9 1k {Lib=R}
   (    1 GND )
@@ -208,7 +208,7 @@
   (    1 N-000060 )
   (    2 N-000061 )
   (    3 ? )
-  (    4 /i.MX233/RX )
+  (    4 /i.MX233/PWM0 )
   (    5 /i.MX233/PWM1 )
   (    6 ? )
   (    7 N-000049 )
@@ -217,10 +217,10 @@
   (   10 N-000057 )
   (   11 ? )
   (   12 /i.MX233/TX )
-  (   13 /i.MX233/PWM0 )
+  (   13 /i.MX233/RX )
   (   14 ? )
   (   15 N-000058 )
-  (   16 N-000070 )
+  (   16 N-000069 )
  )
  ( /4D30AC69/4D7E7656 $noname  R29 47k {Lib=R}
   (    1 /i.MX233/GPMI_RDY0 )
@@ -1535,14 +1535,14 @@ Net 56 "" ""
  R30 2
  D4 2
 Net 57 "" ""
- U1 10
  C5 1
+ U1 10
 Net 58 "" ""
  C4 2
  U1 15
 Net 59 "/i.MX233/RX" "RX"
  P4 3
- U1 4
+ U1 13
 Net 60 "" ""
  U1 1
  C1 2
@@ -1559,22 +1559,22 @@ Net 62 "VDDD" "VDDD"
  C38 1
  C39 1
  IC1 1
-Net 66 "/i.MX233/PWM0" "PWM0"
- U1 13
- IC1 125
-Net 67 "" ""
+Net 66 "" ""
  R28 1
  D3 2
-Net 68 "/i.MX233/PWM1" "PWM1"
- IC1 126
+Net 67 "/i.MX233/PWM1" "PWM1"
  R31 2
+ IC1 126
  U1 5
-Net 69 "" ""
+Net 68 "" ""
  D5 2
  R31 1
-Net 70 "" ""
+Net 69 "" ""
  C4 1
  U1 16
+Net 71 "/i.MX233/PWM0" "PWM0"
+ IC1 125
+ U1 4
 Net 72 "VDD_BATT" "VDD_BATT"
  R2 1
  C41 1

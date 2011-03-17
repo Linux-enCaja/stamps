@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Tue 15 Mar 2011 01:46:05 PM COT
+EESchema Schematic File Version 2  date Thu 17 Mar 2011 02:05:13 PM COT
 LIBS:adm3101e
 LIBS:microsd
 LIBS:transistor-npn
@@ -52,7 +52,7 @@ EELAYER END
 $Descr A4 11700 8267
 Sheet 1 3
 Title ""
-Date "15 mar 2011"
+Date "17 mar 2011"
 Rev ""
 Comp ""
 Comment1 ""

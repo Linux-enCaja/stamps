@@ -1,0 +1,141 @@
+======================================================================
+Creating bootable SD cards for Propendous-imx233
+======================================================================
+
+Some brief instructions for creating a bootable SD Card with the "chumby factory"
+bootloader/OTP programmer.
+
+These procedures are written for the Chumby factory OTP programmer but can also be 
+applied to any bootstream code (SB file) that has been run through elftosb2. 
+The SB file must be compatible with the OTP bits, e.g. for encryption etc.  
+
+MBR format
+----------
+
+Also described in "i.MX23 EVK Linux User’s Guide"
+
+1. need partition of type 'S' 0x53 with small size (e.g 64K)
+
+   For simplicity make the boot partition #1, although it can be any.
+   SD card must be unmounted.
+   Use fdisk to create partition and write to card. 
+  
+2. Write 2048 zeros followed by sb image.
+   Use dd command to create raw file and write to card as below.
+   Boot partition should be unmounted
+
+BCB format
+----------
+
+The last physical sector on the disk has a table pointing to the location of
+the bootstream. This can be anywhere on the disk, typically located at end 
+of disk before the BCB table, or the BCB can point to the bootstream in the
+MBR boot partition.   
+
+Currently the procedure is to create an MBR format card then add the BCB using
+the perl script bootstream_make_bootable.pl
+
+Required Files
+--------------
+
+install/bootstream-factory.bin    bootsream /SB file
+install/bootstream-factory.raw    as above prefixed with 2048 zeros
+install/bootstream-factory.img    disk image including MBR, partition table and
+                                  bootstream partition. Does not have BCB. 
+
+======================================================================
+Instructions
+======================================================================
+# BE CAREFUL! Get the wrong device and you might overwrite something valuable.
+# NB change /dev/sdd as appropriate for your system
+# will need to run as root/sudo
+# Did I say BE CAREFUL?
+
+
+A. Create disk image from scratch
+-----------------------------------
+
+1. cd to bootstream-1.0
+   Do make followed by make .factory-image
+   This creates install/factory-image.bin, which is the bootstream file in SB format.
+   then cd to install
+   
+2. Partition the SD card
+
+# setup partition 1 as boot
+# follow prompts and input values as below:
+
+fdisk /dev/sdd
+
+Command: n
+action: p
+partition number: 1
+First cyl: 1
+last cyl: +64K
+
+Command: t
+Partition number: 1
+hex code: 53
+
+Command: w
+
+3. check partition table
+
+fdisk -l -u /dev/sdd
+
+Disk /dev/sdd: 4110 MB, 4110417920 bytes
+5 heads, 4 sectors/track, 401408 cylinders, total 8028160 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Disk identifier: 0x00000000
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdd1               4          79          38   53  OnTrack DM6 Aux3
+
+
+4. create a raw file of 2048 zeros
+
+dd if=/dev/zero of=bootstream-factory.raw bs=512 count=4
+
+5. append our SB file to the raw file
+
+dd if=bootstream-factory.bin of=bootstream-factory.raw ibs=512 seek=4 conv=sync,notrunc
+
+6. Write the raw file into the boot partition
+
+dd if=bootstream-factory.raw of=/dev/sdd1
+
+** At this point you now have a bootable MBR format SD card **
+
+7. Upgrade the MBR card to a BCB card, required if OTP MBR bit is not set
+
+sudo ./bootstream_make_bootable.pl /dev/sdd 
+
+B. Updating MBR card with new bootloader
+----------------------------------------
+
+1. If you rebuild your bootstream code and want to update an SD card, follow
+   steps A4-A6
+
+C. Make a reference image from the SD 
+-------------------------------------
+
+1. Create a "reference" image copy of the card
+
+dd if=/dev/sdd of=bootstream-factory.img count=80
+
+D. Create a MBR card from the reference image
+----------------------------------------------
+
+1. Write whole disk image: NB will overwrite partition table
+
+sudo dd if=bootstream-factory.img of=/dev/sdd
+
+2. If necessary add the BCB 
+
+sudo ./bootstream_make_bootable.pl /dev/sdd 
+
+----
+Revisions
+1   29/05/2010 bobc  initial version
+2   30/05/2010 bobc  revised and extended for BCB script
+  

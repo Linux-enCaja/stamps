@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svnroot/lyre/!svn/ver/30/propendous-imx233_board/firmware/blink_led/src
+END
+entry.S
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/lyre/!svn/ver/30/propendous-imx233_board/firmware/blink_led/src/entry.S
+END
+main.c
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/lyre/!svn/ver/30/propendous-imx233_board/firmware/blink_led/src/main.c
+END
+blink_led.ld.in
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/lyre/!svn/ver/30/propendous-imx233_board/firmware/blink_led/src/blink_led.ld.in
+END

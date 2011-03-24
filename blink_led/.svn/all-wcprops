@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/lyre/!svn/ver/85/propendous-imx233_board/firmware/blink_led
+END
+Creating_boot_image.txt
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/lyre/!svn/ver/28/propendous-imx233_board/firmware/blink_led/Creating_boot_image.txt
+END
+Debug.launch
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/lyre/!svn/ver/23/propendous-imx233_board/firmware/blink_led/Debug.launch
+END
+elftosb2
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/lyre/!svn/ver/28/propendous-imx233_board/firmware/blink_led/elftosb2
+END
+OpenOCD.launch
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/lyre/!svn/ver/23/propendous-imx233_board/firmware/blink_led/OpenOCD.launch
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/lyre/!svn/ver/23/propendous-imx233_board/firmware/blink_led/.project
+END
+.cproject
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/lyre/!svn/ver/23/propendous-imx233_board/firmware/blink_led/.cproject
+END
+blink_led.db
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/lyre/!svn/ver/28/propendous-imx233_board/firmware/blink_led/blink_led.db
+END
+blink_led.bin
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/lyre/!svn/ver/28/propendous-imx233_board/firmware/blink_led/blink_led.bin
+END
+blink_led.raw
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/lyre/!svn/ver/28/propendous-imx233_board/firmware/blink_led/blink_led.raw
+END
+make_boot_image.sh
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/lyre/!svn/ver/85/propendous-imx233_board/firmware/blink_led/make_boot_image.sh
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svnroot/lyre/!svn/ver/28/propendous-imx233_board/firmware/blink_led/README
+END
+bootstream_make_bootable.pl
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/lyre/!svn/ver/28/propendous-imx233_board/firmware/blink_led/bootstream_make_bootable.pl
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/lyre/!svn/ver/85/propendous-imx233_board/firmware/blink_led/Makefile
+END

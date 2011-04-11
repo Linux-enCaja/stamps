@@ -1,4 +1,4 @@
-PCBNEW-BOARD Version 1 date Mon 11 Apr 2011 02:27:14 PM COT
+PCBNEW-BOARD Version 1 date Mon 11 Apr 2011 03:43:52 PM COT
 
 # Created by Pcbnew(2011-01-25 BZR 2758)-stable
 
@@ -35,7 +35,7 @@ ZoneGridSize 250
 Layers 2
 Layer[0] Back signal
 Layer[15] Front signal
-TrackWidth 79
+TrackWidth 197
 TrackWidthList 79
 TrackWidthList 118
 TrackWidthList 157

@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Thu 17 Mar 2011 02:05:13 PM COT
+EESchema Schematic File Version 2  date Mon 11 Apr 2011 03:43:24 PM COT
 LIBS:adm3101e
 LIBS:microsd
 LIBS:transistor-npn
@@ -52,7 +52,7 @@ EELAYER END
 $Descr A4 11700 8267
 Sheet 2 3
 Title ""
-Date "17 mar 2011"
+Date "11 apr 2011"
 Rev ""
 Comp ""
 Comment1 ""
@@ -466,9 +466,7 @@ Text Label 2200 5200 0    60   ~ 0
 DDR_DQM0
 Text Label 2200 4850 0    60   ~ 0
 DDR_CKE
-Text Label 2200 4550 0    60   ~ 0
-DDR_CKE
-Text Label 2200 4550 0    60   ~ 0
+Text Label 2250 4550 0    60   ~ 0
 DDR_CASN
 Text Label 2200 4950 0    60   ~ 0
 DDR_CLK

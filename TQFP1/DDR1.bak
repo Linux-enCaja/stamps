@@ -1,4 +1,5 @@
-EESchema Schematic File Version 2  date Mon 11 Apr 2011 03:43:24 PM COT
+EESchema Schematic File Version 2  date Fri 15 Apr 2011 12:29:57 PM COT
+LIBS:con-jack
 LIBS:adm3101e
 LIBS:microsd
 LIBS:transistor-npn
@@ -52,7 +53,7 @@ EELAYER END
 $Descr A4 11700 8267
 Sheet 2 3
 Title ""
-Date "11 apr 2011"
+Date "15 apr 2011"
 Rev ""
 Comp ""
 Comment1 ""
@@ -60,6 +61,11 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+Connection ~ 7650 6000
+Wire Wire Line
+	8200 6150 7650 6150
+Wire Wire Line
+	7650 6150 7650 5750
 Connection ~ 7950 6150
 Wire Wire Line
 	7950 6050 7950 6150
@@ -151,8 +157,6 @@ Wire Wire Line
 	9500 6150 9500 5950
 Wire Wire Line
 	7700 6350 8200 6350
-Wire Wire Line
-	7700 6150 8200 6150
 Connection ~ 8550 1500
 Connection ~ 8350 1500
 Wire Wire Line
@@ -387,6 +391,26 @@ Wire Notes Line
 	11150 7150 5750 7150
 Wire Wire Line
 	5850 3800 7250 3800
+Text HLabel 7050 5750 0    60   Input ~ 0
+GPMI_D03
+$Comp
+L JUMPER JP2
+U 1 1 4DA8641E
+P 7350 6000
+F 0 "JP2" H 7350 6150 60  0000 C CNN
+F 1 "JUMPER" H 7350 5920 40  0000 C CNN
+	1    7350 6000
+	1    0    0    -1  
+$EndComp
+$Comp
+L JUMPER JP1
+U 1 1 4DA8641B
+P 7350 5750
+F 0 "JP1" H 7350 5900 60  0000 C CNN
+F 1 "JUMPER" H 7350 5670 40  0000 C CNN
+	1    7350 5750
+	1    0    0    -1  
+$EndComp
 $Comp
 L VDDIO_3V3 #PWR01
 U 1 1 4D7E71FF
@@ -689,7 +713,7 @@ Text HLabel 7700 6350 0    60   Input ~ 0
 GPMI_D01
 Text HLabel 7700 6250 0    60   Input ~ 0
 GPMI_D00
-Text HLabel 7700 6150 0    60   Input ~ 0
+Text HLabel 7050 6000 0    60   Input ~ 0
 GPMI_D04
 $Comp
 L GND #PWR010

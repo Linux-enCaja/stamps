@@ -1,4 +1,4 @@
-update=Sat 16 Apr 2011 09:59:32 PM COT
+update=Thu 21 Apr 2011 06:26:37 PM COT
 version=1
 last_client=pcbnew
 [general]
@@ -99,12 +99,12 @@ TxtPcbV=800
 TxtPcbH=600
 TxtModV=600
 TxtModH=600
-TxtModW=120
+TxtModW=79
 VEgarde=100
 DrawLar=150
 EdgeLar=150
 TxtLar=120
-MSegLar=150
+MSegLar=79
 LastNetListRead=i.mx233stamp.net
 [pcbnew/libraries]
 LibDir=

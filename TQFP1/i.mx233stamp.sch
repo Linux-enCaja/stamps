@@ -1,4 +1,10 @@
-EESchema Schematic File Version 2  date Thu 21 Apr 2011 06:26:39 PM COT
+EESchema Schematic File Version 2  date Mon 25 Apr 2011 11:56:53 AM COT
+LIBS:con-jack
+LIBS:adm3101e
+LIBS:microsd
+LIBS:transistor-npn
+LIBS:ipc-7351-transistor
+LIBS:switch-misc
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -29,13 +35,25 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
+LIBS:micron_ddr_512Mb
+LIBS:iMX23
+LIBS:sdmmc
+LIBS:usbconn
+LIBS:fsusb20
+LIBS:r_pack2
+LIBS:pasives-connectors
+LIBS:EEPROM
+LIBS:PWR
+LIBS:m25p32
+LIBS:PROpendous-cache
+LIBS:w_analog
 LIBS:i.mx233stamp-cache
 EELAYER 25  0
 EELAYER END
 $Descr A4 11700 8267
 Sheet 1 3
 Title ""
-Date "21 apr 2011"
+Date "25 apr 2011"
 Rev ""
 Comp ""
 Comment1 ""

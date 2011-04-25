@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPCB (2011-01-25 BZR 2758)-stable date = Wed 20 Apr 2011 06:42:03 PM COT
+Cmp-Mod V01 Created by CvPCB (2011-01-25 BZR 2758)-stable date = Mon 25 Apr 2011 12:15:24 PM COT
 
 BeginCmp
 TimeStamp = /4D30AC69/4D42D643;
@@ -368,7 +368,7 @@ BeginCmp
 TimeStamp = /4D30AC69/4D7E9D8D;
 Reference = D2;
 ValeurCmp = LED;
-IdModule  = LED-0603;
+IdModule  = SM0603;
 EndCmp
 
 BeginCmp
@@ -389,7 +389,7 @@ BeginCmp
 TimeStamp = /4D30AC69/4D7E9EF6;
 Reference = D5;
 ValeurCmp = LED;
-IdModule  = LED-0603;
+IdModule  = SM0603;
 EndCmp
 
 BeginCmp
@@ -570,7 +570,7 @@ EndCmp
 BeginCmp
 TimeStamp = /4D30AC69/4D408680;
 Reference = R13;
-ValeurCmp = 47k;
+ValeurCmp = 1k;
 IdModule  = SM0603;
 EndCmp
 
@@ -591,7 +591,7 @@ EndCmp
 BeginCmp
 TimeStamp = /4D30AC69/4D40866C;
 Reference = R16;
-ValeurCmp = 47k;
+ValeurCmp = 1k;
 IdModule  = SM0603;
 EndCmp
 
@@ -655,7 +655,7 @@ BeginCmp
 TimeStamp = /4D30AC69/4D42FA4C;
 Reference = R27;
 ValeurCmp = 22;
-IdModule  = R_PACK4-0402;
+IdModule  = SM0603;
 EndCmp
 
 BeginCmp

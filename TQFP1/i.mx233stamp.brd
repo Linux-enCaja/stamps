@@ -1,4 +1,4 @@
-PCBNEW-BOARD Version 1 date Mon 25 Apr 2011 03:55:22 PM COT
+PCBNEW-BOARD Version 1 date Mon 25 Apr 2011 03:59:50 PM COT
 
 # Created by Pcbnew(2011-01-25 BZR 2758)-stable
 
@@ -44,7 +44,7 @@ TrackWidthList 394
 TrackClearence 71
 ZoneClearence 200
 TrackMinWidth 59
-DrawSegmWidth 39
+DrawSegmWidth 150
 EdgeSegmWidth 150
 ViaSize 197
 ViaDrill 79
@@ -840,7 +840,7 @@ Po 1181 0
 $EndPAD
 $EndMODULE  con-jack-SPC4077
 $MODULE Q1
-Po 56120 46958 1800 15 4DB5DF7F 4D4C17BF ~~
+Po 56120 46958 1800 15 4DB5E0C2 4D4C17BF ~~
 Li Q1
 Cd SMALL OUTLINE TRANSISTOR; 6 LEADS REFLOW SOLDERING
 Kw SMALL OUTLINE TRANSISTOR; 6 LEADS REFLOW SOLDERING
@@ -11262,7 +11262,7 @@ ZLayer 15
 ZAux 4 E
 ZClearance 200 T
 ZMinThickness 100
-ZOptions 0 16 F 200 200
+ZOptions 0 16 S 200 200
 ZCorner 68125 51900 0
 ZCorner 68125 31475 0
 ZCorner 44925 31525 0
@@ -13547,7 +13547,7 @@ ZLayer 0
 ZAux 7 E
 ZClearance 200 T
 ZMinThickness 100
-ZOptions 0 16 F 200 200
+ZOptions 0 16 S 200 200
 ZCorner 68225 51975 0
 ZCorner 68200 31250 0
 ZCorner 44725 31250 0

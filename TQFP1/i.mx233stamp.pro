@@ -1,4 +1,4 @@
-update=Mon 25 Apr 2011 03:49:45 PM COT
+update=Mon 25 Apr 2011 04:00:48 PM COT
 version=1
 last_client=pcbnew
 [general]
@@ -101,7 +101,7 @@ TxtModV=600
 TxtModH=600
 TxtModW=79
 VEgarde=100
-DrawLar=39
+DrawLar=150
 EdgeLar=150
 TxtLar=120
 MSegLar=79

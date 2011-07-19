@@ -2,7 +2,8 @@
 #include "regsdigctl.h"
 
 /* LED pin lives in PWM, bank 1, pin 28 */
-#define LED (1 << 28)
+#define LED (1<<6)
+//#define nMOS (1<<19)
 
 void delay_us (int us)
 {
@@ -15,25 +16,27 @@ void delay_us (int us)
 int main(void)
 {
     /* Enable parallel JTAG, 12mA drive and the MUX pins for it */
-    HW_PINCTRL_MUXSEL4_CLR(0x3FFF);
-    HW_PINCTRL_MUXSEL4_SET(0x2AAE);
+    HW_PINCTRL_MUXSEL0_CLR(0x3FFF);
+    HW_PINCTRL_MUXSEL0_SET(0x3000);
 
-    HW_PINCTRL_DRIVE8_CLR(0x3FFF);
-    HW_PINCTRL_DRIVE8_SET(0x2AAE);
 
-    /* Enable Parallel JTAG */
-    HW_DIGCTL_CTRL_CLR((1 << 1) | (1 << 3) | (1 << 6));
-    /**************************************/
+    HW_PINCTRL_DRIVE0_CLR(0x3FFF);
+    HW_PINCTRL_DRIVE0_SET(0x2000000);
+
+
 
     /* Configue PIO for LED */
-    HW_PINCTRL_DOUT1_SET(LED);
-    HW_PINCTRL_DOE1_SET(LED);
+    HW_PINCTRL_DOUT0_SET(LED);
+    HW_PINCTRL_DOE0_SET(LED);
+
+//    HW_PINCTRL_DOUT0_SET(nMOS);
+//    HW_PINCTRL_DOE0_SET(nMOS);
     
     while(1)
     {
-        HW_PINCTRL_DOUT1_SET(LED);
+        HW_PINCTRL_DOUT0_SET(LED);
         delay_us(500000);
-        HW_PINCTRL_DOUT1_CLR(LED);
+        HW_PINCTRL_DOUT0_CLR(LED);
         delay_us(500000);
     }
 

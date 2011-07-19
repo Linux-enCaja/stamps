@@ -13,6 +13,7 @@ sources
 
 section (0)
 {
+
     load blink_led;
     jump blink_led;
 }

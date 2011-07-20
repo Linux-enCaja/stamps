@@ -1,0 +1,15 @@
+# Default command line used if no magic keys detected
+console=ttyAM0,115200 init=/linuxrc root=/dev/mmcblk0p2 rootfstype=ext3 ro rootwait lcd_panel=lms350 ssp1=mmc line=1 sysrq_always_enabled
+
+# Alternative command line, assigned to the bend sensor.
+console=ttyAM0,115200 init=/linuxrc root=/dev/mmcblk0p3 rootfstype=ext3 ro rootwait lcd_panel=lms350 ssp1=mmc line=2 sysrq_always_enabled
+
+# Alternative command line, not currently used.
+console=ttyAM0,115200 root=/dev/mmcblk0p2 rootfstype=ext3 rw rootwait lcd_panel=lms350 ssp1=mmc line=3
+# Root File System on flash
+#console=ttyAM0,115200 ubi.mtd=1 root=ubi0:rootfs0 rootfstype=ubifs lcd_panel=lms350 ssp2=gpmi
+
+# Alternative command line, also not currently used.
+console=ttyAM0,115200 root=/dev/mmcblk0p2 rootfstype=ext3 rw rootwait lcd_panel=lms350 ssp1=mmc line=4
+# Sets up MTD partition table to erase the entire flash
+#console=ttyAM0,115200 root=/dev/mmcblk0p2 rw rootwait mtdparts=gpmi:-(Data) lcd_panel=lms350 ssp1=mmc

@@ -1,0 +1,19 @@
+// bobc 29/05/2010 13:39:56
+// casainho 09/06/2010
+// This file is guesswork based on falconwing_chumby_sb.db
+// SDRAM not used yet
+
+
+// Falconwing STMP378x ROM command script to load and run chumby_factory
+
+sources
+{
+    boot_prep = "output/boot_prep";
+}
+
+section (0)
+{
+
+    load boot_prep;
+    jump boot_prep;
+}

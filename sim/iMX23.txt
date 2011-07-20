@@ -1,2 +1,0 @@
-iMX23 IBIS Model Notes:
-1)  The IBIS mode only includes package parasitic data  for the 169BGA package currently.

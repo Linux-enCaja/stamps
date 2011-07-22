@@ -1,4 +1,4 @@
-PCBNEW-BOARD Version 1 date Fri 22 Jul 2011 04:27:27 PM COT
+PCBNEW-BOARD Version 1 date Fri 22 Jul 2011 04:32:25 PM COT
 
 # Created by Pcbnew(2010-10-01 BZR 2513)-testing
 
@@ -43,7 +43,7 @@ TrackWidthList 315
 TrackWidthList 394
 TrackClearence 71
 ZoneClearence 200
-TrackMinWidth 4
+TrackMinWidth 55
 DrawSegmWidth 150
 EdgeSegmWidth 150
 ViaSize 236
@@ -11270,7 +11270,7 @@ ZLayer 15
 ZAux 4 E
 ZClearance 200 T
 ZMinThickness 100
-ZOptions 0 16 S 200 200
+ZOptions 0 16 F 200 200
 ZCorner 68125 51900 0
 ZCorner 68125 31475 0
 ZCorner 44925 31525 0
@@ -13555,7 +13555,7 @@ ZLayer 0
 ZAux 7 E
 ZClearance 200 T
 ZMinThickness 100
-ZOptions 0 16 S 200 200
+ZOptions 0 16 F 200 200
 ZCorner 68225 51975 0
 ZCorner 68200 31250 0
 ZCorner 44725 31250 0

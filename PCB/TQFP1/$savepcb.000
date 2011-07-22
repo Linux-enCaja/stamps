@@ -1,6 +1,6 @@
-PCBNEW-BOARD Version 1 date Mon 02 May 2011 05:14:03 AM COT
+PCBNEW-BOARD Version 1 date Thu 21 Jul 2011 09:25:01 AM COT
 
-# Created by Pcbnew(2010-10-01 BZR 2513)-testing
+# Created by Pcbnew(2010-04-19 BZR 23xx)-unstable
 
 $GENERAL
 LayerCount 2
@@ -20,7 +20,7 @@ $EndGENERAL
 $SHEETDESCR
 Sheet A4 11700 8267
 Title ""
-Date "2 may 2011"
+Date "21 jul 2011"
 Rev ""
 Comp ""
 Comment1 ""

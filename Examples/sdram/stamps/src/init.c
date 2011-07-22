@@ -717,13 +717,13 @@ printf("init_mddr_mt46h32m16lf_133Mhz\r\n");
 #endif
 #if 1
 	/*Test Memory;*/
-	printf("start test memory accress");
-	for (i = 0; i < 200; i++)
+	printf("start test memory access\r\n");
+	for (i = 0; i < (8*1024*1024); i++)
 		*pTest++ = i;
 
 	pTest = (volatile int *)0x40000000;
 
-	for (i = 0; i < 200; i++) {
+	for (i = 0; i < (8*1024*1024); i++) {
 		if (*pTest != (i)) {
 			printf("0x%x error value 0x%x\r\n", i, *pTest);
 		}

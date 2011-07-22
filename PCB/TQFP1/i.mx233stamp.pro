@@ -1,4 +1,4 @@
-update=Mon 02 May 2011 06:27:32 AM COT
+update=Fri 22 Jul 2011 06:38:24 AM COT
 version=1
 last_client=pcbnew
 [general]

@@ -13,16 +13,16 @@ build_prep:
 gen_bootstream: linux_prep boot_prep power_prep
 	@echo "generating linux kernel boot stream image"
 	@echo "by using the pre-built kernel"
-	elftosb2 -c linux_prebuilt.db -o i$(ARCH)_linux.sb
+	./elftosb2 -c linux_prebuilt.db -o i$(ARCH)_linux.sb
 #	elftosb2 -c linux.db -o i$(ARCH)_linux.sb
 	@echo "generating U-Boot boot stream image"
-	elftosb2 -c ./uboot_prebuilt.db -o i$(ARCH)_uboot.sb
+	./elftosb2 -c ./uboot_prebuilt.db -o i$(ARCH)_uboot.sb
 
 	rm -f sd_mmc_bootstream.raw
 	dd if=/dev/zero of=sd_mmc_bootstream.raw bs=512 count=4
 	dd if=imx23_linux.sb of=sd_mmc_bootstream.raw ibs=512 seek=4 conv=sync,notrunc
-	sudo dd if=sd_mmc_bootstream.raw of=/dev/mmcblk0p1
-	sudo umount /dev/mmcblk0p*
+	sudo dd if=sd_mmc_bootstream.raw of=/dev/sdb1
+	sudo umount /dev/sdb*
 
 power_prep:
 	@echo "build power_prep"

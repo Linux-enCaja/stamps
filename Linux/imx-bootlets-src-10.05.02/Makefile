@@ -9,7 +9,6 @@ all: build_prep gen_bootstream
 
 build_prep:
 
-
 gen_bootstream: linux_prep boot_prep power_prep
 	@echo "generating linux kernel boot stream image"
 	@echo "by using the pre-built kernel"

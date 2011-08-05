@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPCB (2011-01-25 BZR 2758)-stable date = Mon 25 Apr 2011 12:15:24 PM COT
+Cmp-Mod V01 Created by CvPCB (2011-07-20 BZR 3052)-testing date = Fri 05 Aug 2011 08:50:38 AM COT
 
 BeginCmp
 TimeStamp = /4D30AC69/4D42D643;
@@ -775,6 +775,13 @@ TimeStamp = /4D30B991/4D40953F;
 Reference = U3;
 ValeurCmp = M25P32;
 IdModule  = -SO08W;
+EndCmp
+
+BeginCmp
+TimeStamp = /4E3BEC51/4E3BF185;
+Reference = U4;
+ValeurCmp = GL850G;
+IdModule  = SSOP28;
 EndCmp
 
 BeginCmp

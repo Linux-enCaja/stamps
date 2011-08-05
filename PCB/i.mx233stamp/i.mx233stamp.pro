@@ -34,7 +34,7 @@ LibName9=display
 LibName10=valves
 LibName11=led
 LibName12=dip_sockets
-LibName13=/home/afc/devel/HW/stamps/PCB/components/M-PAD
+LibName13=../components/M-PAD
 LibDir=
 [cvpcb]
 version=1
@@ -121,5 +121,5 @@ LibName45=../components/PWR
 LibName46=../components/m25p32
 LibName47=../components/PROpendous-cache
 LibName48=../components/w_analog
-LibName49=/home/afc/devel/HW/stamps/PCB/components/gl850g
-LibName50=/home/afc/devel/HW/stamps/PCB/components/srf2012
+LibName49=../components/gl850g
+LibName50=../components/srf2012

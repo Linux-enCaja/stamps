@@ -1,4 +1,7 @@
-EESchema Schematic File Version 2  date Fri 05 Aug 2011 08:43:14 AM COT
+EESchema Schematic File Version 2  date Fri 05 Aug 2011 09:02:43 AM COT
+LIBS:con-jack
+LIBS:adm3101e
+LIBS:microsd
 LIBS:transistor-npn
 LIBS:ipc-7351-transistor
 LIBS:switch-misc
@@ -60,6 +63,14 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+Wire Wire Line
+	6900 2950 6600 2950
+Wire Wire Line
+	6900 2850 6600 2850
+Text HLabel 6900 2950 2    60   3State ~ 0
+USB_DM0
+Text HLabel 6900 2850 2    60   3State ~ 0
+USB_DP0
 $Comp
 L GL850G U4
 U 1 1 4E3BF185

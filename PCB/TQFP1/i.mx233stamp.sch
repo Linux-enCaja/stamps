@@ -1,4 +1,7 @@
-EESchema Schematic File Version 2  date Fri 05 Aug 2011 08:43:14 AM COT
+EESchema Schematic File Version 2  date Fri 05 Aug 2011 09:02:43 AM COT
+LIBS:con-jack
+LIBS:adm3101e
+LIBS:microsd
 LIBS:transistor-npn
 LIBS:ipc-7351-transistor
 LIBS:switch-misc
@@ -60,12 +63,8 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-$Sheet
-S 2150 3250 850  850 
-U 4E3BEC51
-F0 "USB" 60
-F1 "USB.sch" 60
-$EndSheet
+Wire Wire Line
+	3000 3550 3150 3550
 Wire Wire Line
 	4750 1650 5250 1650
 Wire Wire Line
@@ -110,6 +109,16 @@ Wire Wire Line
 	4750 1850 5250 1850
 Wire Wire Line
 	4750 2150 5250 2150
+Wire Wire Line
+	3150 3450 3000 3450
+$Sheet
+S 2150 3250 850  850 
+U 4E3BEC51
+F0 "USB" 60
+F1 "USB.sch" 60
+F2 "USB_DM0" T R 3000 3550 60 
+F3 "USB_DP0" T R 3000 3450 60 
+$EndSheet
 $Sheet
 S 5250 1600 1150 2500
 U 4D30B991
@@ -165,5 +174,7 @@ F20 "GPMI_D00" O R 4750 1750 60
 F21 "GPMI_D01" O R 4750 1850 60 
 F22 "GPMI_D02" O R 4750 1950 60 
 F23 "GPMI_D03" O R 4750 1650 60 
+F24 "USB_DM" B L 3150 3550 60 
+F25 "USB_DP" B L 3150 3450 60 
 $EndSheet
 $EndSCHEMATC

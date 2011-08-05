@@ -1,6 +1,6 @@
-update=Fri 05 Aug 2011 08:49:58 AM COT
+update=Fri 05 Aug 2011 11:15:23 AM COT
 version=1
-last_client=cvpcb
+last_client=eeschema
 [general]
 version=1
 [pcbnew]
@@ -36,6 +36,11 @@ LibName11=led
 LibName12=dip_sockets
 LibName13=/home/afc/devel/HW/stamps/PCB/components/M-PAD
 LibDir=
+[cvpcb]
+version=1
+NetIExt=net
+[cvpcb/libraries]
+EquName1=devcms
 [eeschema]
 version=1
 LibDir=
@@ -117,8 +122,4 @@ LibName46=../components/m25p32
 LibName47=../components/PROpendous-cache
 LibName48=../components/w_analog
 LibName49=/home/afc/devel/HW/stamps/PCB/components/gl850g
-[cvpcb]
-version=1
-NetIExt=net
-[cvpcb/libraries]
-EquName1=devcms
+LibName50=/home/afc/devel/HW/stamps/PCB/components/srf2012

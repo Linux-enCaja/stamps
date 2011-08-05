@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Fri 05 Aug 2011 09:02:43 AM COT
+EESchema Schematic File Version 2  date Fri 05 Aug 2011 02:31:32 PM COT
 LIBS:con-jack
 LIBS:adm3101e
 LIBS:microsd
@@ -48,6 +48,7 @@ LIBS:m25p32
 LIBS:PROpendous-cache
 LIBS:w_analog
 LIBS:gl850g
+LIBS:srf2012
 LIBS:i.mx233stamp-cache
 EELAYER 25  0
 EELAYER END

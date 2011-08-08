@@ -1,4 +1,4 @@
-update=Mon 08 Aug 2011 06:52:44 AM COT
+update=Mon 08 Aug 2011 07:06:18 AM COT
 version=1
 last_client=cvpcb
 [general]
@@ -36,6 +36,7 @@ LibName11=led
 LibName12=dip_sockets
 LibName13=../components/M-PAD
 LibName14=mounting
+LibName15=JACK
 LibDir=../modules
 [eeschema]
 version=1

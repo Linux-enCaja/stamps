@@ -1,4 +1,4 @@
-Cmp-Mod V01 Genere par PcbNew le Sat 06 Aug 2011 12:05:06 PM COT
+Cmp-Mod V01 Genere par PcbNew le Mon 08 Aug 2011 07:07:43 AM COT
 
 BeginCmp
 TimeStamp = /4D30AC69/4D42D643;
@@ -487,7 +487,7 @@ BeginCmp
 TimeStamp = /4D30AC69/4DA877AA;
 Reference = J2;
 ValeurCmp = JACK-PLUG0;
-IdModule  = con-jack-SPC4077;
+IdModule  = JACK;
 EndCmp
 
 BeginCmp
@@ -575,10 +575,24 @@ IdModule  = pin_array_12x2;
 EndCmp
 
 BeginCmp
+TimeStamp = /4D30AC69/4E3FCD86;
+Reference = P3;
+ValeurCmp = CONN_1;
+IdModule  = MJOLE;
+EndCmp
+
+BeginCmp
 TimeStamp = /4D30AC69/4DA8A543;
 Reference = P4;
 ValeurCmp = CONN_4X2;
 IdModule  = pin_array_4x2;
+EndCmp
+
+BeginCmp
+TimeStamp = /4D30AC69/4E3FCDB1;
+Reference = P5;
+ValeurCmp = CONN_1;
+IdModule  = MJOLE;
 EndCmp
 
 BeginCmp

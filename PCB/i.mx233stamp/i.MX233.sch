@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Mon 08 Aug 2011 06:51:46 AM COT
+EESchema Schematic File Version 2  date Mon 08 Aug 2011 07:05:33 AM COT
 LIBS:con-jack
 LIBS:adm3101e
 LIBS:microsd
@@ -1220,7 +1220,7 @@ U 1 1 4DA877AA
 P 9850 5400
 F 0 "J2" H 9550 5600 50  0000 L BNN
 F 1 "JACK-PLUG0" H 9550 5200 50  0000 L BNN
-F 2 "con-jack-SPC4077" H 9850 5550 50  0001 C CNN
+F 2 "JACK" H 9850 5550 50  0001 C CNN
 	1    9850 5400
 	1    0    0    -1  
 $EndComp

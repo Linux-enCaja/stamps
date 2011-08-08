@@ -1,6 +1,6 @@
-update=Fri 05 Aug 2011 11:15:23 AM COT
+update=Mon 08 Aug 2011 06:52:44 AM COT
 version=1
-last_client=eeschema
+last_client=cvpcb
 [general]
 version=1
 [pcbnew]
@@ -35,12 +35,8 @@ LibName10=valves
 LibName11=led
 LibName12=dip_sockets
 LibName13=../components/M-PAD
-LibDir=
-[cvpcb]
-version=1
-NetIExt=net
-[cvpcb/libraries]
-EquName1=devcms
+LibName14=mounting
+LibDir=../modules
 [eeschema]
 version=1
 LibDir=
@@ -123,3 +119,8 @@ LibName47=../components/PROpendous-cache
 LibName48=../components/w_analog
 LibName49=../components/gl850g
 LibName50=../components/srf2012
+[cvpcb]
+version=1
+NetIExt=net
+[cvpcb/libraries]
+EquName1=devcms

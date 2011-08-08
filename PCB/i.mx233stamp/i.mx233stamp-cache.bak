@@ -1,4 +1,4 @@
-EESchema-LIBRARY Version 2.3  Date: Sat 06 Aug 2011 12:03:02 PM COT
+EESchema-LIBRARY Version 2.3  Date: Mon 08 Aug 2011 06:51:30 AM COT
 #encoding utf-8
 #
 # ADM3101E
@@ -79,6 +79,18 @@ S -50 -25 50 -25 0 1 20 N
 S -50 25 50 25 0 1 20 N
 X ~ 1 0 100 65 D 40 40 1 1 P
 X ~ 2 0 -100 65 U 40 40 1 1 P
+ENDDRAW
+ENDDEF
+#
+# CONN_1
+#
+DEF ~CONN_1 P 0 30 N N 1 F N
+F0 "P" 80 0 40 H V L CNN
+F1 "CONN_1" 0 55 30 H I C CNN
+DRAW
+C 0 0 31 0 1 0 N
+P 2 0 1 0  -30 0  -50 0 N
+X 1 1 -150 0 100 R 60 60 1 1 P
 ENDDRAW
 ENDDEF
 #

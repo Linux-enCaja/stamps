@@ -1,6 +1,6 @@
-update=Mon 08 Aug 2011 07:06:18 AM COT
+update=Tue 09 Aug 2011 10:49:53 AM COT
 version=1
-last_client=cvpcb
+last_client=eeschema
 [general]
 version=1
 [pcbnew]
@@ -38,6 +38,11 @@ LibName13=../components/M-PAD
 LibName14=mounting
 LibName15=JACK
 LibDir=../modules
+[cvpcb]
+version=1
+NetIExt=net
+[cvpcb/libraries]
+EquName1=devcms
 [eeschema]
 version=1
 LibDir=
@@ -120,8 +125,4 @@ LibName47=../components/PROpendous-cache
 LibName48=../components/w_analog
 LibName49=../components/gl850g
 LibName50=../components/srf2012
-[cvpcb]
-version=1
-NetIExt=net
-[cvpcb/libraries]
-EquName1=devcms
+LibName51=/home/cain/Embedded/ARM/iMX233/stamps/PCB/components/rclamp0502b

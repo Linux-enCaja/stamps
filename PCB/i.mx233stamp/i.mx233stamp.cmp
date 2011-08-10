@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPCB (2011-05-31)-stable date = Wed 10 Aug 2011 05:38:02 PM COT
+Cmp-Mod V01 Genere par PcbNew le Wed 10 Aug 2011 06:19:32 PM COT
 
 BeginCmp
 TimeStamp = /4D30AC69/4D42D643;
@@ -991,14 +991,14 @@ BeginCmp
 TimeStamp = /4D30AC69/4D404CE3;
 Reference = X1;
 ValeurCmp = 24_MHz;
-IdModule  = crystal-TC26H;
+IdModule  = ABM8G;
 EndCmp
 
 BeginCmp
 TimeStamp = /4E3BEC51/4E3C17E2;
 Reference = X2;
 ValeurCmp = 12MHz;
-IdModule  = crystal-TC26H;
+IdModule  = ABM8G;
 EndCmp
 
 EndListe

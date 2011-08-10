@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Wed 10 Aug 2011 05:49:50 PM COT
+EESchema Schematic File Version 2  date Wed 10 Aug 2011 06:20:59 PM COT
 LIBS:con-jack
 LIBS:adm3101e
 LIBS:microsd
@@ -51,6 +51,7 @@ LIBS:gl850g
 LIBS:srf2012
 LIBS:rclamp0502b
 LIBS:mcp130
+LIBS:ABM8G
 LIBS:i.mx233stamp-cache
 EELAYER 25  0
 EELAYER END
@@ -66,6 +67,16 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+$Comp
+L ABM8G X2
+U 1 1 4E4310B7
+P 5550 2750
+F 0 "X2" H 5550 2900 60  0000 C CNN
+F 1 "12MHz" H 5550 2600 60  0000 C CNN
+F 2 "ABM8G" H 5550 2750 60  0001 C CNN
+	1    5550 2750
+	1    0    0    -1  
+$EndComp
 Wire Wire Line
 	2750 2650 850  2650
 Wire Wire Line
@@ -991,15 +1002,6 @@ P 5850 3900
 F 0 "#PWR026" H 5850 3900 30  0001 C CNN
 F 1 "GND" H 5850 3830 30  0001 C CNN
 	1    5850 3900
-	1    0    0    -1  
-$EndComp
-$Comp
-L CRYSTAL X2
-U 1 1 4E3C17E2
-P 5550 2750
-F 0 "X2" H 5550 2900 60  0000 C CNN
-F 1 "12MHz" H 5550 2600 60  0000 C CNN
-	1    5550 2750
 	1    0    0    -1  
 $EndComp
 $Comp

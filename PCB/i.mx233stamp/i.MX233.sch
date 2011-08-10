@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Tue 09 Aug 2011 19:29:54 COT
+EESchema Schematic File Version 2  date Wed 10 Aug 2011 05:49:50 PM COT
 LIBS:con-jack
 LIBS:adm3101e
 LIBS:microsd
@@ -979,7 +979,7 @@ $EndComp
 NoConn ~ 12850 5700
 Text Label 5650 8150 0    60   ~ 0
 HP_VGND
-Text Label 13000 5400 0    60   ~ 0
+Text Label 14600 5400 0    60   ~ 0
 HP_VGND
 Text Label 13000 5600 0    60   ~ 0
 MIC
@@ -1020,7 +1020,7 @@ Text Label 6250 6450 0    60   ~ 0
 MIC
 Text Label 14600 5500 0    60   ~ 0
 HPL
-Text Label 14600 5400 0    60   ~ 0
+Text Label 13000 5400 0    60   ~ 0
 HPR
 Text Label 14600 5100 0    60   ~ 0
 VDAC1

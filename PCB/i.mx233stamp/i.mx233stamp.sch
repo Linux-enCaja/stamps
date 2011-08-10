@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Tue 09 Aug 2011 03:40:13 PM COT
+EESchema Schematic File Version 2  date Tue 09 Aug 2011 19:29:54 COT
 LIBS:con-jack
 LIBS:adm3101e
 LIBS:microsd
@@ -50,14 +50,15 @@ LIBS:w_analog
 LIBS:gl850g
 LIBS:srf2012
 LIBS:rclamp0502b
+LIBS:mcp130
 LIBS:i.mx233stamp-cache
-EELAYER 24  0
+EELAYER 25  0
 EELAYER END
 $Descr A4 11700 8267
 encoding utf-8
 Sheet 1 4
 Title ""
-Date "9 aug 2011"
+Date "10 aug 2011"
 Rev ""
 Comp ""
 Comment1 ""

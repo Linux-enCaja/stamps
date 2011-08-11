@@ -1,6 +1,6 @@
-update=Wed 10 Aug 2011 06:13:43 PM COT
+update=Wed 10 Aug 2011 07:04:40 PM COT
 version=1
-last_client=eeschema
+last_client=cvpcb
 [pcbnew]
 version=1
 PadDrlX=320
@@ -37,14 +37,10 @@ LibName15=../components/werner
 LibName16=../components/crystal
 LibName17=ABM8G
 LibName18=SRF2012
+LibName19=/home/cain/Embedded/ARM/iMX233/stamps/PCB/components/m25pxx
 LibDir=../modules
 [general]
 version=1
-[cvpcb]
-version=1
-NetIExt=net
-[cvpcb/libraries]
-EquName1=devcms
 [eeschema]
 version=1
 LibDir=
@@ -129,4 +125,9 @@ LibName49=../components/gl850g
 LibName50=../components/srf2012
 LibName51=../components/rclamp0502b
 LibName52=../components/mcp130
-LibName53=/home/afc/devel/HW/stamps/PCB/components/ABM8G
+LibName53=../components/ABM8G
+[cvpcb]
+version=1
+NetIExt=net
+[cvpcb/libraries]
+EquName1=devcms

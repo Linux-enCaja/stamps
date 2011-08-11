@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPCB (2011-05-31)-stable date = Wed 10 Aug 2011 07:09:21 PM COT
+Cmp-Mod V01 Genere par PcbNew le Wed 10 Aug 2011 09:58:11 PM COT
 
 BeginCmp
 TimeStamp = /4D30AC69/4D42D643;
@@ -480,7 +480,7 @@ BeginCmp
 TimeStamp = /4D30AC69/4D7E9D8D;
 Reference = D2;
 ValeurCmp = LED;
-IdModule  = SM0603;
+IdModule  = LED-0603;
 EndCmp
 
 BeginCmp
@@ -659,6 +659,13 @@ IdModule  = pin_array_12x2;
 EndCmp
 
 BeginCmp
+TimeStamp = /4D30AC69/4E4341F9;
+Reference = P3;
+ValeurCmp = CONN_1;
+IdModule  = MHOLE;
+EndCmp
+
+BeginCmp
 TimeStamp = /4D30AC69/4DA8A543;
 Reference = P4;
 ValeurCmp = CONN_4X2;
@@ -670,6 +677,13 @@ TimeStamp = /4D30AC69/4DA86970;
 Reference = P6;
 ValeurCmp = CONN_2;
 IdModule  = PIN_ARRAY_2X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /4D30AC69/4E43420C;
+Reference = P7;
+ValeurCmp = CONN_1;
+IdModule  = MHOLE;
 EndCmp
 
 BeginCmp
@@ -879,27 +893,6 @@ BeginCmp
 TimeStamp = /4D30AC69/4DA85DCD;
 Reference = R32;
 ValeurCmp = 47k;
-IdModule  = SM0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /4D30AC69/4DACFEFB;
-Reference = R33;
-ValeurCmp = 0;
-IdModule  = SM0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /4D30B991/4DACFF20;
-Reference = R34;
-ValeurCmp = 0;
-IdModule  = SM0603;
-EndCmp
-
-BeginCmp
-TimeStamp = /4D30B991/4DACFF24;
-Reference = R35;
-ValeurCmp = 0;
 IdModule  = SM0603;
 EndCmp
 

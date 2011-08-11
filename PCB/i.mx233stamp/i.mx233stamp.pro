@@ -1,4 +1,4 @@
-update=Wed 10 Aug 2011 07:04:40 PM COT
+update=Wed 10 Aug 2011 09:56:19 PM COT
 version=1
 last_client=cvpcb
 [pcbnew]
@@ -38,6 +38,7 @@ LibName16=../components/crystal
 LibName17=ABM8G
 LibName18=SRF2012
 LibName19=/home/cain/Embedded/ARM/iMX233/stamps/PCB/components/m25pxx
+LibName20=mounting
 LibDir=../modules
 [general]
 version=1

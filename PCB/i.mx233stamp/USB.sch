@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Thu 11 Aug 2011 02:37:53 PM COT
+EESchema Schematic File Version 2  date Fri 12 Aug 2011 11:16:45 AM COT
 LIBS:con-jack
 LIBS:adm3101e
 LIBS:microsd
@@ -52,6 +52,7 @@ LIBS:srf2012
 LIBS:rclamp0502b
 LIBS:mcp130
 LIBS:ABM8G
+LIBS:usb_a
 LIBS:i.mx233stamp-cache
 EELAYER 25  0
 EELAYER END
@@ -59,7 +60,7 @@ $Descr A4 11700 8267
 encoding utf-8
 Sheet 2 4
 Title ""
-Date "11 aug 2011"
+Date "12 aug 2011"
 Rev ""
 Comp ""
 Comment1 ""
@@ -67,6 +68,40 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+Text HLabel 2600 5250 0    60   BiDi ~ 0
+USB_P4
+Text HLabel 2600 5100 0    60   BiDi ~ 0
+USB_M4
+Text HLabel 2650 4200 0    60   BiDi ~ 0
+USM_P3
+Text HLabel 2650 4050 0    60   BiDi ~ 0
+USB_M3
+$Comp
+L USB_2A J4
+U 1 1 4E4530FA
+P 2550 3000
+F 0 "J4" H 2475 3250 60  0000 C CNN
+F 1 "USB_2A" H 2600 2700 60  0001 C CNN
+F 4 "VCC" H 2875 3150 50  0001 C CNN "VCC"
+F 5 "D+" H 2850 3050 50  0001 C CNN "Data+"
+F 6 "D-" H 2850 2950 50  0001 C CNN "Data-"
+F 7 "GND" H 2875 2850 50  0001 C CNN "Ground"
+	1    2550 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L USB_2A J3
+U 1 1 4E4530F2
+P 2500 1750
+F 0 "J3" H 2425 2000 60  0000 C CNN
+F 1 "USB_2A" H 2550 1450 60  0001 C CNN
+F 4 "VCC" H 2825 1900 50  0001 C CNN "VCC"
+F 5 "D+" H 2800 1800 50  0001 C CNN "Data+"
+F 6 "D-" H 2800 1700 50  0001 C CNN "Data-"
+F 7 "GND" H 2825 1600 50  0001 C CNN "Ground"
+	1    2500 1750
+	1    0    0    -1  
+$EndComp
 Connection ~ 5250 3550
 Wire Wire Line
 	5300 3550 5250 3550
@@ -421,20 +456,6 @@ F 2 "ABM8G" H 5550 2750 60  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L USB_2 J4
-U 1 1 4E41CF8F
-P 2550 3000
-F 0 "J4" H 2475 3250 60  0000 C CNN
-F 1 "USB_2" H 2600 2700 60  0001 C CNN
-F 2 "conn_usb_A-vert" H 2550 3000 60  0001 C CNN
-F 4 "VCC" H 2875 3150 50  0001 C CNN "VCC"
-F 5 "D+" H 2850 3050 50  0001 C CNN "Data+"
-F 6 "D-" H 2850 2950 50  0001 C CNN "Data-"
-F 7 "GND" H 2875 2850 50  0001 C CNN "Ground"
-	1    2550 3000
-	1    0    0    -1  
-$EndComp
-$Comp
 L GND #PWR02
 U 1 1 4E41CF8D
 P 1950 3350
@@ -696,20 +717,6 @@ P 950 1150
 F 0 "#PWR015" H 950 1250 30  0001 C CNN
 F 1 "VDD5V" H 950 1250 30  0000 C CNN
 	1    950  1150
-	1    0    0    -1  
-$EndComp
-$Comp
-L USB_2 J3
-U 1 1 4E414C60
-P 2500 1750
-F 0 "J3" H 2425 2000 60  0000 C CNN
-F 1 "USB_2" H 2550 1450 60  0001 C CNN
-F 2 "conn_usb_A-vert" H 2500 1750 60  0001 C CNN
-F 4 "VCC" H 2825 1900 50  0001 C CNN "VCC"
-F 5 "D+" H 2800 1800 50  0001 C CNN "Data+"
-F 6 "D-" H 2800 1700 50  0001 C CNN "Data-"
-F 7 "GND" H 2825 1600 50  0001 C CNN "Ground"
-	1    2500 1750
 	1    0    0    -1  
 $EndComp
 $Comp

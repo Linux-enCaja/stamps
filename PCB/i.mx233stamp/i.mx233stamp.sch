@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Thu 11 Aug 2011 02:37:53 PM COT
+EESchema Schematic File Version 2  date Fri 12 Aug 2011 11:16:45 AM COT
 LIBS:con-jack
 LIBS:adm3101e
 LIBS:microsd
@@ -52,6 +52,7 @@ LIBS:srf2012
 LIBS:rclamp0502b
 LIBS:mcp130
 LIBS:ABM8G
+LIBS:usb_a
 LIBS:i.mx233stamp-cache
 EELAYER 25  0
 EELAYER END
@@ -59,7 +60,7 @@ $Descr A4 11700 8267
 encoding utf-8
 Sheet 1 4
 Title ""
-Date "11 aug 2011"
+Date "12 aug 2011"
 Rev ""
 Comp ""
 Comment1 ""
@@ -67,6 +68,10 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+Wire Wire Line
+	3000 4050 3150 4050
+Wire Wire Line
+	3000 3850 3150 3850
 Wire Wire Line
 	3000 3550 3150 3550
 Wire Wire Line
@@ -115,6 +120,10 @@ Wire Wire Line
 	4750 2150 5250 2150
 Wire Wire Line
 	3150 3450 3000 3450
+Wire Wire Line
+	3000 3750 3150 3750
+Wire Wire Line
+	3000 3950 3150 3950
 $Sheet
 S 2150 3250 850  850 
 U 4E3BEC51
@@ -122,6 +131,10 @@ F0 "USB" 60
 F1 "USB.sch" 60
 F2 "USB_DM0" T R 3000 3550 60 
 F3 "USB_DP0" T R 3000 3450 60 
+F4 "USB_P4" B R 3000 3750 60 
+F5 "USB_M4" B R 3000 3850 60 
+F6 "USM_P3" B R 3000 3950 60 
+F7 "USB_M3" B R 3000 4050 60 
 $EndSheet
 $Sheet
 S 5250 1600 1150 2500
@@ -180,5 +193,9 @@ F22 "GPMI_D02" O R 4750 1950 60
 F23 "GPMI_D03" O R 4750 1650 60 
 F24 "USB_DM" B L 3150 3550 60 
 F25 "USB_DP" B L 3150 3450 60 
+F26 "USB_M3" B L 3150 4050 60 
+F27 "USM_P3" B L 3150 3950 60 
+F28 "USB_M4" B L 3150 3850 60 
+F29 "USB_P4" B L 3150 3750 60 
 $EndSheet
 $EndSCHEMATC

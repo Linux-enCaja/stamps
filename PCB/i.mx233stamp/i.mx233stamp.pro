@@ -129,7 +129,7 @@ LibName51=../components/rclamp0502b
 LibName52=../components/mcp130
 LibName53=../components/ABM8G
 LibName54=../components/usb_a
-LibName55=/home/cain/Embedded/ARM/iMX233/stamps/PCB/components/Reset
+LibName55=../components/Reset
 [cvpcb]
 version=1
 NetIExt=net

@@ -1,4 +1,4 @@
-Cmp-Mod V01 Genere par PcbNew le Wed 10 Aug 2011 09:58:11 PM COT
+Cmp-Mod V01 Created by CvPCB (2011-05-31)-stable date = Fri 12 Aug 2011 07:52:58 PM COT
 
 BeginCmp
 TimeStamp = /4D30AC69/4D42D643;
@@ -235,7 +235,7 @@ BeginCmp
 TimeStamp = /4D30AC69/4D42D646;
 Reference = C34;
 ValeurCmp = 4.7uF;
-IdModule  = SM0603;
+IdModule  = SM0805;
 EndCmp
 
 BeginCmp
@@ -540,16 +540,16 @@ IdModule  = JACK_ALIM;
 EndCmp
 
 BeginCmp
-TimeStamp = /4E3BEC51/4E414C60;
+TimeStamp = /4E3BEC51/4E4530F2;
 Reference = J3;
-ValeurCmp = USB_2;
+ValeurCmp = USB_2A;
 IdModule  = conn_usb_A-vert;
 EndCmp
 
 BeginCmp
-TimeStamp = /4E3BEC51/4E41CF8F;
+TimeStamp = /4E3BEC51/4E4530FA;
 Reference = J4;
-ValeurCmp = USB_2;
+ValeurCmp = USB_2A;
 IdModule  = conn_usb_A-vert;
 EndCmp
 
@@ -673,17 +673,17 @@ IdModule  = pin_array_4x2;
 EndCmp
 
 BeginCmp
+TimeStamp = /4D30AC69/4E434391;
+Reference = P5;
+ValeurCmp = CONN_1;
+IdModule  = MHOLE;
+EndCmp
+
+BeginCmp
 TimeStamp = /4D30AC69/4DA86970;
 Reference = P6;
 ValeurCmp = CONN_2;
 IdModule  = PIN_ARRAY_2X1;
-EndCmp
-
-BeginCmp
-TimeStamp = /4D30AC69/4E43420C;
-Reference = P7;
-ValeurCmp = CONN_1;
-IdModule  = MHOLE;
 EndCmp
 
 BeginCmp
@@ -904,16 +904,9 @@ IdModule  = SM0603;
 EndCmp
 
 BeginCmp
-TimeStamp = /4D30AC69/4D4073A8;
-Reference = SW2;
-ValeurCmp = SW_PUSH;
-IdModule  = SW_PUSH;
-EndCmp
-
-BeginCmp
-TimeStamp = /4D30AC69/4D40868E;
+TimeStamp = /4D30AC69/4E455CB6;
 Reference = SW3;
-ValeurCmp = SW_PUSH;
+ValeurCmp = RESET;
 IdModule  = SW_PUSH;
 EndCmp
 

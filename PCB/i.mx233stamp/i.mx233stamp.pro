@@ -1,13 +1,8 @@
-update=Fri 12 Aug 2011 08:44:50 AM COT
+update=Fri 12 Aug 2011 12:13:53 PM COT
 version=1
-last_client=eeschema
+last_client=cvpcb
 [general]
 version=1
-[cvpcb]
-version=1
-NetIExt=net
-[cvpcb/libraries]
-EquName1=devcms
 [pcbnew]
 version=1
 PadDrlX=320
@@ -26,7 +21,6 @@ TxtLar=120
 MSegLar=79
 LastNetListRead=i.mx233stamp.net
 [pcbnew/libraries]
-LibDir=../modules
 LibName1=sockets
 LibName2=../components/diode-1
 LibName3=../components/w_conn_pc
@@ -47,6 +41,8 @@ LibName17=ABM8G
 LibName18=SRF2012
 LibName19=../components/m25pxx
 LibName20=mounting
+LibName21=PB2
+LibDir=../modules
 [eeschema]
 version=1
 LibDir=
@@ -133,3 +129,9 @@ LibName51=../components/rclamp0502b
 LibName52=../components/mcp130
 LibName53=../components/ABM8G
 LibName54=../components/usb_a
+LibName55=/home/cain/Embedded/ARM/iMX233/stamps/PCB/components/Reset
+[cvpcb]
+version=1
+NetIExt=net
+[cvpcb/libraries]
+EquName1=devcms

@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Sat 13 Aug 2011 08:44:42 PM COT
+EESchema Schematic File Version 2  date Sun 14 Aug 2011 07:37:17 PM COT
 LIBS:con-jack
 LIBS:adm3101e
 LIBS:microsd
@@ -61,7 +61,7 @@ $Descr A4 11700 8267
 encoding utf-8
 Sheet 2 4
 Title ""
-Date "14 aug 2011"
+Date "15 aug 2011"
 Rev ""
 Comp ""
 Comment1 ""
@@ -69,6 +69,10 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+Connection ~ 1900 1600
+Connection ~ 1950 2850
+Connection ~ 1950 3150
+Connection ~ 1900 1900
 Text HLabel 2600 5250 0    60   BiDi ~ 0
 USB_P4
 Text HLabel 2600 5100 0    60   BiDi ~ 0

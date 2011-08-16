@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Sun 14 Aug 2011 07:37:17 PM COT
+EESchema Schematic File Version 2  date Tue 16 Aug 2011 06:52:22 AM COT
 LIBS:con-jack
 LIBS:adm3101e
 LIBS:microsd
@@ -61,7 +61,7 @@ $Descr A4 11700 8267
 encoding utf-8
 Sheet 2 4
 Title ""
-Date "15 aug 2011"
+Date "16 aug 2011"
 Rev ""
 Comp ""
 Comment1 ""
@@ -73,40 +73,6 @@ Connection ~ 1900 1600
 Connection ~ 1950 2850
 Connection ~ 1950 3150
 Connection ~ 1900 1900
-Text HLabel 2600 5250 0    60   BiDi ~ 0
-USB_P4
-Text HLabel 2600 5100 0    60   BiDi ~ 0
-USB_M4
-Text HLabel 2650 4200 0    60   BiDi ~ 0
-USM_P3
-Text HLabel 2650 4050 0    60   BiDi ~ 0
-USB_M3
-$Comp
-L USB_2A J4
-U 1 1 4E4530FA
-P 2550 3000
-F 0 "J4" H 2475 3250 60  0000 C CNN
-F 1 "USB_2A" H 2600 2700 60  0001 C CNN
-F 4 "VCC" H 2875 3150 50  0001 C CNN "VCC"
-F 5 "D+" H 2850 3050 50  0001 C CNN "Data+"
-F 6 "D-" H 2850 2950 50  0001 C CNN "Data-"
-F 7 "GND" H 2875 2850 50  0001 C CNN "Ground"
-	1    2550 3000
-	1    0    0    -1  
-$EndComp
-$Comp
-L USB_2A J3
-U 1 1 4E4530F2
-P 2500 1750
-F 0 "J3" H 2425 2000 60  0000 C CNN
-F 1 "USB_2A" H 2550 1450 60  0001 C CNN
-F 4 "VCC" H 2825 1900 50  0001 C CNN "VCC"
-F 5 "D+" H 2800 1800 50  0001 C CNN "Data+"
-F 6 "D-" H 2800 1700 50  0001 C CNN "Data-"
-F 7 "GND" H 2825 1600 50  0001 C CNN "Ground"
-	1    2500 1750
-	1    0    0    -1  
-$EndComp
 Connection ~ 5250 3550
 Wire Wire Line
 	5300 3550 5250 3550
@@ -441,6 +407,60 @@ Wire Wire Line
 Wire Wire Line
 	5800 3550 5850 3550
 Connection ~ 5850 3550
+$Comp
+L JUMPER JP5
+U 1 1 4E4A57BC
+P 10400 2350
+F 0 "JP5" H 10800 2300 60  0000 C CNN
+F 1 "JUMPER" H 10000 2200 40  0000 C CNN
+F 2 "PIN_ARRAY_2X1" H 10400 2350 60  0001 C CNN
+	1    10400 2350
+	-1   0    0    1   
+$EndComp
+$Comp
+L JUMPER JP4
+U 1 1 4E4A57B4
+P 10400 2250
+F 0 "JP4" H 10000 2300 60  0000 C CNN
+F 1 "JUMPER" H 10800 2200 40  0000 C CNN
+F 2 "PIN_ARRAY_2X1" H 10400 2250 60  0001 C CNN
+	1    10400 2250
+	1    0    0    -1  
+$EndComp
+Text HLabel 2600 5250 0    60   BiDi ~ 0
+USB_P4
+Text HLabel 2600 5100 0    60   BiDi ~ 0
+USB_M4
+Text HLabel 2650 4200 0    60   BiDi ~ 0
+USM_P3
+Text HLabel 2650 4050 0    60   BiDi ~ 0
+USB_M3
+$Comp
+L USB_2A J4
+U 1 1 4E4530FA
+P 2550 3000
+F 0 "J4" H 2475 3250 60  0000 C CNN
+F 1 "USB_2A" H 2600 2700 60  0001 C CNN
+F 4 "VCC" H 2875 3150 50  0001 C CNN "VCC"
+F 5 "D+" H 2850 3050 50  0001 C CNN "Data+"
+F 6 "D-" H 2850 2950 50  0001 C CNN "Data-"
+F 7 "GND" H 2875 2850 50  0001 C CNN "Ground"
+	1    2550 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L USB_2A J3
+U 1 1 4E4530F2
+P 2500 1750
+F 0 "J3" H 2425 2000 60  0000 C CNN
+F 1 "USB_2A" H 2550 1450 60  0001 C CNN
+F 4 "VCC" H 2825 1900 50  0001 C CNN "VCC"
+F 5 "D+" H 2800 1800 50  0001 C CNN "Data+"
+F 6 "D-" H 2800 1700 50  0001 C CNN "Data-"
+F 7 "GND" H 2825 1600 50  0001 C CNN "Ground"
+	1    2500 1750
+	1    0    0    -1  
+$EndComp
 $Comp
 L GND #PWR01
 U 1 1 4E43139E
@@ -1070,9 +1090,9 @@ F 2 "SRF2012" H 3800 1700 60  0001 C CNN
 	1    3800 1700
 	1    0    0    -1  
 $EndComp
-Text HLabel 10100 2350 2    60   3State ~ 0
+Text HLabel 10700 2350 2    60   3State ~ 0
 USB_DM0
-Text HLabel 10100 2250 2    60   3State ~ 0
+Text HLabel 10700 2250 2    60   3State ~ 0
 USB_DP0
 $Comp
 L GL850G U4

@@ -1,4 +1,4 @@
-Cmp-Mod V01 Genere par PcbNew le Sat 13 Aug 2011 09:11:18 AM COT
+Cmp-Mod V01 Created by CvPCB (2011-05-31)-stable date = Wed 17 Aug 2011 11:10:09 AM COT
 
 BeginCmp
 TimeStamp = /4D30AC69/4D42D643;
@@ -183,24 +183,10 @@ IdModule  = SM0805;
 EndCmp
 
 BeginCmp
-TimeStamp = /4D30AC69/4D4054E0;
-Reference = C26;
-ValeurCmp = 1uF;
-IdModule  = SM0603;
-EndCmp
-
-BeginCmp
 TimeStamp = /4D30AC69/4D42D62F;
 Reference = C27;
 ValeurCmp = 33uF;
 IdModule  = SM1206;
-EndCmp
-
-BeginCmp
-TimeStamp = /4D30AC69/4D42D64B;
-Reference = C28;
-ValeurCmp = 0.1uF;
-IdModule  = SM0603;
 EndCmp
 
 BeginCmp
@@ -372,13 +358,6 @@ IdModule  = SM0603;
 EndCmp
 
 BeginCmp
-TimeStamp = /4D30AC69/4D42D616;
-Reference = C56;
-ValeurCmp = 0.1uF;
-IdModule  = SM0603;
-EndCmp
-
-BeginCmp
 TimeStamp = /4D30AC69/4D40783C;
 Reference = C57;
 ValeurCmp = 0.1uF;
@@ -529,7 +508,7 @@ BeginCmp
 TimeStamp = /4D30AC69/4D59B1E9;
 Reference = J1;
 ValeurCmp = MICROSD;
-IdModule  = J1;
+IdModule  = MICROSD;
 EndCmp
 
 BeginCmp
@@ -570,6 +549,20 @@ EndCmp
 BeginCmp
 TimeStamp = /4D30AC69/4DAF62ED;
 Reference = JP3;
+ValeurCmp = JUMPER;
+IdModule  = PIN_ARRAY_2X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /4E3BEC51/4E4A57B4;
+Reference = JP4;
+ValeurCmp = JUMPER;
+IdModule  = PIN_ARRAY_2X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /4E3BEC51/4E4A57BC;
+Reference = JP5;
 ValeurCmp = JUMPER;
 IdModule  = PIN_ARRAY_2X1;
 EndCmp
@@ -684,6 +677,13 @@ TimeStamp = /4D30AC69/4DA86970;
 Reference = P6;
 ValeurCmp = CONN_2;
 IdModule  = PIN_ARRAY_2X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /4D30AC69/4E4BC769;
+Reference = P7;
+ValeurCmp = CONN_1;
+IdModule  = MHOLE;
 EndCmp
 
 BeginCmp

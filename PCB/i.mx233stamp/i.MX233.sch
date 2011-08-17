@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Tue 16 Aug 2011 06:52:22 AM COT
+EESchema Schematic File Version 2  date Wed 17 Aug 2011 08:52:32 AM COT
 LIBS:con-jack
 LIBS:adm3101e
 LIBS:microsd
@@ -61,7 +61,7 @@ $Descr A3 16535 11700
 encoding utf-8
 Sheet 4 4
 Title ""
-Date "16 aug 2011"
+Date "17 aug 2011"
 Rev ""
 Comp ""
 Comment1 ""
@@ -95,11 +95,9 @@ Wire Wire Line
 Wire Wire Line
 	11525 1100 11425 1100
 Wire Wire Line
-	12250 9150 12200 9150
+	12200 9150 12250 9150
 Wire Wire Line
-	12200 9150 12200 8950
-Wire Wire Line
-	12200 8950 12250 8950
+	12250 8950 12200 8950
 Wire Wire Line
 	900  1850 900  1800
 Wire Wire Line
@@ -977,6 +975,21 @@ Wire Wire Line
 	11550 1300 11425 1300
 Wire Wire Line
 	10625 1300 10525 1300
+Wire Wire Line
+	12250 9300 12200 9300
+Wire Wire Line
+	12200 9300 12200 8950
+Connection ~ 12200 9150
+$Comp
+L CONN_1 P7
+U 1 1 4E4BC769
+P 12400 9300
+F 0 "P7" H 12480 9300 40  0000 L CNN
+F 1 "CONN_1" H 12400 9355 30  0001 C CNN
+F 2 "MHOLE" H 12400 9300 60  0001 C CNN
+	1    12400 9300
+	1    0    0    -1  
+$EndComp
 $Comp
 L GND #PWR041
 U 1 1 4E48679E

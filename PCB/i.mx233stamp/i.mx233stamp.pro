@@ -129,7 +129,7 @@ LibName18=SRF2012
 LibName19=../components/m25pxx
 LibName20=mounting
 LibName21=PB2
-LibName22=/home/cain/Embedded/ARM/iMX233/stamps/PCB/components/J1
+LibName22=../components/J1
 LibDir=../modules
 [cvpcb]
 version=1

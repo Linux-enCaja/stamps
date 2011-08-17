@@ -1,4 +1,4 @@
-PCBNEW-BOARD Version 1 date Wed 17 Aug 2011 11:48:39 AM COT
+PCBNEW-BOARD Version 1 date Wed 17 Aug 2011 01:39:18 PM COT
 
 # Created by Pcbnew(2011-05-31)-stable
 
@@ -10,7 +10,7 @@ EnabledLayers 1FFF8001
 Links 431
 NoConn 2
 Di 44630 32185 72468 58989
-Ndraw 45
+Ndraw 47
 Ntrack 1692
 Nzone 0
 BoardThickness 630
@@ -68,7 +68,7 @@ PadSize 600 600
 PadDrill 320
 Pad2MaskClearance 100
 AuxiliaryAxisOrg 0 0
-PcbPlotParams (pcbplotparams (layerselection 3145728) (usegerberextensions true) (excludeedgelayer true) (linewidth 60) (plotframeref false) (viasonmask false) (mode 1) (useauxorigin false) (hpglpennumber 1) (hpglpenspeed 20) (hpglpendiameter 15) (hpglpenoverlay 0) (pscolor true) (psnegative false) (psa4output false) (plotreference true) (plotvalue true) (plotothertext true) (plotinvisibletext false) (padsonsilk false) (subtractmaskfromsilk false) (outputformat 1) (mirror false) (drillshape 1) (scaleselection 1) (outputdirectory ""))
+PcbPlotParams (pcbplotparams (layerselection 284983297) (usegerberextensions true) (excludeedgelayer true) (linewidth 60) (plotframeref false) (viasonmask false) (mode 1) (useauxorigin false) (hpglpennumber 1) (hpglpenspeed 20) (hpglpendiameter 15) (hpglpenoverlay 0) (pscolor true) (psnegative false) (psa4output false) (plotreference true) (plotvalue true) (plotothertext true) (plotinvisibletext false) (padsonsilk false) (subtractmaskfromsilk false) (outputformat 1) (mirror false) (drillshape 1) (scaleselection 1) (outputdirectory gerbers))
 $EndSETUP
 
 $EQUIPOT
@@ -8042,6 +8042,16 @@ Ne 62 "/i.MX233/GND_CASE"
 Po -1969 1969
 $EndPAD
 $EndMODULE  MHOLE
+$TEXTPCB
+Te "CC-BY-SA  linuxencaja"
+Po 61268 41740 276 276 43 0
+De 21 1 0 Normal
+$EndTEXTPCB
+$TEXTPCB
+Te "Designed by CAIN"
+Po 61437 41339 276 276 43 0
+De 21 1 0 Normal
+$EndTEXTPCB
 $TEXTPCB
 Te "A"
 Po 65154 52500 276 276 43 0

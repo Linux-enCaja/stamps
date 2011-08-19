@@ -1,4 +1,4 @@
-Cmp-Mod V01 Genere par PcbNew le Wed 17 Aug 2011 11:12:19 PM COT
+Cmp-Mod V01 Genere par PcbNew le Thu 18 Aug 2011 02:18:42 PM COT
 
 BeginCmp
 TimeStamp = /4D30AC69/4D42D643;
@@ -487,14 +487,14 @@ BeginCmp
 TimeStamp = /4E3BEC51/4E415351;
 Reference = D6;
 ValeurCmp = RSA5M;
-IdModule  = diode-1-SOD123;
+IdModule  = RSA5M;
 EndCmp
 
 BeginCmp
 TimeStamp = /4E3BEC51/4E41559D;
 Reference = D7;
 ValeurCmp = RSA5M;
-IdModule  = diode-1-SOD123;
+IdModule  = RSA5M;
 EndCmp
 
 BeginCmp

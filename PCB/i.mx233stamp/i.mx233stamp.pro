@@ -1,4 +1,4 @@
-update=Wed 17 Aug 2011 11:11:27 PM COT
+update=Thu 18 Aug 2011 02:18:19 PM COT
 version=1
 last_client=pcbnew
 [general]
@@ -137,3 +137,4 @@ LibName20=mounting
 LibName21=PB2
 LibName22=../components/J1
 LibName23=LED0603
+LibName24=RSA5M

@@ -1,4 +1,4 @@
-update=Thu 18 Aug 2011 02:18:19 PM COT
+update=Thu 18 Aug 2011 10:48:36 PM COT
 version=1
 last_client=pcbnew
 [general]
@@ -138,3 +138,4 @@ LibName21=PB2
 LibName22=../components/J1
 LibName23=LED0603
 LibName24=RSA5M
+LibName25=LogoCL

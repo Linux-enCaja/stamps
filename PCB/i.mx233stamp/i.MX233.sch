@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Thu 18 Aug 2011 02:49:08 PM COT
+EESchema Schematic File Version 2  date Fri 26 Aug 2011 09:24:05 AM COT
 LIBS:con-jack
 LIBS:adm3101e
 LIBS:microsd
@@ -61,7 +61,7 @@ $Descr A3 16535 11700
 encoding utf-8
 Sheet 4 4
 Title ""
-Date "18 aug 2011"
+Date "26 aug 2011"
 Rev ""
 Comp ""
 Comment1 ""
@@ -121,7 +121,6 @@ Wire Wire Line
 	6200 8150 5550 8150
 Wire Wire Line
 	13600 5700 12850 5700
-Connection ~ 13900 5400
 Wire Wire Line
 	1800 7600 2550 7600
 Wire Wire Line

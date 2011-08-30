@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Mon 29 Aug 2011 10:09:29 AM COT
+EESchema Schematic File Version 2  date Mon 29 Aug 2011 11:04:30 PM COT
 LIBS:con-jack
 LIBS:adm3101e
 LIBS:microsd
@@ -61,7 +61,7 @@ $Descr A3 16535 11700
 encoding utf-8
 Sheet 4 4
 Title ""
-Date "29 aug 2011"
+Date "30 aug 2011"
 Rev ""
 Comp ""
 Comment1 ""
@@ -1401,7 +1401,7 @@ P 9150 4800
 F 0 "P6" V 9100 4800 40  0000 C CNN
 F 1 "CONN_2" V 9200 4800 40  0000 C CNN
 	1    9150 4800
-	-1   0    0    1   
+	-1   0    0    -1  
 $EndComp
 Text HLabel 1950 5200 0    60   Output ~ 0
 GPMI_D03

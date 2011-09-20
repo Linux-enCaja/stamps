@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Mon 29 Aug 2011 11:04:30 PM COT
+EESchema Schematic File Version 2  date Tue 20 Sep 2011 03:32:09 PM COT
 LIBS:con-jack
 LIBS:adm3101e
 LIBS:microsd
@@ -61,7 +61,7 @@ $Descr A3 16535 11700
 encoding utf-8
 Sheet 4 4
 Title ""
-Date "30 aug 2011"
+Date "20 sep 2011"
 Rev ""
 Comp ""
 Comment1 ""
@@ -69,6 +69,15 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+$Comp
+L VDD5V #PWR?
+U 1 1 4E78F82B
+P 8550 2800
+F 0 "#PWR?" H 8550 2900 30  0001 C CNN
+F 1 "VDD5V" H 8550 2900 30  0000 C CNN
+	1    8550 2800
+	1    0    0    -1  
+$EndComp
 Connection ~ 14150 9300
 Wire Wire Line
 	14200 9300 14150 9300
@@ -2578,15 +2587,6 @@ P 11250 3450
 F 0 "#PWR0115" H 11250 3450 30  0001 C CNN
 F 1 "GND" H 11250 3380 30  0001 C CNN
 	1    11250 3450
-	1    0    0    -1  
-$EndComp
-$Comp
-L VDD_BATT #PWR0116
-U 1 1 4D4086D0
-P 8550 2800
-F 0 "#PWR0116" H 8550 2900 30  0001 C CNN
-F 1 "VDD_BATT" H 8550 2900 30  0000 C CNN
-	1    8550 2800
 	1    0    0    -1  
 $EndComp
 $Comp

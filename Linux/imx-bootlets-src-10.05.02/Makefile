@@ -20,8 +20,8 @@ gen_bootstream: linux_prep boot_prep power_prep
 	rm -f sd_mmc_bootstream.raw
 	dd if=/dev/zero of=sd_mmc_bootstream.raw bs=512 count=4
 	dd if=imx23_linux.sb of=sd_mmc_bootstream.raw ibs=512 seek=4 conv=sync,notrunc
-	sudo dd if=sd_mmc_bootstream.raw of=/dev/sdb1
-	sudo umount /dev/sdb*
+	sudo dd if=sd_mmc_bootstream.raw of=/dev/sdc1
+	sudo umount /dev/sdc*
 
 power_prep:
 	@echo "build power_prep"

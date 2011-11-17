@@ -1,4 +1,1 @@
-console=ttyAM0,115200 ssp1=spi1 ssp2=mmc root=/dev/mmcblk0p2 ro rootfstype=ext2 rootdelay=1
-console=ttyAM0,115200 root=/dev/mmcblk0p2 rootfstype=ext2 rw rootwait lcd_panel=lms350 ssp1=mmc line=2
-console=ttyAM0,115200 root=/dev/mmcblk0p2 rw rootwait ssp1=mmc
-console=ttyAM0,115200 ssp1=spi1 ubi.mtd=2 root=ubi0:rootfs0 rootfstype=ubifs lcd_panel=lms430
+mem=64M console=ttyAM0,115200 ssp1=spi1 ssp2=mmc root=/dev/mmcblk0p2 ro rootfstype=ext2 rootdelay=1

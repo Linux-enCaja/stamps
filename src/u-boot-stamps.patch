@@ -1,0 +1,3778 @@
+diff -Naur u-boot-2009.08/board/freescale/mx23_stamps/config.mk u-boot-stamps//board/freescale/mx23_stamps/config.mk
+--- u-boot-2009.08/board/freescale/mx23_stamps/config.mk	1969-12-31 19:00:00.000000000 -0500
++++ u-boot-stamps//board/freescale/mx23_stamps/config.mk	2011-08-14 18:51:23.000000000 -0500
+@@ -0,0 +1,6 @@
++#
++# image should be loaded at 0x41008000
++#
++LDSCRIPT := $(SRCTREE)/board/$(VENDOR)/$(BOARD)/u-boot.lds
++
++TEXT_BASE = 0x41008000
+diff -Naur u-boot-2009.08/board/freescale/mx23_stamps/lowlevel_init.S u-boot-stamps//board/freescale/mx23_stamps/lowlevel_init.S
+--- u-boot-2009.08/board/freescale/mx23_stamps/lowlevel_init.S	1969-12-31 19:00:00.000000000 -0500
++++ u-boot-stamps//board/freescale/mx23_stamps/lowlevel_init.S	2011-08-14 18:51:23.000000000 -0500
+@@ -0,0 +1,36 @@
++/*
++ * Board specific setup info
++ *
++ * (C) Copyright 2009-2010 Freescale Semiconductor, Inc.
++ *
++ * (C) Copyright 2003, ARM Ltd.
++ * Philippe Robin, <philippe.robin@arm.com>
++ *
++ * See file CREDITS for list of people who contributed to this
++ * project.
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License as
++ * published by the Free Software Foundation; either version 2 of
++ * the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
++ * MA 02111-1307 USA
++ */
++
++#include <config.h>
++#include <version.h>
++
++/* Set up the platform, once the cpu has been initialized */
++.globl lowlevel_init
++lowlevel_init:
++
++	/* All SDRAM settings are done by sdram_prep */
++	mov pc, lr
+diff -Naur u-boot-2009.08/board/freescale/mx23_stamps/Makefile u-boot-stamps//board/freescale/mx23_stamps/Makefile
+--- u-boot-2009.08/board/freescale/mx23_stamps/Makefile	1969-12-31 19:00:00.000000000 -0500
++++ u-boot-stamps//board/freescale/mx23_stamps/Makefile	2011-11-11 11:30:45.000000000 -0500
+@@ -0,0 +1,52 @@
++#
++# (C) Copyright 2000-2006
++# Wolfgang Denk, DENX Software Engineering, wd@denx.de.
++#
++# See file CREDITS for list of people who contributed to this
++# project.
++#
++# This program is free software; you can redistribute it and/or
++# modify it under the terms of the GNU General Public License as
++# published by the Free Software Foundation; either version 2 of
++# the License, or (at your option) any later version.
++#
++# This program is distributed in the hope that it will be useful,
++# but WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++# GNU General Public License for more details.
++#
++# You should have received a copy of the GNU General Public License
++# along with this program; if not, write to the Free Software
++# Foundation, Inc., 59 Temple Place, Suite 330, Boston,
++# MA 02111-1307 USA
++#
++
++include $(TOPDIR)/config.mk
++
++LIB	= $(obj)lib$(BOARD).a
++
++COBJS	:= mx23_stamps.o
++SOBJS	:= lowlevel_init.o
++
++SRCS	:= $(SOBJS:.o=.S) $(COBJS:.o=.c)
++OBJS	:= $(addprefix $(obj),$(COBJS))
++SOBJS	:= $(addprefix $(obj),$(SOBJS))
++
++$(LIB):	$(obj).depend $(OBJS) $(SOBJS)
++	$(AR) $(ARFLAGS) $@ $(OBJS) $(SOBJS)
++
++clean:
++	rm -f $(SOBJS) $(OBJS)
++
++distclean:	clean
++	rm -f $(LIB) core *.bak $(obj).depend
++
++#########################################################################
++
++# defines $(obj).depend target
++include $(SRCTREE)/rules.mk
++
++sinclude $(obj).depend
++
++#########################################################################
++
+diff -Naur u-boot-2009.08/board/freescale/mx23_stamps/mx23_stamps.c u-boot-stamps//board/freescale/mx23_stamps/mx23_stamps.c
+--- u-boot-2009.08/board/freescale/mx23_stamps/mx23_stamps.c	1969-12-31 19:00:00.000000000 -0500
++++ u-boot-stamps//board/freescale/mx23_stamps/mx23_stamps.c	2011-11-09 10:04:56.000000000 -0500
+@@ -0,0 +1,172 @@
++/*
++ *
++ * (c) 2008 Embedded Alley Solutions, Inc.
++ *
++ * (C) Copyright 2009-2010 Freescale Semiconductor, Inc.
++ *
++ * See file CREDITS for list of people who contributed to this
++ * project.
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License as
++ * published by the Free Software Foundation; either version 2 of
++ * the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
++ * MA 02111-1307 USA
++ */
++
++
++#include <common.h>
++#include <asm/arch/mx23.h>
++#include <asm/arch/clkctrl.h>
++#include <asm/arch/pinmux.h>
++#include <asm/arch/spi.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++#define KHz	1000
++#define MHz	(1000 * KHz)
++
++static void set_pinmux(void)
++{
++/*
++#if defined(CONFIG_SPI_SSP1)
++
++	 Configure SSP1 pins for ENC28j60: 8maA 
++	REG_CLR(PINCTRL_BASE + PINCTRL_MUXSEL(4), 0x00003fff);
++
++	REG_CLR(PINCTRL_BASE + PINCTRL_DRIVE(8), 0X03333333);
++	REG_SET(PINCTRL_BASE + PINCTRL_DRIVE(8), 0x01111111);
++
++	REG_CLR(PINCTRL_BASE + PINCTRL_PULL(2), 0x0000003f);
++#endif*/
++
++#if defined(CONFIG_SPI_SSP2)
++
++	/* Configure SSP2 pins for ENC28j60: 8maA */
++
++//SSP Lines (MOSI, MISO, SCK SSn)
++	REG_CLR(PINCTRL_BASE + PINCTRL_MUXSEL(0), 0x00000fc3);
++	REG_SET(PINCTRL_BASE + PINCTRL_MUXSEL(0), 0x00000abe);
++
++	REG_CLR(PINCTRL_BASE + PINCTRL_MUXSEL(1), 0x00030300);
++	REG_SET(PINCTRL_BASE + PINCTRL_MUXSEL(1), 0x00020200);
++
++//8mA current driving
++
++	REG_CLR(PINCTRL_BASE + PINCTRL_DRIVE(0), 0X00333003);
++	REG_SET(PINCTRL_BASE + PINCTRL_DRIVE(0), 0x00111001);
++
++	REG_CLR(PINCTRL_BASE + PINCTRL_DRIVE(2), 0x00030000);
++	REG_SET(PINCTRL_BASE + PINCTRL_DRIVE(2), 0x00010000);
++
++	REG_CLR(PINCTRL_BASE + PINCTRL_DRIVE(3), 0x00000003);
++	REG_SET(PINCTRL_BASE + PINCTRL_DRIVE(3), 0x00000001);
++
++	REG_CLR(PINCTRL_BASE + PINCTRL_PULL(0), 0x00100039);
++	//REG_SET(PINCTRL_BASE + PINCTRL_PULL(0), 0x00000006);
++	//set wp and hold to High level
++	REG_SET(PINCTRL_DOUT(0), 0x00000006);
++#endif
++
++
++	REG_CLR(PINCTRL_BASE + PINCTRL_MUXSEL(3), 0x00f00000);
++	REG_SET(PINCTRL_BASE + PINCTRL_MUXSEL(3), 0x00a00000);
++
++	REG_CLR(PINCTRL_BASE + PINCTRL_DRIVE(7), 0x00003300);
++	REG_SET(PINCTRL_BASE + PINCTRL_DRIVE(7), 0x00002200);
++
++}
++
++#define IO_DIVIDER	18
++static void set_clocks(void)
++{
++	u32 ssp_source_clk, ssp_clk;
++	u32 ssp_div = 1;
++	u32 val = 0;
++
++	/*
++	 * Configure 480Mhz IO clock
++	 */
++
++	/* Ungate IO_CLK and set divider */
++	REG_CLR(CLKCTRL_BASE + CLKCTRL_FRAC, FRAC_CLKGATEIO);
++	REG_CLR(CLKCTRL_BASE + CLKCTRL_FRAC, 0x3f << FRAC_IOFRAC);
++	REG_SET(CLKCTRL_BASE + CLKCTRL_FRAC, IO_DIVIDER << FRAC_IOFRAC);
++
++	/*
++	 * Set SSP CLK to desired value
++	 */
++
++	/* Calculate SSP_CLK divider relatively to 480Mhz IO_CLK*/
++	ssp_source_clk = 480 * MHz;
++	ssp_clk = CONFIG_SSP_CLK;
++	ssp_div = (ssp_source_clk + ssp_clk - 1) / ssp_clk;
++
++	/* Enable SSP clock */
++	val = REG_RD(CLKCTRL_BASE + CLKCTRL_SSP);
++	val &= ~SSP_CLKGATE;
++	REG_WR(CLKCTRL_BASE + CLKCTRL_SSP, val);
++
++	/* Wait while clock is gated */
++	while (REG_RD(CLKCTRL_BASE + CLKCTRL_SSP) & SSP_CLKGATE)
++		;
++
++	/* Set SSP clock divider */
++	val &= ~(0x1ff << SSP_DIV);
++	val |= ssp_div << SSP_DIV;
++	REG_WR(CLKCTRL_BASE + CLKCTRL_SSP, val);
++
++	/* Wait until new divider value is set */
++	while (REG_RD(CLKCTRL_BASE + CLKCTRL_SSP) & SSP_BUSY)
++		;
++
++	/* Set SSP clock source to IO_CLK */
++	REG_SET(CLKCTRL_BASE + CLKCTRL_CLKSEQ, CLKSEQ_BYPASS_SSP);
++	REG_CLR(CLKCTRL_BASE + CLKCTRL_CLKSEQ, CLKSEQ_BYPASS_SSP);
++}
++
++int dram_init(void)
++{
++	gd->bd->bi_dram[0].start = PHYS_SDRAM_1;
++	gd->bd->bi_dram[0].size = PHYS_SDRAM_1_SIZE;
++
++	return 0;
++}
++
++int board_init(void)
++{
++	/* arch number of Freescale STMP 378x development board */
++	gd->bd->bi_arch_number = MACH_TYPE_MX23EVK;
++
++	/* adress of boot parameters */
++	gd->bd->bi_boot_params = LINUX_BOOT_PARAM_ADDR;
++
++	set_clocks();
++
++	set_pinmux();
++
++	/* Configure SPI on SSP1 or SSP2 */
++	spi_init();
++
++	return 0;
++}
++
++int misc_init_r(void)
++{
++	return 0;
++}
++
++int checkboard(void)
++{
++	printf("Board: i.MX233 Stamps. \n");
++	return 0;
++}
+diff -Naur u-boot-2009.08/board/freescale/mx23_stamps/u-boot.lds u-boot-stamps//board/freescale/mx23_stamps/u-boot.lds
+--- u-boot-2009.08/board/freescale/mx23_stamps/u-boot.lds	1969-12-31 19:00:00.000000000 -0500
++++ u-boot-stamps//board/freescale/mx23_stamps/u-boot.lds	2011-08-14 18:51:23.000000000 -0500
+@@ -0,0 +1,51 @@
++/*
++ * (C) Copyright 2002
++ * Gary Jennejohn, DENX Software Engineering, <gj@denx.de>
++ *
++ * See file CREDITS for list of people who contributed to this
++ * project.
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License as
++ * published by the Free Software Foundation; either version 2 of
++ * the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
++ * MA 02111-1307 USA
++ */
++
++OUTPUT_FORMAT("elf32-littlearm", "elf32-littlearm", "elf32-littlearm")
++OUTPUT_ARCH(arm)
++ENTRY(_start)
++SECTIONS
++{
++	. = 0x00000000;
++	. = ALIGN(4);
++	.text	:
++	{
++	  cpu/arm926ejs/start.o	(.text)
++	  *(.text)
++	}
++	.rodata : { *(.rodata) }
++	. = ALIGN(4);
++	.data : { *(.data) }
++	. = ALIGN(4);
++	.got : { *(.got) }
++
++	. = .;
++	__u_boot_cmd_start = .;
++	.u_boot_cmd : { *(.u_boot_cmd) }
++	__u_boot_cmd_end = .;
++
++	. = ALIGN(4);
++	__bss_start = .;
++	.bss (NOLOAD) : { *(.bss) }
++	_end = .;
++}
+diff -Naur u-boot-2009.08/cpu/arm926ejs/mx23/spi.c u-boot-stamps//cpu/arm926ejs/mx23/spi.c
+--- u-boot-2009.08/cpu/arm926ejs/mx23/spi.c	2011-09-16 16:17:53.000000000 -0500
++++ u-boot-stamps//cpu/arm926ejs/mx23/spi.c	2012-01-20 14:58:10.171525622 -0500
+@@ -5,6 +5,8 @@
+  *
+  * Freescale MX23 SSP/SPI driver
+  *
++ * Modified by: Andrés Mauricio Asprilla Valdés - Universidad Nacional de Colombia
++ *
+  * This program is free software; you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+  * the Free Software Foundation; either version 2 of the License, or
+@@ -21,10 +23,23 @@
+  */
+ 
+ #include <asm/arch/spi.h>
++#include <spi.h>
++#include <malloc.h>
++
++#include <asm/arch/mx23.h>
++#include <asm/arch/clkctrl.h>
++#include <asm/arch/pinmux.h>
+ 
+ #define SPI_NUM_BUSES	2
+ #define SPI_NUM_SLAVES	3
+ 
++struct mxs_spi_slave {
++	struct spi_slave slave;
++	void		*regs;
++	u32		mr;
++};
++
++
+ /* Initalized in spi_init() depending on SSP port configuration */
+ static unsigned long ssp_bases[SPI_NUM_BUSES];
+ 
+@@ -58,8 +73,7 @@
+ 
+ 	/* Set SFTRST and wait until CLKGATE is set */
+ 	REG_SET(ssp_base + SSP_CTRL0, CTRL0_SFTRST);
+-	while (!(REG_RD(ssp_base + SSP_CTRL0) & CTRL0_CLKGATE))
+-		;
++	while (!(REG_RD(ssp_base + SSP_CTRL0) & CTRL0_CLKGATE));
+ 
+ 	/* Clear SFTRST and CLKGATE */
+ 	REG_CLR(ssp_base + SSP_CTRL0, CTRL0_SFTRST);
+@@ -154,6 +168,7 @@
+ 	}
+ 
+ 	REG_SET(ssp_base + SSP_CTRL0, set_mask);
++	
+ }
+ 
+ /* Read single data byte */
+@@ -220,8 +235,9 @@
+ 
+ static void spi_unlock_cs(void)
+ {
+-	REG_CLR(ssp_base + SSP_CTRL0, CTRL0_LOCK_CS);
++	
+ 	REG_SET(ssp_base + SSP_CTRL0, CTRL0_IGNORE_CRC);
++	REG_CLR(ssp_base + SSP_CTRL0, CTRL0_LOCK_CS);
+ }
+ 
+ void spi_txrx(const char *dout, unsigned int tx_len, char *din,
+@@ -253,3 +269,86 @@
+ 		din[i] = spi_read();
+ 	}
+ }
++//added the necesary functions to start the communication with the SPI flash
++int  spi_xfer(struct spi_slave *slave, unsigned int bitlen, const void *dout,
++		void *din, unsigned long flags){
++	u8 tmpdout;
++	u8 *tmpdin;
++	int bytelen=bitlen/8;
++	int i;
++	if (bitlen == 0||bitlen%8!=0){
++		return -1;
++	}
++	udelay(1000);
++	if (flags & SPI_START){
++		spi_lock_cs();
++		
++	}
++	
++	
++	for(i=0;i<bytelen;i++){
++		if((i==bytelen-1)&&((flags&SPI_STOP))){
++				spi_unlock_cs();
++		}
++		if(dout!=NULL){
++			
++			tmpdout=*(u8*)dout;
++			spi_write(tmpdout);
++			dout++;
++		}
++		if(din!=NULL){
++			tmpdin=spi_read();
++			*((u8*)din) = tmpdin;
++			din++;
++		}
++	}
++
++	
++return 0;
++}
++
++void spi_free_slave(struct spi_slave *slave){
++}
++
++int spi_claim_bus(struct spi_slave *slave){
++	return 0;
++}
++
++void spi_release_bus(struct spi_slave *slave){
++}
++
++struct spi_slave *spi_setup_slave(unsigned int bus, unsigned int cs,
++		unsigned int max_hz, unsigned int mode){
++	spi_init();
++	struct mxs_spi_slave	*mxs_slave;
++	unsigned int		scbr;
++	u32			csrx;
++	void			*regs;
++	mxs_slave = malloc(sizeof(struct mxs_spi_slave));
++	if (!mxs_slave)
++		return NULL;
++
++	if (cs > 2)
++		return NULL;
++	switch (bus) {
++		case 0:
++			regs = (void *)SSP1_BASE;
++			REG_SET(PINCTRL_DOUT(0), 0x00000006);
++			debug("bus0 (SSP1)\n");
++			break;
++		case 1:
++			regs = (void *)SSP2_BASE;
++			debug("bus1 (SSP2)\n");
++			break;	
++		default:
++			return NULL;
++	}
++	printf("Mode: %d\n",mode);
++	spi_set_cfg(bus,cs,mode);
++	mxs_slave->slave.bus = bus;
++	mxs_slave->slave.cs = cs;
++	mxs_slave->regs = regs;
++
++return &mxs_slave->slave;
++
++}
+diff -Naur u-boot-2009.08/drivers/mtd/spi/atmel.c u-boot-stamps//drivers/mtd/spi/atmel.c
+--- u-boot-2009.08/drivers/mtd/spi/atmel.c	2009-08-31 12:57:42.000000000 -0500
++++ u-boot-stamps//drivers/mtd/spi/atmel.c	2011-11-08 17:39:36.000000000 -0500
+@@ -2,6 +2,7 @@
+  * Atmel SPI DataFlash support
+  *
+  * Copyright (C) 2008 Atmel Corporation
++ * Licensed under the GPL-2 or later.
+  */
+ 
+ #include <common.h>
+@@ -169,20 +170,6 @@
+ 	cmd[2] = byte_addr;
+ }
+ 
+-static int dataflash_read_fast_p2(struct spi_flash *flash,
+-		u32 offset, size_t len, void *buf)
+-{
+-	u8 cmd[5];
+-
+-	cmd[0] = CMD_READ_ARRAY_FAST;
+-	cmd[1] = offset >> 16;
+-	cmd[2] = offset >> 8;
+-	cmd[3] = offset;
+-	cmd[4] = 0x00;
+-
+-	return spi_flash_read_common(flash, cmd, sizeof(cmd), buf, len);
+-}
+-
+ static int dataflash_read_fast_at45(struct spi_flash *flash,
+ 		u32 offset, size_t len, void *buf)
+ {
+@@ -341,7 +328,7 @@
+ /*
+  * TODO: the two erase funcs (_p2/_at45) should get unified ...
+  */
+-int dataflash_erase_p2(struct spi_flash *flash, u32 offset, size_t len)
++static int dataflash_erase_p2(struct spi_flash *flash, u32 offset, size_t len)
+ {
+ 	struct atmel_spi_flash *asf = to_atmel_spi_flash(flash);
+ 	unsigned long page_size;
+@@ -400,7 +387,7 @@
+ 	return ret;
+ }
+ 
+-int dataflash_erase_at45(struct spi_flash *flash, u32 offset, size_t len)
++static int dataflash_erase_at45(struct spi_flash *flash, u32 offset, size_t len)
+ {
+ 	struct atmel_spi_flash *asf = to_atmel_spi_flash(flash);
+ 	unsigned long page_addr;
+@@ -466,7 +453,7 @@
+ struct spi_flash *spi_flash_probe_atmel(struct spi_slave *spi, u8 *idcode)
+ {
+ 	const struct atmel_spi_flash_params *params;
+-	unsigned long page_size;
++	unsigned page_size;
+ 	unsigned int family;
+ 	struct atmel_spi_flash *asf;
+ 	unsigned int i;
+@@ -518,7 +505,7 @@
+ 			asf->flash.erase = dataflash_erase_at45;
+ 			page_size += 1 << (params->l2_page_size - 5);
+ 		} else {
+-			asf->flash.read = dataflash_read_fast_p2;
++			asf->flash.read = spi_flash_cmd_read_fast;
+ 			asf->flash.write = dataflash_write_p2;
+ 			asf->flash.erase = dataflash_erase_p2;
+ 		}
+@@ -527,7 +514,7 @@
+ 
+ 	case DF_FAMILY_AT26F:
+ 	case DF_FAMILY_AT26DF:
+-		asf->flash.read = dataflash_read_fast_p2;
++		asf->flash.read = spi_flash_cmd_read_fast;
+ 		break;
+ 
+ 	default:
+@@ -535,13 +522,11 @@
+ 		goto err;
+ 	}
+ 
++	asf->flash.sector_size = page_size;
+ 	asf->flash.size = page_size * params->pages_per_block
+ 				* params->blocks_per_sector
+ 				* params->nr_sectors;
+ 
+-	debug("SF: Detected %s with page size %lu, total %u bytes\n",
+-			params->name, page_size, asf->flash.size);
+-
+ 	return &asf->flash;
+ 
+ err:
+diff -Naur u-boot-2009.08/drivers/mtd/spi/atmel.c.orig u-boot-stamps//drivers/mtd/spi/atmel.c.orig
+--- u-boot-2009.08/drivers/mtd/spi/atmel.c.orig	1969-12-31 19:00:00.000000000 -0500
++++ u-boot-stamps//drivers/mtd/spi/atmel.c.orig	2011-11-08 17:27:03.000000000 -0500
+@@ -0,0 +1,550 @@
++/*
++ * Atmel SPI DataFlash support
++ *
++ * Copyright (C) 2008 Atmel Corporation
++ */
++
++#include <common.h>
++#include <malloc.h>
++#include <spi_flash.h>
++
++#include "spi_flash_internal.h"
++
++/* AT45-specific commands */
++#define CMD_AT45_READ_STATUS		0xd7
++#define CMD_AT45_ERASE_PAGE		0x81
++#define CMD_AT45_LOAD_PROG_BUF1		0x82
++#define CMD_AT45_LOAD_BUF1		0x84
++#define CMD_AT45_LOAD_PROG_BUF2		0x85
++#define CMD_AT45_LOAD_BUF2		0x87
++#define CMD_AT45_PROG_BUF1		0x88
++#define CMD_AT45_PROG_BUF2		0x89
++
++/* AT45 status register bits */
++#define AT45_STATUS_P2_PAGE_SIZE	(1 << 0)
++#define AT45_STATUS_READY		(1 << 7)
++
++/* DataFlash family IDs, as obtained from the second idcode byte */
++#define DF_FAMILY_AT26F			0
++#define DF_FAMILY_AT45			1
++#define DF_FAMILY_AT26DF		2	/* AT25DF and AT26DF */
++
++struct atmel_spi_flash_params {
++	u8		idcode1;
++	/* Log2 of page size in power-of-two mode */
++	u8		l2_page_size;
++	u8		pages_per_block;
++	u8		blocks_per_sector;
++	u8		nr_sectors;
++	const char	*name;
++};
++
++/* spi_flash needs to be first so upper layers can free() it */
++struct atmel_spi_flash {
++	struct spi_flash flash;
++	const struct atmel_spi_flash_params *params;
++};
++
++static inline struct atmel_spi_flash *
++to_atmel_spi_flash(struct spi_flash *flash)
++{
++	return container_of(flash, struct atmel_spi_flash, flash);
++}
++
++static const struct atmel_spi_flash_params atmel_spi_flash_table[] = {
++	{
++		.idcode1		= 0x22,
++		.l2_page_size		= 8,
++		.pages_per_block	= 8,
++		.blocks_per_sector	= 16,
++		.nr_sectors		= 4,
++		.name			= "AT45DB011D",
++	},
++	{
++		.idcode1		= 0x23,
++		.l2_page_size		= 8,
++		.pages_per_block	= 8,
++		.blocks_per_sector	= 16,
++		.nr_sectors		= 8,
++		.name			= "AT45DB021D",
++	},
++	{
++		.idcode1		= 0x24,
++		.l2_page_size		= 8,
++		.pages_per_block	= 8,
++		.blocks_per_sector	= 32,
++		.nr_sectors		= 8,
++		.name			= "AT45DB041D",
++	},
++	{
++		.idcode1		= 0x25,
++		.l2_page_size		= 8,
++		.pages_per_block	= 8,
++		.blocks_per_sector	= 32,
++		.nr_sectors		= 16,
++		.name			= "AT45DB081D",
++	},
++	{
++		.idcode1		= 0x26,
++		.l2_page_size		= 9,
++		.pages_per_block	= 8,
++		.blocks_per_sector	= 32,
++		.nr_sectors		= 16,
++		.name			= "AT45DB161D",
++	},
++	{
++		.idcode1		= 0x27,
++		.l2_page_size		= 9,
++		.pages_per_block	= 8,
++		.blocks_per_sector	= 64,
++		.nr_sectors		= 64,
++		.name			= "AT45DB321D",
++	},
++	{
++		.idcode1		= 0x28,
++		.l2_page_size		= 10,
++		.pages_per_block	= 8,
++		.blocks_per_sector	= 32,
++		.nr_sectors		= 32,
++		.name			= "AT45DB642D",
++	},
++};
++
++static int at45_wait_ready(struct spi_flash *flash, unsigned long timeout)
++{
++	struct spi_slave *spi = flash->spi;
++	unsigned long timebase;
++	int ret;
++	u8 cmd = CMD_AT45_READ_STATUS;
++	u8 status;
++
++	timebase = get_timer(0);
++
++	ret = spi_xfer(spi, 8, &cmd, NULL, SPI_XFER_BEGIN);
++	if (ret)
++		return -1;
++
++	do {
++		ret = spi_xfer(spi, 8, NULL, &status, 0);
++		if (ret)
++			return -1;
++
++		if (status & AT45_STATUS_READY)
++			break;
++	} while (get_timer(timebase) < timeout);
++
++	/* Deactivate CS */
++	spi_xfer(spi, 0, NULL, NULL, SPI_XFER_END);
++
++	if (status & AT45_STATUS_READY)
++		return 0;
++
++	/* Timed out */
++	return -1;
++}
++
++/*
++ * Assemble the address part of a command for AT45 devices in
++ * non-power-of-two page size mode.
++ */
++static void at45_build_address(struct atmel_spi_flash *asf, u8 *cmd, u32 offset)
++{
++	unsigned long page_addr;
++	unsigned long byte_addr;
++	unsigned long page_size;
++	unsigned int page_shift;
++
++	/*
++	 * The "extra" space per page is the power-of-two page size
++	 * divided by 32.
++	 */
++	page_shift = asf->params->l2_page_size;
++	page_size = (1 << page_shift) + (1 << (page_shift - 5));
++	page_shift++;
++	page_addr = offset / page_size;
++	byte_addr = offset % page_size;
++
++	cmd[0] = page_addr >> (16 - page_shift);
++	cmd[1] = page_addr << (page_shift - 8) | (byte_addr >> 8);
++	cmd[2] = byte_addr;
++}
++
++static int dataflash_read_fast_p2(struct spi_flash *flash,
++		u32 offset, size_t len, void *buf)
++{
++	u8 cmd[5];
++
++	cmd[0] = CMD_READ_ARRAY_FAST;
++	cmd[1] = offset >> 16;
++	cmd[2] = offset >> 8;
++	cmd[3] = offset;
++	cmd[4] = 0x00;
++
++	return spi_flash_read_common(flash, cmd, sizeof(cmd), buf, len);
++}
++
++static int dataflash_read_fast_at45(struct spi_flash *flash,
++		u32 offset, size_t len, void *buf)
++{
++	struct atmel_spi_flash *asf = to_atmel_spi_flash(flash);
++	u8 cmd[5];
++
++	cmd[0] = CMD_READ_ARRAY_FAST;
++	at45_build_address(asf, cmd + 1, offset);
++	cmd[4] = 0x00;
++
++	return spi_flash_read_common(flash, cmd, sizeof(cmd), buf, len);
++}
++
++/*
++ * TODO: the two write funcs (_p2/_at45) should get unified ...
++ */
++static int dataflash_write_p2(struct spi_flash *flash,
++		u32 offset, size_t len, const void *buf)
++{
++	struct atmel_spi_flash *asf = to_atmel_spi_flash(flash);
++	unsigned long page_size;
++	u32 addr = offset;
++	size_t chunk_len;
++	size_t actual;
++	int ret;
++	u8 cmd[4];
++
++	/*
++	 * TODO: This function currently uses only page buffer #1.  We can
++	 * speed this up by using both buffers and loading one buffer while
++	 * the other is being programmed into main memory.
++	 */
++
++	page_size = (1 << asf->params->l2_page_size);
++
++	ret = spi_claim_bus(flash->spi);
++	if (ret) {
++		debug("SF: Unable to claim SPI bus\n");
++		return ret;
++	}
++
++	for (actual = 0; actual < len; actual += chunk_len) {
++		chunk_len = min(len - actual, page_size - (addr % page_size));
++
++		/* Use the same address bits for both commands */
++		cmd[0] = CMD_AT45_LOAD_BUF1;
++		cmd[1] = addr >> 16;
++		cmd[2] = addr >> 8;
++		cmd[3] = addr;
++
++		ret = spi_flash_cmd_write(flash->spi, cmd, 4,
++				buf + actual, chunk_len);
++		if (ret < 0) {
++			debug("SF: Loading AT45 buffer failed\n");
++			goto out;
++		}
++
++		cmd[0] = CMD_AT45_PROG_BUF1;
++		ret = spi_flash_cmd_write(flash->spi, cmd, 4, NULL, 0);
++		if (ret < 0) {
++			debug("SF: AT45 page programming failed\n");
++			goto out;
++		}
++
++		ret = at45_wait_ready(flash, SPI_FLASH_PROG_TIMEOUT);
++		if (ret < 0) {
++			debug("SF: AT45 page programming timed out\n");
++			goto out;
++		}
++
++		addr += chunk_len;
++	}
++
++	debug("SF: AT45: Successfully programmed %zu bytes @ 0x%x\n",
++			len, offset);
++	ret = 0;
++
++out:
++	spi_release_bus(flash->spi);
++	return ret;
++}
++
++static int dataflash_write_at45(struct spi_flash *flash,
++		u32 offset, size_t len, const void *buf)
++{
++	struct atmel_spi_flash *asf = to_atmel_spi_flash(flash);
++	unsigned long page_addr;
++	unsigned long byte_addr;
++	unsigned long page_size;
++	unsigned int page_shift;
++	size_t chunk_len;
++	size_t actual;
++	int ret;
++	u8 cmd[4];
++
++	/*
++	 * TODO: This function currently uses only page buffer #1.  We can
++	 * speed this up by using both buffers and loading one buffer while
++	 * the other is being programmed into main memory.
++	 */
++
++	page_shift = asf->params->l2_page_size;
++	page_size = (1 << page_shift) + (1 << (page_shift - 5));
++	page_shift++;
++	page_addr = offset / page_size;
++	byte_addr = offset % page_size;
++
++	ret = spi_claim_bus(flash->spi);
++	if (ret) {
++		debug("SF: Unable to claim SPI bus\n");
++		return ret;
++	}
++
++	for (actual = 0; actual < len; actual += chunk_len) {
++		chunk_len = min(len - actual, page_size - byte_addr);
++
++		/* Use the same address bits for both commands */
++		cmd[0] = CMD_AT45_LOAD_BUF1;
++		cmd[1] = page_addr >> (16 - page_shift);
++		cmd[2] = page_addr << (page_shift - 8) | (byte_addr >> 8);
++		cmd[3] = byte_addr;
++
++		ret = spi_flash_cmd_write(flash->spi, cmd, 4,
++				buf + actual, chunk_len);
++		if (ret < 0) {
++			debug("SF: Loading AT45 buffer failed\n");
++			goto out;
++		}
++
++		cmd[0] = CMD_AT45_PROG_BUF1;
++		ret = spi_flash_cmd_write(flash->spi, cmd, 4, NULL, 0);
++		if (ret < 0) {
++			debug("SF: AT45 page programming failed\n");
++			goto out;
++		}
++
++		ret = at45_wait_ready(flash, SPI_FLASH_PROG_TIMEOUT);
++		if (ret < 0) {
++			debug("SF: AT45 page programming timed out\n");
++			goto out;
++		}
++
++		page_addr++;
++		byte_addr = 0;
++	}
++
++	debug("SF: AT45: Successfully programmed %zu bytes @ 0x%x\n",
++			len, offset);
++	ret = 0;
++
++out:
++	spi_release_bus(flash->spi);
++	return ret;
++}
++
++/*
++ * TODO: the two erase funcs (_p2/_at45) should get unified ...
++ */
++int dataflash_erase_p2(struct spi_flash *flash, u32 offset, size_t len)
++{
++	struct atmel_spi_flash *asf = to_atmel_spi_flash(flash);
++	unsigned long page_size;
++
++	size_t actual;
++	int ret;
++	u8 cmd[4];
++
++	/*
++	 * TODO: This function currently uses page erase only. We can
++	 * probably speed things up by using block and/or sector erase
++	 * when possible.
++	 */
++
++	page_size = (1 << asf->params->l2_page_size);
++
++	if (offset % page_size || len % page_size) {
++		debug("SF: Erase offset/length not multiple of page size\n");
++		return -1;
++	}
++
++	cmd[0] = CMD_AT45_ERASE_PAGE;
++	cmd[3] = 0x00;
++
++	ret = spi_claim_bus(flash->spi);
++	if (ret) {
++		debug("SF: Unable to claim SPI bus\n");
++		return ret;
++	}
++
++	for (actual = 0; actual < len; actual += page_size) {
++		cmd[1] = offset >> 16;
++		cmd[2] = offset >> 8;
++
++		ret = spi_flash_cmd_write(flash->spi, cmd, 4, NULL, 0);
++		if (ret < 0) {
++			debug("SF: AT45 page erase failed\n");
++			goto out;
++		}
++
++		ret = at45_wait_ready(flash, SPI_FLASH_PAGE_ERASE_TIMEOUT);
++		if (ret < 0) {
++			debug("SF: AT45 page erase timed out\n");
++			goto out;
++		}
++
++		offset += page_size;
++	}
++
++	debug("SF: AT45: Successfully erased %zu bytes @ 0x%x\n",
++			len, offset);
++	ret = 0;
++
++out:
++	spi_release_bus(flash->spi);
++	return ret;
++}
++
++int dataflash_erase_at45(struct spi_flash *flash, u32 offset, size_t len)
++{
++	struct atmel_spi_flash *asf = to_atmel_spi_flash(flash);
++	unsigned long page_addr;
++	unsigned long page_size;
++	unsigned int page_shift;
++	size_t actual;
++	int ret;
++	u8 cmd[4];
++
++	/*
++	 * TODO: This function currently uses page erase only. We can
++	 * probably speed things up by using block and/or sector erase
++	 * when possible.
++	 */
++
++	page_shift = asf->params->l2_page_size;
++	page_size = (1 << page_shift) + (1 << (page_shift - 5));
++	page_shift++;
++	page_addr = offset / page_size;
++
++	if (offset % page_size || len % page_size) {
++		debug("SF: Erase offset/length not multiple of page size\n");
++		return -1;
++	}
++
++	cmd[0] = CMD_AT45_ERASE_PAGE;
++	cmd[3] = 0x00;
++
++	ret = spi_claim_bus(flash->spi);
++	if (ret) {
++		debug("SF: Unable to claim SPI bus\n");
++		return ret;
++	}
++
++	for (actual = 0; actual < len; actual += page_size) {
++		cmd[1] = page_addr >> (16 - page_shift);
++		cmd[2] = page_addr << (page_shift - 8);
++
++		ret = spi_flash_cmd_write(flash->spi, cmd, 4, NULL, 0);
++		if (ret < 0) {
++			debug("SF: AT45 page erase failed\n");
++			goto out;
++		}
++
++		ret = at45_wait_ready(flash, SPI_FLASH_PAGE_ERASE_TIMEOUT);
++		if (ret < 0) {
++			debug("SF: AT45 page erase timed out\n");
++			goto out;
++		}
++
++		page_addr++;
++	}
++
++	debug("SF: AT45: Successfully erased %zu bytes @ 0x%x\n",
++			len, offset);
++	ret = 0;
++
++out:
++	spi_release_bus(flash->spi);
++	return ret;
++}
++
++struct spi_flash *spi_flash_probe_atmel(struct spi_slave *spi, u8 *idcode)
++{
++	const struct atmel_spi_flash_params *params;
++	unsigned long page_size;
++	unsigned int family;
++	struct atmel_spi_flash *asf;
++	unsigned int i;
++	int ret;
++	u8 status;
++
++	for (i = 0; i < ARRAY_SIZE(atmel_spi_flash_table); i++) {
++		params = &atmel_spi_flash_table[i];
++		if (params->idcode1 == idcode[1])
++			break;
++	}
++
++	if (i == ARRAY_SIZE(atmel_spi_flash_table)) {
++		debug("SF: Unsupported DataFlash ID %02x\n",
++				idcode[1]);
++		return NULL;
++	}
++
++	asf = malloc(sizeof(struct atmel_spi_flash));
++	if (!asf) {
++		debug("SF: Failed to allocate memory\n");
++		return NULL;
++	}
++
++	asf->params = params;
++	asf->flash.spi = spi;
++	asf->flash.name = params->name;
++
++	/* Assuming power-of-two page size initially. */
++	page_size = 1 << params->l2_page_size;
++
++	family = idcode[1] >> 5;
++
++	switch (family) {
++	case DF_FAMILY_AT45:
++		/*
++		 * AT45 chips have configurable page size. The status
++		 * register indicates which configuration is active.
++		 */
++		ret = spi_flash_cmd(spi, CMD_AT45_READ_STATUS, &status, 1);
++		if (ret)
++			goto err;
++
++		debug("SF: AT45 status register: %02x\n", status);
++
++		if (!(status & AT45_STATUS_P2_PAGE_SIZE)) {
++			asf->flash.read = dataflash_read_fast_at45;
++			asf->flash.write = dataflash_write_at45;
++			asf->flash.erase = dataflash_erase_at45;
++			page_size += 1 << (params->l2_page_size - 5);
++		} else {
++			asf->flash.read = dataflash_read_fast_p2;
++			asf->flash.write = dataflash_write_p2;
++			asf->flash.erase = dataflash_erase_p2;
++		}
++
++		break;
++
++	case DF_FAMILY_AT26F:
++	case DF_FAMILY_AT26DF:
++		asf->flash.read = dataflash_read_fast_p2;
++		break;
++
++	default:
++		debug("SF: Unsupported DataFlash family %u\n", family);
++		goto err;
++	}
++
++	asf->flash.size = page_size * params->pages_per_block
++				* params->blocks_per_sector
++				* params->nr_sectors;
++
++	debug("SF: Detected %s with page size %lu, total %u bytes\n",
++			params->name, page_size, asf->flash.size);
++
++	return &asf->flash;
++
++err:
++	free(asf);
++	return NULL;
++}
+diff -Naur u-boot-2009.08/drivers/mtd/spi/eeprom_m95xxx.c u-boot-stamps//drivers/mtd/spi/eeprom_m95xxx.c
+--- u-boot-2009.08/drivers/mtd/spi/eeprom_m95xxx.c	2009-08-31 12:57:42.000000000 -0500
++++ u-boot-stamps//drivers/mtd/spi/eeprom_m95xxx.c	2011-11-08 17:39:36.000000000 -0500
+@@ -44,6 +44,9 @@
+ 
+ 	slave = spi_setup_slave(CONFIG_DEFAULT_SPI_BUS, 1, 1000000,
+ 			CONFIG_DEFAULT_SPI_MODE);
++	if(!slave)
++		return 0;
++
+ 	spi_claim_bus(slave);
+ 
+ 	/* command */
+@@ -72,9 +75,13 @@
+ {
+ 	struct spi_slave *slave;
+ 	char buf[3];
++	ulong start;
+ 
+ 	slave = spi_setup_slave(CONFIG_DEFAULT_SPI_BUS, 1, 1000000,
+ 			CONFIG_DEFAULT_SPI_MODE);
++	if (!slave)
++		return 0;
++
+ 	spi_claim_bus(slave);
+ 
+ 	buf[0] = SPI_EEPROM_WREN;
+@@ -96,7 +103,7 @@
+ 	if(spi_xfer(slave, len * 8, buffer, NULL, SPI_XFER_END))
+ 		return -1;
+ 
+-	reset_timer_masked();
++	start = get_timer(0);
+ 	do {
+ 		buf[0] = SPI_EEPROM_RDSR;
+ 		buf[1] = 0;
+@@ -105,7 +112,7 @@
+ 		if (!(buf[1] & 1))
+ 			break;
+ 
+-	} while (get_timer_masked() < CONFIG_SYS_SPI_WRITE_TOUT);
++	} while (get_timer(start) < CONFIG_SYS_SPI_WRITE_TOUT);
+ 
+ 	if (buf[1] & 1)
+ 		printf ("*** spi_write: Time out while writing!\n");
+diff -Naur u-boot-2009.08/drivers/mtd/spi/eon.c u-boot-stamps//drivers/mtd/spi/eon.c
+--- u-boot-2009.08/drivers/mtd/spi/eon.c	1969-12-31 19:00:00.000000000 -0500
++++ u-boot-stamps//drivers/mtd/spi/eon.c	2011-11-08 17:39:36.000000000 -0500
+@@ -0,0 +1,103 @@
++/*
++ * (C) Copyright 2010, ucRobotics Inc.
++ * Author: Chong Huang <chuang@ucrobotics.com>
++ * Licensed under the GPL-2 or later.
++ */
++
++#include <common.h>
++#include <malloc.h>
++#include <spi_flash.h>
++
++#include "spi_flash_internal.h"
++
++/* EN25Q128-specific commands */
++#define CMD_EN25Q128_WREN	0x06    /* Write Enable */
++#define CMD_EN25Q128_WRDI	0x04    /* Write Disable */
++#define CMD_EN25Q128_RDSR	0x05    /* Read Status Register */
++#define CMD_EN25Q128_WRSR	0x01    /* Write Status Register */
++#define CMD_EN25Q128_READ	0x03    /* Read Data Bytes */
++#define CMD_EN25Q128_FAST_READ	0x0b    /* Read Data Bytes at Higher Speed */
++#define CMD_EN25Q128_PP		0x02    /* Page Program */
++#define CMD_EN25Q128_SE		0x20    /* Sector Erase */
++#define CMD_EN25Q128_BE		0xd8    /* Block Erase */
++#define CMD_EN25Q128_DP		0xb9    /* Deep Power-down */
++#define CMD_EN25Q128_RES	0xab    /* Release from DP, and Read Signature */
++
++struct eon_spi_flash_params {
++	u8 idcode1;
++	u16 page_size;
++	u16 pages_per_sector;
++	u16 sectors_per_block;
++	u16 nr_sectors;
++	const char *name;
++};
++
++static const struct eon_spi_flash_params eon_spi_flash_table[] = {
++	{
++		.idcode1 = 0x16,
++		.page_size = 256,
++		.pages_per_sector = 16,
++		.sectors_per_block = 16,
++		.nr_sectors = 1024,
++		.name = "EN25Q32B",
++	},
++	{
++		.idcode1 = 0x18,
++		.page_size = 256,
++		.pages_per_sector = 16,
++		.sectors_per_block = 16,
++		.nr_sectors = 4096,
++		.name = "EN25Q128",
++	},
++	{
++		.idcode1 = 0x16,
++		.page_size = 256,
++		.pages_per_sector = 16,
++		.sectors_per_block = 16,
++		.nr_sectors = 1024,
++		.name = "EN25Q32B",
++	},
++};
++
++static int eon_erase(struct spi_flash *flash, u32 offset, size_t len)
++{
++	return spi_flash_cmd_erase(flash, CMD_EN25Q128_BE, offset, len);
++}
++
++struct spi_flash *spi_flash_probe_eon(struct spi_slave *spi, u8 *idcode)
++{
++	const struct eon_spi_flash_params *params;
++	struct spi_flash *flash;
++	unsigned int i;
++
++	for (i = 0; i < ARRAY_SIZE(eon_spi_flash_table); ++i) {
++		params = &eon_spi_flash_table[i];
++		if (params->idcode1 == idcode[2])
++			break;
++	}
++
++	if (i == ARRAY_SIZE(eon_spi_flash_table)) {
++		debug("SF: Unsupported EON ID %02x\n", idcode[1]);
++		return NULL;
++	}
++
++	flash = malloc(sizeof(*flash));
++	if (!flash) {
++		debug("SF: Failed to allocate memory\n");
++		return NULL;
++	}
++
++	flash->spi = spi;
++	flash->name = params->name;
++
++	flash->write = spi_flash_cmd_write_multi;
++	flash->erase = eon_erase;
++	flash->read = spi_flash_cmd_read_fast;
++	flash->page_size = params->page_size;
++	flash->sector_size = params->page_size * params->pages_per_sector
++	    * params->sectors_per_block;
++	flash->size = params->page_size * params->pages_per_sector
++	    * params->nr_sectors;
++
++	return flash;
++}
+diff -Naur u-boot-2009.08/drivers/mtd/spi/macronix.c u-boot-stamps//drivers/mtd/spi/macronix.c
+--- u-boot-2009.08/drivers/mtd/spi/macronix.c	2009-08-31 12:57:42.000000000 -0500
++++ u-boot-stamps//drivers/mtd/spi/macronix.c	2011-11-08 17:39:36.000000000 -0500
+@@ -49,8 +49,6 @@
+ #define CMD_MX25XX_DP		0xb9	/* Deep Power-down */
+ #define CMD_MX25XX_RES		0xab	/* Release from DP, and Read Signature */
+ 
+-#define MACRONIX_SR_WIP		(1 << 0)	/* Write-in-Progress */
+-
+ struct macronix_spi_flash_params {
+ 	u16 idcode;
+ 	u16 page_size;
+@@ -60,19 +58,24 @@
+ 	const char *name;
+ };
+ 
+-struct macronix_spi_flash {
+-	struct spi_flash flash;
+-	const struct macronix_spi_flash_params *params;
+-};
+-
+-static inline struct macronix_spi_flash *to_macronix_spi_flash(struct spi_flash
+-							       *flash)
+-{
+-	return container_of(flash, struct macronix_spi_flash, flash);
+-}
+-
+ static const struct macronix_spi_flash_params macronix_spi_flash_table[] = {
+ 	{
++		.idcode = 0x2013,
++		.page_size = 256,
++		.pages_per_sector = 16,
++		.sectors_per_block = 16,
++		.nr_blocks = 8,
++		.name = "MX25L4005",
++	},
++	{
++		.idcode = 0x2014,
++		.page_size = 256,
++		.pages_per_sector = 16,
++		.sectors_per_block = 16,
++		.nr_blocks = 16,
++		.name = "MX25L8005",
++	},
++	{
+ 		.idcode = 0x2015,
+ 		.page_size = 256,
+ 		.pages_per_sector = 16,
+@@ -114,192 +117,54 @@
+ 	},
+ };
+ 
+-static int macronix_wait_ready(struct spi_flash *flash, unsigned long timeout)
++static int macronix_write_status(struct spi_flash *flash, u8 sr)
+ {
+-	struct spi_slave *spi = flash->spi;
+-	unsigned long timebase;
++	u8 cmd;
+ 	int ret;
+-	u8 status;
+-	u8 cmd = CMD_MX25XX_RDSR;
+ 
+-	ret = spi_xfer(spi, 8, &cmd, NULL, SPI_XFER_BEGIN);
+-	if (ret) {
+-		debug("SF: Failed to send command %02x: %d\n", cmd, ret);
++	ret = spi_flash_cmd_write_enable(flash);
++	if (ret < 0) {
++		debug("SF: enabling write failed\n");
+ 		return ret;
+ 	}
+ 
+-	timebase = get_timer(0);
+-	do {
+-		ret = spi_xfer(spi, 8, NULL, &status, 0);
+-		if (ret)
+-			return -1;
+-
+-		if ((status & MACRONIX_SR_WIP) == 0)
+-			break;
+-
+-	} while (get_timer(timebase) < timeout);
+-
+-	spi_xfer(spi, 0, NULL, NULL, SPI_XFER_END);
+-
+-	if ((status & MACRONIX_SR_WIP) == 0)
+-		return 0;
+-
+-	/* Timed out */
+-	return -1;
+-}
+-
+-static int macronix_read_fast(struct spi_flash *flash,
+-			      u32 offset, size_t len, void *buf)
+-{
+-	struct macronix_spi_flash *mcx = to_macronix_spi_flash(flash);
+-	unsigned long page_addr;
+-	unsigned long page_size;
+-	u8 cmd[5];
+-
+-	page_size = mcx->params->page_size;
+-	page_addr = offset / page_size;
+-
+-	cmd[0] = CMD_READ_ARRAY_FAST;
+-	cmd[1] = page_addr >> 8;
+-	cmd[2] = page_addr;
+-	cmd[3] = offset % page_size;
+-	cmd[4] = 0x00;
+-
+-	return spi_flash_read_common(flash, cmd, sizeof(cmd), buf, len);
+-}
+-
+-static int macronix_write(struct spi_flash *flash,
+-			  u32 offset, size_t len, const void *buf)
+-{
+-	struct macronix_spi_flash *mcx = to_macronix_spi_flash(flash);
+-	unsigned long page_addr;
+-	unsigned long byte_addr;
+-	unsigned long page_size;
+-	size_t chunk_len;
+-	size_t actual;
+-	int ret;
+-	u8 cmd[4];
+-
+-	page_size = mcx->params->page_size;
+-	page_addr = offset / page_size;
+-	byte_addr = offset % page_size;
+-
+-	ret = spi_claim_bus(flash->spi);
++	cmd = CMD_MX25XX_WRSR;
++	ret = spi_flash_cmd_write(flash->spi, &cmd, 1, &sr, 1);
+ 	if (ret) {
+-		debug("SF: Unable to claim SPI bus\n");
++		debug("SF: fail to write status register\n");
+ 		return ret;
+ 	}
+ 
+-	ret = 0;
+-	for (actual = 0; actual < len; actual += chunk_len) {
+-		chunk_len = min(len - actual, page_size - byte_addr);
+-
+-		cmd[0] = CMD_MX25XX_PP;
+-		cmd[1] = page_addr >> 8;
+-		cmd[2] = page_addr;
+-		cmd[3] = byte_addr;
+-
+-		debug
+-		    ("PP: 0x%p => cmd = { 0x%02x 0x%02x%02x%02x } chunk_len = %d\n",
+-		     buf + actual, cmd[0], cmd[1], cmd[2], cmd[3], chunk_len);
+-
+-		ret = spi_flash_cmd(flash->spi, CMD_MX25XX_WREN, NULL, 0);
+-		if (ret < 0) {
+-			debug("SF: Enabling Write failed\n");
+-			break;
+-		}
+-
+-		ret = spi_flash_cmd_write(flash->spi, cmd, 4,
+-					  buf + actual, chunk_len);
+-		if (ret < 0) {
+-			debug("SF: Macronix Page Program failed\n");
+-			break;
+-		}
+-
+-		ret = macronix_wait_ready(flash, SPI_FLASH_PROG_TIMEOUT);
+-		if (ret < 0) {
+-			debug("SF: Macronix page programming timed out\n");
+-			break;
+-		}
+-
+-		page_addr++;
+-		byte_addr = 0;
++	ret = spi_flash_cmd_wait_ready(flash, SPI_FLASH_PROG_TIMEOUT);
++	if (ret < 0) {
++		debug("SF: write status register timed out\n");
++		return ret;
+ 	}
+ 
+-	debug("SF: Macronix: Successfully programmed %u bytes @ 0x%x\n",
+-	      len, offset);
+-
+-	spi_release_bus(flash->spi);
+-	return ret;
++	return 0;
+ }
+ 
+-int macronix_erase(struct spi_flash *flash, u32 offset, size_t len)
++static int macronix_unlock(struct spi_flash *flash)
+ {
+-	struct macronix_spi_flash *mcx = to_macronix_spi_flash(flash);
+-	unsigned long sector_size;
+-	size_t actual;
+ 	int ret;
+-	u8 cmd[4];
+-
+-	/*
+-	 * This function currently uses sector erase only.
+-	 * probably speed things up by using bulk erase
+-	 * when possible.
+-	 */
+-
+-	sector_size = mcx->params->page_size * mcx->params->pages_per_sector
+-			* mcx->params->sectors_per_block;
+-
+-	if (offset % sector_size || len % sector_size) {
+-		debug("SF: Erase offset/length not multiple of sector size\n");
+-		return -1;
+-	}
+-
+-	len /= sector_size;
+-	cmd[0] = CMD_MX25XX_BE;
+-	cmd[2] = 0x00;
+-	cmd[3] = 0x00;
+ 
+-	ret = spi_claim_bus(flash->spi);
+-	if (ret) {
+-		debug("SF: Unable to claim SPI bus\n");
+-		return ret;
+-	}
+-
+-	ret = 0;
+-	for (actual = 0; actual < len; actual++) {
+-		cmd[1] = (offset / sector_size) + actual;
+-
+-		ret = spi_flash_cmd(flash->spi, CMD_MX25XX_WREN, NULL, 0);
+-		if (ret < 0) {
+-			debug("SF: Enabling Write failed\n");
+-			break;
+-		}
+-
+-		ret = spi_flash_cmd_write(flash->spi, cmd, 4, NULL, 0);
+-		if (ret < 0) {
+-			debug("SF: Macronix page erase failed\n");
+-			break;
+-		}
++	/* Enable status register writing and clear BP# bits */
++	ret = macronix_write_status(flash, 0);
++	if (ret)
++		debug("SF: fail to disable write protection\n");
+ 
+-		ret = macronix_wait_ready(flash, SPI_FLASH_PAGE_ERASE_TIMEOUT);
+-		if (ret < 0) {
+-			debug("SF: Macronix page erase timed out\n");
+-			break;
+-		}
+-	}
+-
+-	debug("SF: Macronix: Successfully erased %u bytes @ 0x%x\n",
+-	      len * sector_size, offset);
+-
+-	spi_release_bus(flash->spi);
+ 	return ret;
+ }
+ 
++static int macronix_erase(struct spi_flash *flash, u32 offset, size_t len)
++{
++	return spi_flash_cmd_erase(flash, CMD_MX25XX_BE, offset, len);
++}
++
+ struct spi_flash *spi_flash_probe_macronix(struct spi_slave *spi, u8 *idcode)
+ {
+ 	const struct macronix_spi_flash_params *params;
+-	struct macronix_spi_flash *mcx;
++	struct spi_flash *flash;
+ 	unsigned int i;
+ 	u16 id = idcode[2] | idcode[1] << 8;
+ 
+@@ -314,24 +179,25 @@
+ 		return NULL;
+ 	}
+ 
+-	mcx = malloc(sizeof(*mcx));
+-	if (!mcx) {
++	flash = malloc(sizeof(*flash));
++	if (!flash) {
+ 		debug("SF: Failed to allocate memory\n");
+ 		return NULL;
+ 	}
+ 
+-	mcx->params = params;
+-	mcx->flash.spi = spi;
+-	mcx->flash.name = params->name;
+-
+-	mcx->flash.write = macronix_write;
+-	mcx->flash.erase = macronix_erase;
+-	mcx->flash.read = macronix_read_fast;
+-	mcx->flash.size = params->page_size * params->pages_per_sector
+-	    * params->sectors_per_block * params->nr_blocks;
++	flash->spi = spi;
++	flash->name = params->name;
++
++	flash->write = spi_flash_cmd_write_multi;
++	flash->erase = macronix_erase;
++	flash->read = spi_flash_cmd_read_fast;
++	flash->page_size = params->page_size;
++	flash->sector_size = params->page_size * params->pages_per_sector
++		* params->sectors_per_block;
++	flash->size = flash->sector_size * params->nr_blocks;
+ 
+-	printf("SF: Detected %s with page size %u, total %u bytes\n",
+-	      params->name, params->page_size, mcx->flash.size);
++	/* Clear BP# bits for read-only flash */
++	macronix_unlock(flash);
+ 
+-	return &mcx->flash;
++	return flash;
+ }
+diff -Naur u-boot-2009.08/drivers/mtd/spi/Makefile u-boot-stamps//drivers/mtd/spi/Makefile
+--- u-boot-2009.08/drivers/mtd/spi/Makefile	2011-09-16 16:17:52.000000000 -0500
++++ u-boot-stamps//drivers/mtd/spi/Makefile	2011-11-08 18:04:45.000000000 -0500
+@@ -27,14 +27,14 @@
+ 
+ COBJS-$(CONFIG_SPI_FLASH)	+= spi_flash.o
+ COBJS-$(CONFIG_SPI_FLASH_ATMEL)	+= atmel.o
++COBJS-$(CONFIG_SPI_FLASH_EON)	+= eon.o
+ COBJS-$(CONFIG_SPI_FLASH_MACRONIX)	+= macronix.o
+ COBJS-$(CONFIG_SPI_FLASH_SPANSION)	+= spansion.o
+ COBJS-$(CONFIG_SPI_FLASH_SST)	+= sst.o
+ COBJS-$(CONFIG_SPI_FLASH_STMICRO)	+= stmicro.o
++COBJS-$(CONFIG_SPI_FLASH_WINBOND)	+= winbond.o
++COBJS-$(CONFIG_SPI_FRAM_RAMTRON)	+= ramtron.o
+ COBJS-$(CONFIG_SPI_M95XXX) += eeprom_m95xxx.o
+-COBJS-$(CONFIG_SPI_FLASH_IMX)	+= imx_spi_nor.o
+-COBJS-$(CONFIG_SPI_FLASH_IMX_SST)	+= imx_spi_nor_sst.o
+-COBJS-$(CONFIG_SPI_FLASH_IMX_ATMEL)	+= imx_spi_nor_atmel.o
+ 
+ COBJS	:= $(COBJS-y)
+ SRCS	:= $(COBJS:.o=.c)
+diff -Naur u-boot-2009.08/drivers/mtd/spi/ramtron.c u-boot-stamps//drivers/mtd/spi/ramtron.c
+--- u-boot-2009.08/drivers/mtd/spi/ramtron.c	1969-12-31 19:00:00.000000000 -0500
++++ u-boot-stamps//drivers/mtd/spi/ramtron.c	2011-11-08 17:39:36.000000000 -0500
+@@ -0,0 +1,316 @@
++/*
++ * (C) Copyright 2010
++ * Reinhard Meyer, EMK Elektronik, reinhard.meyer@emk-elektronik.de
++ *
++ * See file CREDITS for list of people who contributed to this
++ * project.
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License as
++ * published by the Free Software Foundation; either version 2 of
++ * the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
++ * MA 02111-1307 USA
++ */
++
++/*
++ * Note: RAMTRON SPI FRAMs are ferroelectric, nonvolatile RAMs
++ * with an interface identical to SPI flash devices.
++ * However since they behave like RAM there are no delays or
++ * busy polls required. They can sustain read or write at the
++ * allowed SPI bus speed, which can be 40 MHz for some devices.
++ *
++ * Unfortunately some RAMTRON devices do not have a means of
++ * identifying them. They will leave the SO line undriven when
++ * the READ-ID command is issued. It is therefore mandatory
++ * that the MISO line has a proper pull-up, so that READ-ID
++ * will return a row of 0xff. This 0xff pseudo-id will cause
++ * probes by all vendor specific functions that are designed
++ * to handle it. If the MISO line is not pulled up, READ-ID
++ * could return any random noise, even mimicking another
++ * device.
++ *
++ * We use CONFIG_SPI_FRAM_RAMTRON_NON_JEDEC
++ * to define which device will be assumed after a simple status
++ * register verify. This method is prone to false positive
++ * detection and should therefore be the last to be tried.
++ * Enter it in the last position in the table in spi_flash.c!
++ *
++ * The define CONFIG_SPI_FRAM_RAMTRON_NON_JEDEC both activates
++ * compilation of the special handler and defines the device
++ * to assume.
++ */
++
++#include <common.h>
++#include <malloc.h>
++#include <spi_flash.h>
++#include "spi_flash_internal.h"
++
++/* RAMTRON commands common to all devices */
++#define CMD_RAMTRON_WREN	0x06	/* Write Enable */
++#define CMD_RAMTRON_WRDI	0x04	/* Write Disable */
++#define CMD_RAMTRON_RDSR	0x05	/* Read Status Register */
++#define CMD_RAMTRON_WRSR	0x01	/* Write Status Register */
++#define CMD_RAMTRON_READ	0x03	/* Read Data Bytes */
++#define CMD_RAMTRON_WRITE	0x02	/* Write Data Bytes */
++/* not all have those: */
++#define CMD_RAMTRON_FSTRD	0x0b	/* Fast Read (for compatibility - not used here) */
++#define CMD_RAMTRON_SLEEP	0xb9	/* Enter Sleep Mode */
++#define CMD_RAMTRON_RDID	0x9f	/* Read ID */
++#define CMD_RAMTRON_SNR		0xc3	/* Read Serial Number */
++
++/*
++ * Properties of supported FRAMs
++ * Note: speed is currently not used because we have no method to deliver that
++ * value to the upper layers
++ */
++struct ramtron_spi_fram_params {
++	u32	size;		/* size in bytes */
++	u8	addr_len;	/* number of address bytes */
++	u8	merge_cmd;	/* some address bits are in the command byte */
++	u8	id1;		/* device ID 1 (family, density) */
++	u8	id2;		/* device ID 2 (sub, rev, rsvd) */
++	u32	speed;		/* max. SPI clock in Hz */
++	const char *name;	/* name for display and/or matching */
++};
++
++struct ramtron_spi_fram {
++	struct spi_flash flash;
++	const struct ramtron_spi_fram_params *params;
++};
++
++static inline struct ramtron_spi_fram *to_ramtron_spi_fram(struct spi_flash
++							     *flash)
++{
++	return container_of(flash, struct ramtron_spi_fram, flash);
++}
++
++/*
++ * table describing supported FRAM chips:
++ * chips without RDID command must have the values 0xff for id1 and id2
++ */
++static const struct ramtron_spi_fram_params ramtron_spi_fram_table[] = {
++	{
++		.size = 32*1024,
++		.addr_len = 2,
++		.merge_cmd = 0,
++		.id1 = 0x22,
++		.id2 = 0x00,
++		.speed = 40000000,
++		.name = "FM25V02",
++	},
++	{
++		.size = 32*1024,
++		.addr_len = 2,
++		.merge_cmd = 0,
++		.id1 = 0x22,
++		.id2 = 0x01,
++		.speed = 40000000,
++		.name = "FM25VN02",
++	},
++	{
++		.size = 64*1024,
++		.addr_len = 2,
++		.merge_cmd = 0,
++		.id1 = 0x23,
++		.id2 = 0x00,
++		.speed = 40000000,
++		.name = "FM25V05",
++	},
++	{
++		.size = 64*1024,
++		.addr_len = 2,
++		.merge_cmd = 0,
++		.id1 = 0x23,
++		.id2 = 0x01,
++		.speed = 40000000,
++		.name = "FM25VN05",
++	},
++	{
++		.size = 128*1024,
++		.addr_len = 3,
++		.merge_cmd = 0,
++		.id1 = 0x24,
++		.id2 = 0x00,
++		.speed = 40000000,
++		.name = "FM25V10",
++	},
++	{
++		.size = 128*1024,
++		.addr_len = 3,
++		.merge_cmd = 0,
++		.id1 = 0x24,
++		.id2 = 0x01,
++		.speed = 40000000,
++		.name = "FM25VN10",
++	},
++#ifdef CONFIG_SPI_FRAM_RAMTRON_NON_JEDEC
++	{
++		.size = 256*1024,
++		.addr_len = 3,
++		.merge_cmd = 0,
++		.id1 = 0xff,
++		.id2 = 0xff,
++		.speed = 40000000,
++		.name = "FM25H20",
++	},
++#endif
++};
++
++static int ramtron_common(struct spi_flash *flash,
++		u32 offset, size_t len, void *buf, u8 command)
++{
++	struct ramtron_spi_fram *sn = to_ramtron_spi_fram(flash);
++	u8 cmd[4];
++	int cmd_len;
++	int ret;
++
++	if (sn->params->addr_len == 3 && sn->params->merge_cmd == 0) {
++		cmd[0] = command;
++		cmd[1] = offset >> 16;
++		cmd[2] = offset >> 8;
++		cmd[3] = offset;
++		cmd_len = 4;
++	} else if (sn->params->addr_len == 2 && sn->params->merge_cmd == 0) {
++		cmd[0] = command;
++		cmd[1] = offset >> 8;
++		cmd[2] = offset;
++		cmd_len = 3;
++	} else {
++		printf("SF: unsupported addr_len or merge_cmd\n");
++		return -1;
++	}
++
++	/* claim the bus */
++	ret = spi_claim_bus(flash->spi);
++	if (ret) {
++		debug("SF: Unable to claim SPI bus\n");
++		return ret;
++	}
++
++	if (command == CMD_RAMTRON_WRITE) {
++		/* send WREN */
++		ret = spi_flash_cmd_write_enable(flash);
++		if (ret < 0) {
++			debug("SF: Enabling Write failed\n");
++			goto releasebus;
++		}
++	}
++
++	/* do the transaction */
++	if (command == CMD_RAMTRON_WRITE)
++		ret = spi_flash_cmd_write(flash->spi, cmd, cmd_len, buf, len);
++	else
++		ret = spi_flash_cmd_read(flash->spi, cmd, cmd_len, buf, len);
++	if (ret < 0)
++		debug("SF: Transaction failed\n");
++
++releasebus:
++	/* release the bus */
++	spi_release_bus(flash->spi);
++	return ret;
++}
++
++static int ramtron_read(struct spi_flash *flash,
++		u32 offset, size_t len, void *buf)
++{
++	return ramtron_common(flash, offset, len, buf,
++		CMD_RAMTRON_READ);
++}
++
++static int ramtron_write(struct spi_flash *flash,
++		u32 offset, size_t len, const void *buf)
++{
++	return ramtron_common(flash, offset, len, (void *)buf,
++		CMD_RAMTRON_WRITE);
++}
++
++static int ramtron_erase(struct spi_flash *flash, u32 offset, size_t len)
++{
++	debug("SF: Erase of RAMTRON FRAMs is pointless\n");
++	return -1;
++}
++
++/*
++ * nore: we are called here with idcode pointing to the first non-0x7f byte
++ * already!
++ */
++struct spi_flash *spi_fram_probe_ramtron(struct spi_slave *spi, u8 *idcode)
++{
++	const struct ramtron_spi_fram_params *params;
++	struct ramtron_spi_fram *sn;
++	unsigned int i;
++#ifdef CONFIG_SPI_FRAM_RAMTRON_NON_JEDEC
++	int ret;
++	u8 sr;
++#endif
++
++	/* NOTE: the bus has been claimed before this function is called! */
++	switch (idcode[0]) {
++	case 0xc2:
++		/* JEDEC conformant RAMTRON id */
++		for (i = 0; i < ARRAY_SIZE(ramtron_spi_fram_table); i++) {
++			params = &ramtron_spi_fram_table[i];
++			if (idcode[1] == params->id1 && idcode[2] == params->id2)
++				goto found;
++		}
++		break;
++#ifdef CONFIG_SPI_FRAM_RAMTRON_NON_JEDEC
++	case 0xff:
++		/*
++		 * probably open MISO line, pulled up.
++		 * We COULD have a non JEDEC conformant FRAM here,
++		 * read the status register to verify
++		 */
++		ret = spi_flash_cmd(spi, CMD_RAMTRON_RDSR, &sr, 1);
++		if (ret)
++			return NULL;
++
++		/* Bits 5,4,0 are fixed 0 for all devices */
++		if ((sr & 0x31) != 0x00)
++			return NULL;
++		/* now find the device */
++		for (i = 0; i < ARRAY_SIZE(ramtron_spi_fram_table); i++) {
++			params = &ramtron_spi_fram_table[i];
++			if (!strcmp(params->name, CONFIG_SPI_FRAM_RAMTRON_NON_JEDEC))
++				goto found;
++		}
++		debug("SF: Unsupported non-JEDEC RAMTRON device "
++			CONFIG_SPI_FRAM_RAMTRON_NON_JEDEC "\n");
++		break;
++#endif
++	default:
++		break;
++	}
++
++	/* arriving here means no method has found a device we can handle */
++	debug("SF/ramtron: unsupported device id0=%02x id1=%02x id2=%02x\n",
++		idcode[0], idcode[1], idcode[2]);
++	return NULL;
++
++found:
++	sn = malloc(sizeof(*sn));
++	if (!sn) {
++		debug("SF: Failed to allocate memory\n");
++		return NULL;
++	}
++
++	sn->params = params;
++	sn->flash.spi = spi;
++	sn->flash.name = params->name;
++
++	sn->flash.write = ramtron_write;
++	sn->flash.read = ramtron_read;
++	sn->flash.erase = ramtron_erase;
++	sn->flash.size = params->size;
++
++	return &sn->flash;
++}
+diff -Naur u-boot-2009.08/drivers/mtd/spi/spansion.c u-boot-stamps//drivers/mtd/spi/spansion.c
+--- u-boot-2009.08/drivers/mtd/spi/spansion.c	2009-08-31 12:57:42.000000000 -0500
++++ u-boot-stamps//drivers/mtd/spi/spansion.c	2011-11-08 17:39:36.000000000 -0500
+@@ -52,8 +52,8 @@
+ #define SPSN_ID_S25FL128P	0x2018
+ #define SPSN_EXT_ID_S25FL128P_256KB	0x0300
+ #define SPSN_EXT_ID_S25FL128P_64KB	0x0301
+-
+-#define SPANSION_SR_WIP		(1 << 0)	/* Write-in-Progress */
++#define SPSN_EXT_ID_S25FL032P		0x4d00
++#define SPSN_EXT_ID_S25FL129P		0x4d01
+ 
+ struct spansion_spi_flash_params {
+ 	u16 idcode1;
+@@ -64,17 +64,6 @@
+ 	const char *name;
+ };
+ 
+-struct spansion_spi_flash {
+-	struct spi_flash flash;
+-	const struct spansion_spi_flash_params *params;
+-};
+-
+-static inline struct spansion_spi_flash *to_spansion_spi_flash(struct spi_flash
+-							     *flash)
+-{
+-	return container_of(flash, struct spansion_spi_flash, flash);
+-}
+-
+ static const struct spansion_spi_flash_params spansion_spi_flash_table[] = {
+ 	{
+ 		.idcode1 = SPSN_ID_S25FL008A,
+@@ -124,190 +113,33 @@
+ 		.nr_sectors = 64,
+ 		.name = "S25FL128P_256K",
+ 	},
++	{
++		.idcode1 = SPSN_ID_S25FL032A,
++		.idcode2 = SPSN_EXT_ID_S25FL032P,
++		.page_size = 256,
++		.pages_per_sector = 256,
++		.nr_sectors = 64,
++		.name = "S25FL032P",
++	},
++	{
++		.idcode1 = SPSN_ID_S25FL128P,
++		.idcode2 = SPSN_EXT_ID_S25FL129P,
++		.page_size = 256,
++		.pages_per_sector = 256,
++		.nr_sectors = 256,
++		.name = "S25FL129P_64K",
++	},
+ };
+ 
+-static int spansion_wait_ready(struct spi_flash *flash, unsigned long timeout)
+-{
+-	struct spi_slave *spi = flash->spi;
+-	unsigned long timebase;
+-	int ret;
+-	u8 status;
+-
+-	timebase = get_timer(0);
+-	do {
+-		ret = spi_flash_cmd(spi, CMD_S25FLXX_RDSR, &status, sizeof(status));
+-		if (ret)
+-			return -1;
+-
+-		if ((status & SPANSION_SR_WIP) == 0)
+-			break;
+-
+-	} while (get_timer(timebase) < timeout);
+-
+-
+-	if ((status & SPANSION_SR_WIP) == 0)
+-		return 0;
+-
+-	/* Timed out */
+-	return -1;
+-}
+-
+-static int spansion_read_fast(struct spi_flash *flash,
+-			     u32 offset, size_t len, void *buf)
+-{
+-	struct spansion_spi_flash *spsn = to_spansion_spi_flash(flash);
+-	unsigned long page_addr;
+-	unsigned long page_size;
+-	u8 cmd[5];
+-
+-	page_size = spsn->params->page_size;
+-	page_addr = offset / page_size;
+-
+-	cmd[0] = CMD_READ_ARRAY_FAST;
+-	cmd[1] = page_addr >> 8;
+-	cmd[2] = page_addr;
+-	cmd[3] = offset % page_size;
+-	cmd[4] = 0x00;
+-
+-	debug
+-		("READ: 0x%x => cmd = { 0x%02x 0x%02x%02x%02x%02x } len = 0x%x\n",
+-		 offset, cmd[0], cmd[1], cmd[2], cmd[3], cmd[4], len);
+-
+-	return spi_flash_read_common(flash, cmd, sizeof(cmd), buf, len);
+-}
+-
+-static int spansion_write(struct spi_flash *flash,
+-			 u32 offset, size_t len, const void *buf)
++static int spansion_erase(struct spi_flash *flash, u32 offset, size_t len)
+ {
+-	struct spansion_spi_flash *spsn = to_spansion_spi_flash(flash);
+-	unsigned long page_addr;
+-	unsigned long byte_addr;
+-	unsigned long page_size;
+-	size_t chunk_len;
+-	size_t actual;
+-	int ret;
+-	u8 cmd[4];
+-
+-	page_size = spsn->params->page_size;
+-	page_addr = offset / page_size;
+-	byte_addr = offset % page_size;
+-
+-	ret = spi_claim_bus(flash->spi);
+-	if (ret) {
+-		debug("SF: Unable to claim SPI bus\n");
+-		return ret;
+-	}
+-
+-	ret = 0;
+-	for (actual = 0; actual < len; actual += chunk_len) {
+-		chunk_len = min(len - actual, page_size - byte_addr);
+-
+-		cmd[0] = CMD_S25FLXX_PP;
+-		cmd[1] = page_addr >> 8;
+-		cmd[2] = page_addr;
+-		cmd[3] = byte_addr;
+-
+-		debug
+-		    ("PP: 0x%p => cmd = { 0x%02x 0x%02x%02x%02x } chunk_len = %d\n",
+-		     buf + actual, cmd[0], cmd[1], cmd[2], cmd[3], chunk_len);
+-
+-		ret = spi_flash_cmd(flash->spi, CMD_S25FLXX_WREN, NULL, 0);
+-		if (ret < 0) {
+-			debug("SF: Enabling Write failed\n");
+-			break;
+-		}
+-
+-		ret = spi_flash_cmd_write(flash->spi, cmd, 4,
+-					  buf + actual, chunk_len);
+-		if (ret < 0) {
+-			debug("SF: SPANSION Page Program failed\n");
+-			break;
+-		}
+-
+-		ret = spansion_wait_ready(flash, SPI_FLASH_PROG_TIMEOUT);
+-		if (ret < 0) {
+-			debug("SF: SPANSION page programming timed out\n");
+-			break;
+-		}
+-
+-		page_addr++;
+-		byte_addr = 0;
+-	}
+-
+-	debug("SF: SPANSION: Successfully programmed %u bytes @ 0x%x\n",
+-	      len, offset);
+-
+-	spi_release_bus(flash->spi);
+-	return ret;
+-}
+-
+-int spansion_erase(struct spi_flash *flash, u32 offset, size_t len)
+-{
+-	struct spansion_spi_flash *spsn = to_spansion_spi_flash(flash);
+-	unsigned long sector_size;
+-	size_t actual;
+-	int ret;
+-	u8 cmd[4];
+-
+-	/*
+-	 * This function currently uses sector erase only.
+-	 * probably speed things up by using bulk erase
+-	 * when possible.
+-	 */
+-
+-	sector_size = spsn->params->page_size * spsn->params->pages_per_sector;
+-
+-	if (offset % sector_size || len % sector_size) {
+-		debug("SF: Erase offset/length not multiple of sector size\n");
+-		return -1;
+-	}
+-
+-	len /= sector_size;
+-	cmd[0] = CMD_S25FLXX_SE;
+-	cmd[2] = 0x00;
+-	cmd[3] = 0x00;
+-
+-	ret = spi_claim_bus(flash->spi);
+-	if (ret) {
+-		debug("SF: Unable to claim SPI bus\n");
+-		return ret;
+-	}
+-
+-	ret = 0;
+-	for (actual = 0; actual < len; actual++) {
+-		cmd[1] = (offset / sector_size) + actual;
+-
+-		ret = spi_flash_cmd(flash->spi, CMD_S25FLXX_WREN, NULL, 0);
+-		if (ret < 0) {
+-			debug("SF: Enabling Write failed\n");
+-			break;
+-		}
+-
+-		ret = spi_flash_cmd_write(flash->spi, cmd, 4, NULL, 0);
+-		if (ret < 0) {
+-			debug("SF: SPANSION page erase failed\n");
+-			break;
+-		}
+-
+-		/* Up to 2 seconds */
+-		ret = spansion_wait_ready(flash, SPI_FLASH_PAGE_ERASE_TIMEOUT);
+-		if (ret < 0) {
+-			debug("SF: SPANSION page erase timed out\n");
+-			break;
+-		}
+-	}
+-
+-	debug("SF: SPANSION: Successfully erased %u bytes @ 0x%x\n",
+-	      len * sector_size, offset);
+-
+-	spi_release_bus(flash->spi);
+-	return ret;
++	return spi_flash_cmd_erase(flash, CMD_S25FLXX_SE, offset, len);
+ }
+ 
+ struct spi_flash *spi_flash_probe_spansion(struct spi_slave *spi, u8 *idcode)
+ {
+ 	const struct spansion_spi_flash_params *params;
+-	struct spansion_spi_flash *spsn;
++	struct spi_flash *flash;
+ 	unsigned int i;
+ 	unsigned short jedec, ext_jedec;
+ 
+@@ -327,24 +159,21 @@
+ 		return NULL;
+ 	}
+ 
+-	spsn = malloc(sizeof(struct spansion_spi_flash));
+-	if (!spsn) {
++	flash = malloc(sizeof(*flash));
++	if (!flash) {
+ 		debug("SF: Failed to allocate memory\n");
+ 		return NULL;
+ 	}
+ 
+-	spsn->params = params;
+-	spsn->flash.spi = spi;
+-	spsn->flash.name = params->name;
+-
+-	spsn->flash.write = spansion_write;
+-	spsn->flash.erase = spansion_erase;
+-	spsn->flash.read = spansion_read_fast;
+-	spsn->flash.size = params->page_size * params->pages_per_sector
+-	    * params->nr_sectors;
++	flash->spi = spi;
++	flash->name = params->name;
+ 
+-	debug("SF: Detected %s with page size %u, total %u bytes\n",
+-	      params->name, params->page_size, spsn->flash.size);
++	flash->write = spi_flash_cmd_write_multi;
++	flash->erase = spansion_erase;
++	flash->read = spi_flash_cmd_read_fast;
++	flash->page_size = params->page_size;
++	flash->sector_size = params->page_size * params->pages_per_sector;
++	flash->size = flash->sector_size * params->nr_sectors;
+ 
+-	return &spsn->flash;
++	return flash;
+ }
+diff -Naur u-boot-2009.08/drivers/mtd/spi/spi_flash.c u-boot-stamps//drivers/mtd/spi/spi_flash.c
+--- u-boot-2009.08/drivers/mtd/spi/spi_flash.c	2009-08-31 12:57:42.000000000 -0500
++++ u-boot-stamps//drivers/mtd/spi/spi_flash.c	2011-11-14 16:49:21.000000000 -0500
+@@ -2,41 +2,31 @@
+  * SPI flash interface
+  *
+  * Copyright (C) 2008 Atmel Corporation
++ * Copyright (C) 2010 Reinhard Meyer, EMK Elektronik
++ *
++ * Licensed under the GPL-2 or later.
+  */
+ 
+ #include <common.h>
+ #include <malloc.h>
+ #include <spi.h>
+ #include <spi_flash.h>
++#include <watchdog.h>
+ 
+ #include "spi_flash_internal.h"
+ 
+-int spi_flash_cmd(struct spi_slave *spi, u8 cmd, void *response, size_t len)
++static void spi_flash_addr(u32 addr, u8 *cmd)
+ {
+-	unsigned long flags = SPI_XFER_BEGIN;
+-	int ret;
+-
+-	if (len == 0)
+-		flags |= SPI_XFER_END;
+-
+-	ret = spi_xfer(spi, 8, &cmd, NULL, flags);
+-	if (ret) {
+-		debug("SF: Failed to send command %02x: %d\n", cmd, ret);
+-		return ret;
+-	}
+-
+-	if (len) {
+-		ret = spi_xfer(spi, len * 8, NULL, response, SPI_XFER_END);
+-		if (ret)
+-			debug("SF: Failed to read response (%zu bytes): %d\n",
+-					len, ret);
+-	}
+-
+-	return ret;
++	/* cmd[0] is actual command */
++	cmd[1] = addr >> 16;
++	cmd[2] = addr >> 8;
++	cmd[3] = addr >> 0;
+ }
+ 
+-int spi_flash_cmd_read(struct spi_slave *spi, const u8 *cmd,
+-		size_t cmd_len, void *data, size_t data_len)
++static int spi_flash_read_write(struct spi_slave *spi,
++				const u8 *cmd, size_t cmd_len,
++				const u8 *data_out, u8 *data_in,
++				size_t data_len)
+ {
+ 	unsigned long flags = SPI_XFER_BEGIN;
+ 	int ret;
+@@ -46,42 +36,92 @@
+ 
+ 	ret = spi_xfer(spi, cmd_len * 8, cmd, NULL, flags);
+ 	if (ret) {
+-		debug("SF: Failed to send read command (%zu bytes): %d\n",
++		debug("SF: Failed to send command (%zu bytes): %d\n",
+ 				cmd_len, ret);
+ 	} else if (data_len != 0) {
+-		ret = spi_xfer(spi, data_len * 8, NULL, data, SPI_XFER_END);
++		ret = spi_xfer(spi, data_len * 8, data_out, data_in, SPI_XFER_END);
+ 		if (ret)
+-			debug("SF: Failed to read %zu bytes of data: %d\n",
++			debug("SF: Failed to transfer %zu bytes of data: %d\n",
+ 					data_len, ret);
+ 	}
+ 
+ 	return ret;
+ }
+ 
++int spi_flash_cmd(struct spi_slave *spi, u8 cmd, void *response, size_t len)
++{
++	return spi_flash_cmd_read(spi, &cmd, 1, response, len);
++}
++
++int spi_flash_cmd_read(struct spi_slave *spi, const u8 *cmd,
++		size_t cmd_len, void *data, size_t data_len)
++{
++	return spi_flash_read_write(spi, cmd, cmd_len, NULL, data, data_len);
++}
++
+ int spi_flash_cmd_write(struct spi_slave *spi, const u8 *cmd, size_t cmd_len,
+ 		const void *data, size_t data_len)
+ {
+-	unsigned long flags = SPI_XFER_BEGIN;
++	return spi_flash_read_write(spi, cmd, cmd_len, data, NULL, data_len);
++}
++
++int spi_flash_cmd_write_multi(struct spi_flash *flash, u32 offset,
++		size_t len, const void *buf)
++{
++	unsigned long page_addr, byte_addr, page_size;
++	size_t chunk_len, actual;
+ 	int ret;
++	u8 cmd[4];
+ 
+-	if (data_len == 0)
+-		flags |= SPI_XFER_END;
++	page_size = flash->page_size;
++	page_addr = offset / page_size;
++	byte_addr = offset % page_size;
+ 
+-	ret = spi_xfer(spi, cmd_len * 8, cmd, NULL, flags);
++	ret = spi_claim_bus(flash->spi);
+ 	if (ret) {
+-		debug("SF: Failed to send read command (%zu bytes): %d\n",
+-				cmd_len, ret);
+-	} else if (data_len != 0) {
+-		ret = spi_xfer(spi, data_len * 8, data, NULL, SPI_XFER_END);
++		debug("SF: unable to claim SPI bus\n");
++		return ret;
++	}
++
++	cmd[0] = CMD_PAGE_PROGRAM;
++	for (actual = 0; actual < len; actual += chunk_len) {
++		chunk_len = min(len - actual, page_size - byte_addr);
++
++		cmd[1] = page_addr >> 8;
++		cmd[2] = page_addr;
++		cmd[3] = byte_addr;
++
++		debug("PP: 0x%p => cmd = { 0x%02x 0x%02x%02x%02x } chunk_len = %zu\n",
++		      buf + actual, cmd[0], cmd[1], cmd[2], cmd[3], chunk_len);
++
++		ret = spi_flash_cmd_write_enable(flash);
++		if (ret < 0) {
++			debug("SF: enabling write failed\n");
++			break;
++		}
++
++		ret = spi_flash_cmd_write(flash->spi, cmd, 4,
++					  buf + actual, chunk_len);
++		if (ret < 0) {
++			debug("SF: write failed\n");
++			break;
++		}
++
++		ret = spi_flash_cmd_wait_ready(flash, SPI_FLASH_PROG_TIMEOUT);
+ 		if (ret)
+-			debug("SF: Failed to read %zu bytes of data: %d\n",
+-					data_len, ret);
++			break;
++
++		page_addr++;
++		byte_addr = 0;
+ 	}
+ 
++	debug("SF: program %s %zu bytes @ %#x\n",
++	      ret ? "failure" : "success", len, offset);
++
++	spi_release_bus(flash->spi);
+ 	return ret;
+ }
+ 
+-
+ int spi_flash_read_common(struct spi_flash *flash, const u8 *cmd,
+ 		size_t cmd_len, void *data, size_t data_len)
+ {
+@@ -95,17 +135,188 @@
+ 	return ret;
+ }
+ 
++int spi_flash_cmd_read_fast(struct spi_flash *flash, u32 offset,
++		size_t len, void *data)
++{
++	u8 cmd[5];
++
++	cmd[0] = CMD_READ_ARRAY_FAST;
++	spi_flash_addr(offset, cmd);
++	cmd[4] = 0x00;
++
++	return spi_flash_read_common(flash, cmd, sizeof(cmd), data, len);
++}
++
++int spi_flash_cmd_poll_bit(struct spi_flash *flash, unsigned long timeout,
++			   u8 cmd, u8 poll_bit)
++{
++	struct spi_slave *spi = flash->spi;
++	unsigned long timebase;
++	int ret;
++	u8 status;
++
++	ret = spi_xfer(spi, 8, &cmd, NULL, SPI_XFER_BEGIN);
++	if (ret) {
++		debug("SF: Failed to send command %02x: %d\n", cmd, ret);
++		return ret;
++	}
++
++	timebase = get_timer(0);
++	do {
++		WATCHDOG_RESET();
++
++		ret = spi_xfer(spi, 8, NULL, &status, SPI_XFER_BEGIN);
++		if (ret)
++			return -1;
++
++		if ((status & poll_bit) == 0)
++			break;
++
++	} while (get_timer(timebase) < timeout);
++
++	spi_xfer(spi, 8, &cmd, NULL, SPI_XFER_END);
++
++	if ((status & poll_bit) == 0)
++		return 0;
++
++	/* Timed out */
++	debug("SF: time out!\n");
++	return -1;
++}
++
++int spi_flash_cmd_wait_ready(struct spi_flash *flash, unsigned long timeout)
++{
++	return spi_flash_cmd_poll_bit(flash, timeout,
++		CMD_READ_STATUS, STATUS_WIP);
++}
++
++int spi_flash_cmd_erase(struct spi_flash *flash, u8 erase_cmd,
++			u32 offset, size_t len)
++{
++	u32 start, end, erase_size;
++	int ret;
++	u8 cmd[4];
++
++	erase_size = flash->sector_size;
++	if (offset % erase_size || len % erase_size) {
++		debug("SF: Erase offset/length not multiple of erase size\n");
++		return -1;
++	}
++
++	ret = spi_claim_bus(flash->spi);
++	if (ret) {
++		debug("SF: Unable to claim SPI bus\n");
++		return ret;
++	}
++
++	cmd[0] = erase_cmd;
++	start = offset;
++	end = start + len;
++
++	while (offset < end) {
++		spi_flash_addr(offset, cmd);
++		offset += erase_size;
++
++		debug("SF: erase %2x %2x %2x %2x (%x)\n", cmd[0], cmd[1],
++		      cmd[2], cmd[3], offset);
++
++		ret = spi_flash_cmd_write_enable(flash);
++		if (ret)
++			goto out;
++
++		ret = spi_flash_cmd_write(flash->spi, cmd, sizeof(cmd), NULL, 0);
++		if (ret)
++			goto out;
++		ret = spi_flash_cmd_wait_ready(flash, SPI_FLASH_PAGE_ERASE_TIMEOUT);
++		if (ret)
++			goto out;
++	}
++
++	debug("SF: Successfully erased %zu bytes @ %#x\n",
++	      len * erase_size, start);
++
++ out:
++	spi_release_bus(flash->spi);
++	return ret;
++}
++
++/*
++ * The following table holds all device probe functions
++ *
++ * shift:  number of continuation bytes before the ID
++ * idcode: the expected IDCODE or 0xff for non JEDEC devices
++ * probe:  the function to call
++ *
++ * Non JEDEC devices should be ordered in the table such that
++ * the probe functions with best detection algorithms come first.
++ *
++ * Several matching entries are permitted, they will be tried
++ * in sequence until a probe function returns non NULL.
++ *
++ * IDCODE_CONT_LEN may be redefined if a device needs to declare a
++ * larger "shift" value.  IDCODE_PART_LEN generally shouldn't be
++ * changed.  This is the max number of bytes probe functions may
++ * examine when looking up part-specific identification info.
++ *
++ * Probe functions will be given the idcode buffer starting at their
++ * manu id byte (the "idcode" in the table below).  In other words,
++ * all of the continuation bytes will be skipped (the "shift" below).
++ */
++#define IDCODE_CONT_LEN 0
++#define IDCODE_PART_LEN 5
++static const struct {
++	const u8 shift;
++	const u8 idcode;
++	struct spi_flash *(*probe) (struct spi_slave *spi, u8 *idcode);
++} flashes[] = {
++	/* Keep it sorted by define name */
++#ifdef CONFIG_SPI_FLASH_ATMEL
++	{ 0, 0x1f, spi_flash_probe_atmel, },
++#endif
++#ifdef CONFIG_SPI_FLASH_EON
++	{ 0, 0x1c, spi_flash_probe_eon, },
++#endif
++#ifdef CONFIG_SPI_FLASH_MACRONIX
++	{ 0, 0xc2, spi_flash_probe_macronix, },
++#endif
++#ifdef CONFIG_SPI_FLASH_SPANSION
++	{ 0, 0x01, spi_flash_probe_spansion, },
++#endif
++#ifdef CONFIG_SPI_FLASH_SST
++	{ 0, 0xbf, spi_flash_probe_sst, },
++#endif
++#ifdef CONFIG_SPI_FLASH_STMICRO
++	{ 0, 0x20, spi_flash_probe_stmicro, },
++#endif
++#ifdef CONFIG_SPI_FLASH_WINBOND
++	{ 0, 0xef, spi_flash_probe_winbond, },
++#endif
++#ifdef CONFIG_SPI_FRAM_RAMTRON
++	{ 6, 0xc2, spi_fram_probe_ramtron, },
++# undef IDCODE_CONT_LEN
++# define IDCODE_CONT_LEN 6
++#endif
++	/* Keep it sorted by best detection */
++#ifdef CONFIG_SPI_FLASH_STMICRO
++	{ 0, 0xff, spi_flash_probe_stmicro, },
++#endif
++#ifdef CONFIG_SPI_FRAM_RAMTRON_NON_JEDEC
++	{ 0, 0xff, spi_fram_probe_ramtron, },
++#endif
++};
++#define IDCODE_LEN (IDCODE_CONT_LEN + IDCODE_PART_LEN)
++
+ struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
+ 		unsigned int max_hz, unsigned int spi_mode)
+ {
+ 	struct spi_slave *spi;
+-	struct spi_flash *flash;
+-	int ret;
+-	u8 idcode[5];
++	struct spi_flash *flash = NULL;
++	int ret, i, shift;
++	u8 idcode[IDCODE_LEN], *idp;
+ 
+ 	spi = spi_setup_slave(bus, cs, max_hz, spi_mode);
+ 	if (!spi) {
+-		debug("SF: Failed to set up slave\n");
++		printf("SF: Failed to set up slave\n");
+ 		return NULL;
+ 	}
+ 
+@@ -116,47 +327,38 @@
+ 	}
+ 
+ 	/* Read the ID codes */
+-	ret = spi_flash_cmd(spi, CMD_READ_ID, &idcode, sizeof(idcode));
++	ret = spi_flash_cmd(spi, CMD_READ_ID, idcode, sizeof(idcode));
+ 	if (ret)
+ 		goto err_read_id;
+ 
+-	debug("SF: Got idcode %02x %02x %02x %02x %02x\n", idcode[0],
+-			idcode[1], idcode[2], idcode[3], idcode[4]);
+-
+-	switch (idcode[0]) {
+-#ifdef CONFIG_SPI_FLASH_SPANSION
+-	case 0x01:
+-		flash = spi_flash_probe_spansion(spi, idcode);
+-		break;
+-#endif
+-#ifdef CONFIG_SPI_FLASH_ATMEL
+-	case 0x1F:
+-		flash = spi_flash_probe_atmel(spi, idcode);
+-		break;
+-#endif
+-#ifdef CONFIG_SPI_FLASH_MACRONIX
+-	case 0xc2:
+-		flash = spi_flash_probe_macronix(spi, idcode);
+-		break;
++#ifdef DEBUG
++	printf("SF: Got idcodes\n");
++	print_buffer(0, idcode, 1, sizeof(idcode), 0);
+ #endif
+-#ifdef CONFIG_SPI_FLASH_STMICRO
+-	case 0x20:
+-		flash = spi_flash_probe_stmicro(spi, idcode);
+-		break;
+-#endif
+-#ifdef CONFIG_SPI_FLASH_SST
+-	case 0xBF:
+-		flash = spi_flash_probe_sst(spi, idcode);
+-		break;
+-#endif
+-	default:
+-		debug("SF: Unsupported manufacturer %02X\n", idcode[0]);
+-		flash = NULL;
+-		break;
+-	}
+ 
+-	if (!flash)
++	/* count the number of continuation bytes */
++	for (shift = 0, idp = idcode;
++	     shift < IDCODE_CONT_LEN && *idp == 0x7f;
++	     ++shift, ++idp)
++		continue;
++
++	/* search the table for matches in shift and id */
++	for (i = 0; i < ARRAY_SIZE(flashes); ++i)
++		if (flashes[i].shift == shift && flashes[i].idcode == *idp) {
++			/* we have a match, call probe */
++			flash = flashes[i].probe(spi, idp);
++			if (flash)
++				break;
++		}
++
++	if (!flash) {
++		printf("SF: Unsupported manufacturer %02x\n", *idp);
+ 		goto err_manufacturer_probe;
++	}
++
++	printf("SF: Detected %s with page size ", flash->name);
++	print_size(flash->sector_size, ", total ");
++	print_size(flash->size, "\n");
+ 
+ 	spi_release_bus(spi);
+ 
+diff -Naur u-boot-2009.08/drivers/mtd/spi/spi_flash_internal.h u-boot-stamps//drivers/mtd/spi/spi_flash_internal.h
+--- u-boot-2009.08/drivers/mtd/spi/spi_flash_internal.h	2011-09-16 16:17:52.000000000 -0500
++++ u-boot-stamps//drivers/mtd/spi/spi_flash_internal.h	2011-11-14 16:35:32.000000000 -0500
+@@ -8,9 +8,9 @@
+  * is a problem (and well your system already is broken), so err on the side
+  * of caution in case we're dealing with slower SPI buses and/or processors.
+  */
+-#define SPI_FLASH_PROG_TIMEOUT		(2 * CONFIG_SYS_HZ)
+-#define SPI_FLASH_PAGE_ERASE_TIMEOUT	(5 * CONFIG_SYS_HZ)
+-#define SPI_FLASH_SECTOR_ERASE_TIMEOUT	(10 * CONFIG_SYS_HZ)
++#define SPI_FLASH_PROG_TIMEOUT		(5 * CONFIG_SYS_HZ)
++#define SPI_FLASH_PAGE_ERASE_TIMEOUT	(1000 * CONFIG_SYS_HZ)
++#define SPI_FLASH_SECTOR_ERASE_TIMEOUT	(80 * CONFIG_SYS_HZ)
+ 
+ /* Common commands */
+ #define CMD_READ_ID			0x9f
+@@ -19,6 +19,14 @@
+ #define CMD_READ_ARRAY_FAST		0x0b
+ #define CMD_READ_ARRAY_LEGACY		0xe8
+ 
++#define CMD_PAGE_PROGRAM		0x02
++#define CMD_WRITE_DISABLE		0x04
++#define CMD_READ_STATUS			0x05
++#define CMD_WRITE_ENABLE		0x06
++
++/* Common status */
++#define STATUS_WIP			0x01
++
+ /* Send a single-byte command to the device and read the response */
+ int spi_flash_cmd(struct spi_slave *spi, u8 cmd, void *response, size_t len);
+ 
+@@ -29,6 +37,9 @@
+ int spi_flash_cmd_read(struct spi_slave *spi, const u8 *cmd,
+ 		size_t cmd_len, void *data, size_t data_len);
+ 
++int spi_flash_cmd_read_fast(struct spi_flash *flash, u32 offset,
++		size_t len, void *data);
++
+ /*
+  * Send a multi-byte command to the device followed by (optional)
+  * data. Used for programming the flash array, etc.
+@@ -37,16 +48,55 @@
+ 		const void *data, size_t data_len);
+ 
+ /*
++ * Write the requested data out breaking it up into multiple write
++ * commands as needed per the write size.
++ */
++int spi_flash_cmd_write_multi(struct spi_flash *flash, u32 offset,
++		size_t len, const void *buf);
++
++/*
++ * Enable writing on the SPI flash.
++ */
++static inline int spi_flash_cmd_write_enable(struct spi_flash *flash)
++{
++	return spi_flash_cmd(flash->spi, CMD_WRITE_ENABLE, NULL, 0);
++}
++
++/*
++ * Disable writing on the SPI flash.
++ */
++static inline int spi_flash_cmd_write_disable(struct spi_flash *flash)
++{
++	return spi_flash_cmd(flash->spi, CMD_WRITE_DISABLE, NULL, 0);
++}
++
++/*
+  * Same as spi_flash_cmd_read() except it also claims/releases the SPI
+  * bus. Used as common part of the ->read() operation.
+  */
+ int spi_flash_read_common(struct spi_flash *flash, const u8 *cmd,
+ 		size_t cmd_len, void *data, size_t data_len);
+ 
++/* Send a command to the device and wait for some bit to clear itself. */
++int spi_flash_cmd_poll_bit(struct spi_flash *flash, unsigned long timeout,
++			   u8 cmd, u8 poll_bit);
++
++/*
++ * Send the read status command to the device and wait for the wip
++ * (write-in-progress) bit to clear itself.
++ */
++int spi_flash_cmd_wait_ready(struct spi_flash *flash, unsigned long timeout);
++
++/* Erase sectors. */
++int spi_flash_cmd_erase(struct spi_flash *flash, u8 erase_cmd,
++			u32 offset, size_t len);
++
+ /* Manufacturer-specific probe functions */
+ struct spi_flash *spi_flash_probe_spansion(struct spi_slave *spi, u8 *idcode);
+ struct spi_flash *spi_flash_probe_atmel(struct spi_slave *spi, u8 *idcode);
++struct spi_flash *spi_flash_probe_eon(struct spi_slave *spi, u8 *idcode);
+ struct spi_flash *spi_flash_probe_macronix(struct spi_slave *spi, u8 *idcode);
+ struct spi_flash *spi_flash_probe_sst(struct spi_slave *spi, u8 *idcode);
+ struct spi_flash *spi_flash_probe_stmicro(struct spi_slave *spi, u8 *idcode);
+-struct spi_flash *spi_flash_probe_imx(struct spi_slave *spi, u8 *idcode);
++struct spi_flash *spi_flash_probe_winbond(struct spi_slave *spi, u8 *idcode);
++struct spi_flash *spi_fram_probe_ramtron(struct spi_slave *spi, u8 *idcode);
+diff -Naur u-boot-2009.08/drivers/mtd/spi/sst.c u-boot-stamps//drivers/mtd/spi/sst.c
+--- u-boot-2009.08/drivers/mtd/spi/sst.c	2009-08-31 12:57:42.000000000 -0500
++++ u-boot-stamps//drivers/mtd/spi/sst.c	2011-11-08 17:39:36.000000000 -0500
+@@ -36,8 +36,12 @@
+ #define SST_SR_AAI		(1 << 6)	/* Addressing mode */
+ #define SST_SR_BPL		(1 << 7)	/* BP bits lock */
+ 
++#define SST_FEAT_WP		(1 << 0)	/* Supports AAI word program */
++#define SST_FEAT_MBP		(1 << 1)	/* Supports multibyte program */
++
+ struct sst_spi_flash_params {
+ 	u8 idcode1;
++	u8 flags;
+ 	u16 nr_sectors;
+ 	const char *name;
+ };
+@@ -53,81 +57,60 @@
+ }
+ 
+ #define SST_SECTOR_SIZE (4 * 1024)
++#define SST_PAGE_SIZE   256
+ static const struct sst_spi_flash_params sst_spi_flash_table[] = {
+ 	{
+ 		.idcode1 = 0x8d,
++		.flags = SST_FEAT_WP,
+ 		.nr_sectors = 128,
+ 		.name = "SST25VF040B",
+ 	},{
+ 		.idcode1 = 0x8e,
++		.flags = SST_FEAT_WP,
+ 		.nr_sectors = 256,
+ 		.name = "SST25VF080B",
+ 	},{
+ 		.idcode1 = 0x41,
++		.flags = SST_FEAT_WP,
+ 		.nr_sectors = 512,
+ 		.name = "SST25VF016B",
+ 	},{
+ 		.idcode1 = 0x4a,
++		.flags = SST_FEAT_WP,
+ 		.nr_sectors = 1024,
+ 		.name = "SST25VF032B",
+ 	},{
++		.idcode1 = 0x4b,
++		.flags = SST_FEAT_MBP,
++		.nr_sectors = 2048,
++		.name = "SST25VF064C",
++	},{
+ 		.idcode1 = 0x01,
++		.flags = SST_FEAT_WP,
+ 		.nr_sectors = 16,
+ 		.name = "SST25WF512",
+ 	},{
+ 		.idcode1 = 0x02,
++		.flags = SST_FEAT_WP,
+ 		.nr_sectors = 32,
+ 		.name = "SST25WF010",
+ 	},{
+ 		.idcode1 = 0x03,
++		.flags = SST_FEAT_WP,
+ 		.nr_sectors = 64,
+ 		.name = "SST25WF020",
+ 	},{
+ 		.idcode1 = 0x04,
++		.flags = SST_FEAT_WP,
+ 		.nr_sectors = 128,
+ 		.name = "SST25WF040",
+ 	},
+ };
+ 
+ static int
+-sst_wait_ready(struct spi_flash *flash, unsigned long timeout)
+-{
+-	struct spi_slave *spi = flash->spi;
+-	unsigned long timebase;
+-	int ret;
+-	u8 byte = CMD_SST_RDSR;
+-
+-	ret = spi_xfer(spi, sizeof(byte) * 8, &byte, NULL, SPI_XFER_BEGIN);
+-	if (ret) {
+-		debug("SF: Failed to send command %02x: %d\n", byte, ret);
+-		return ret;
+-	}
+-
+-	timebase = get_timer(0);
+-	do {
+-		ret = spi_xfer(spi, sizeof(byte) * 8, NULL, &byte, 0);
+-		if (ret)
+-			break;
+-
+-		if ((byte & SST_SR_WIP) == 0)
+-			break;
+-
+-	} while (get_timer(timebase) < timeout);
+-
+-	spi_xfer(spi, 0, NULL, NULL, SPI_XFER_END);
+-
+-	if (!ret && (byte & SST_SR_WIP) != 0)
+-		ret = -1;
+-
+-	if (ret)
+-		debug("SF: sst wait for ready timed out\n");
+-	return ret;
+-}
+-
+-static int
+ sst_enable_writing(struct spi_flash *flash)
+ {
+-	int ret = spi_flash_cmd(flash->spi, CMD_SST_WREN, NULL, 0);
++	int ret = spi_flash_cmd_write_enable(flash);
+ 	if (ret)
+ 		debug("SF: Enabling Write failed\n");
+ 	return ret;
+@@ -136,26 +119,13 @@
+ static int
+ sst_disable_writing(struct spi_flash *flash)
+ {
+-	int ret = spi_flash_cmd(flash->spi, CMD_SST_WRDI, NULL, 0);
++	int ret = spi_flash_cmd_write_disable(flash);
+ 	if (ret)
+ 		debug("SF: Disabling Write failed\n");
+ 	return ret;
+ }
+ 
+ static int
+-sst_read_fast(struct spi_flash *flash, u32 offset, size_t len, void *buf)
+-{
+-	u8 cmd[5] = {
+-		CMD_READ_ARRAY_FAST,
+-		offset >> 16,
+-		offset >> 8,
+-		offset,
+-		0x00,
+-	};
+-	return spi_flash_read_common(flash, cmd, sizeof(cmd), buf, len);
+-}
+-
+-static int
+ sst_byte_write(struct spi_flash *flash, u32 offset, const void *buf)
+ {
+ 	int ret;
+@@ -177,11 +147,11 @@
+ 	if (ret)
+ 		return ret;
+ 
+-	return sst_wait_ready(flash, SPI_FLASH_PROG_TIMEOUT);
++	return spi_flash_cmd_wait_ready(flash, SPI_FLASH_PROG_TIMEOUT);
+ }
+ 
+ static int
+-sst_write(struct spi_flash *flash, u32 offset, size_t len, const void *buf)
++sst_write_wp(struct spi_flash *flash, u32 offset, size_t len, const void *buf)
+ {
+ 	size_t actual, cmd_len;
+ 	int ret;
+@@ -224,7 +194,7 @@
+ 			break;
+ 		}
+ 
+-		ret = sst_wait_ready(flash, SPI_FLASH_PROG_TIMEOUT);
++		ret = spi_flash_cmd_wait_ready(flash, SPI_FLASH_PROG_TIMEOUT);
+ 		if (ret)
+ 			break;
+ 
+@@ -247,67 +217,9 @@
+ 	return ret;
+ }
+ 
+-int
+-sst_erase(struct spi_flash *flash, u32 offset, size_t len)
++static int sst_erase(struct spi_flash *flash, u32 offset, size_t len)
+ {
+-	unsigned long sector_size;
+-	u32 start, end;
+-	int ret;
+-	u8 cmd[4];
+-
+-	/*
+-	 * This function currently uses sector erase only.
+-	 * Probably speed things up by using bulk erase
+-	 * when possible.
+-	 */
+-
+-	sector_size = SST_SECTOR_SIZE;
+-
+-	if (offset % sector_size) {
+-		debug("SF: Erase offset not multiple of sector size\n");
+-		return -1;
+-	}
+-
+-	ret = spi_claim_bus(flash->spi);
+-	if (ret) {
+-		debug("SF: Unable to claim SPI bus\n");
+-		return ret;
+-	}
+-
+-	cmd[0] = CMD_SST_SE;
+-	cmd[3] = 0;
+-	start = offset;
+-	end = start + len;
+-
+-	ret = 0;
+-	while (offset < end) {
+-		cmd[1] = offset >> 16;
+-		cmd[2] = offset >> 8;
+-		offset += sector_size;
+-
+-		debug("SF: erase %2x %2x %2x %2x (%x)\n", cmd[0], cmd[1],
+-		      cmd[2], cmd[3], offset);
+-
+-		ret = sst_enable_writing(flash);
+-		if (ret)
+-			break;
+-
+-		ret = spi_flash_cmd_write(flash->spi, cmd, sizeof(cmd), NULL, 0);
+-		if (ret) {
+-			debug("SF: sst page erase failed\n");
+-			break;
+-		}
+-
+-		ret = sst_wait_ready(flash, SPI_FLASH_PAGE_ERASE_TIMEOUT);
+-		if (ret)
+-			break;
+-	}
+-
+-	debug("SF: sst: Successfully erased %lu bytes @ 0x%x\n",
+-	      len * sector_size, start);
+-
+-	spi_release_bus(flash->spi);
+-	return ret;
++	return spi_flash_cmd_erase(flash, CMD_SST_SE, offset, len);
+ }
+ 
+ static int
+@@ -359,13 +271,15 @@
+ 	stm->flash.spi = spi;
+ 	stm->flash.name = params->name;
+ 
+-	stm->flash.write = sst_write;
++	if (stm->params->flags & SST_FEAT_WP)
++		stm->flash.write = sst_write_wp;
++	else
++		stm->flash.write = spi_flash_cmd_write_multi;
+ 	stm->flash.erase = sst_erase;
+-	stm->flash.read = sst_read_fast;
+-	stm->flash.size = SST_SECTOR_SIZE * params->nr_sectors;
+-
+-	debug("SF: Detected %s with page size %u, total %u bytes\n",
+-	      params->name, SST_SECTOR_SIZE, stm->flash.size);
++	stm->flash.read = spi_flash_cmd_read_fast;
++	stm->flash.page_size = SST_PAGE_SIZE;
++	stm->flash.sector_size = SST_SECTOR_SIZE;
++	stm->flash.size = stm->flash.sector_size * params->nr_sectors;
+ 
+ 	/* Flash powers up read-only, so clear BP# bits */
+ 	sst_unlock(&stm->flash);
+diff -Naur u-boot-2009.08/drivers/mtd/spi/stmicro.c u-boot-stamps//drivers/mtd/spi/stmicro.c
+--- u-boot-2009.08/drivers/mtd/spi/stmicro.c	2009-08-31 12:57:42.000000000 -0500
++++ u-boot-stamps//drivers/mtd/spi/stmicro.c	2011-11-08 17:39:36.000000000 -0500
+@@ -46,16 +46,6 @@
+ #define CMD_M25PXX_DP		0xb9	/* Deep Power-down */
+ #define CMD_M25PXX_RES		0xab	/* Release from DP, and Read Signature */
+ 
+-#define STM_ID_M25P16		0x15
+-#define STM_ID_M25P20		0x12
+-#define STM_ID_M25P32		0x16
+-#define STM_ID_M25P40		0x13
+-#define STM_ID_M25P64		0x17
+-#define STM_ID_M25P80		0x14
+-#define STM_ID_M25P128		0x18
+-
+-#define STMICRO_SR_WIP		(1 << 0)	/* Write-in-Progress */
+-
+ struct stmicro_spi_flash_params {
+ 	u8 idcode1;
+ 	u16 page_size;
+@@ -64,63 +54,58 @@
+ 	const char *name;
+ };
+ 
+-/* spi_flash needs to be first so upper layers can free() it */
+-struct stmicro_spi_flash {
+-	struct spi_flash flash;
+-	const struct stmicro_spi_flash_params *params;
+-};
+-
+-static inline struct stmicro_spi_flash *to_stmicro_spi_flash(struct spi_flash
+-							     *flash)
+-{
+-	return container_of(flash, struct stmicro_spi_flash, flash);
+-}
+-
+ static const struct stmicro_spi_flash_params stmicro_spi_flash_table[] = {
+ 	{
+-		.idcode1 = STM_ID_M25P16,
++		.idcode1 = 0x11,
++		.page_size = 256,
++		.pages_per_sector = 128,
++		.nr_sectors = 4,
++		.name = "M25P10",
++	},
++	{
++		.idcode1 = 0x15,
+ 		.page_size = 256,
+ 		.pages_per_sector = 256,
+ 		.nr_sectors = 32,
+ 		.name = "M25P16",
+ 	},
+ 	{
+-		.idcode1 = STM_ID_M25P20,
++		.idcode1 = 0x12,
+ 		.page_size = 256,
+ 		.pages_per_sector = 256,
+ 		.nr_sectors = 4,
+ 		.name = "M25P20",
+ 	},
+ 	{
+-		.idcode1 = STM_ID_M25P32,
++		.idcode1 = 0x16,
+ 		.page_size = 256,
+ 		.pages_per_sector = 256,
+ 		.nr_sectors = 64,
+ 		.name = "M25P32",
+ 	},
+ 	{
+-		.idcode1 = STM_ID_M25P40,
++		.idcode1 = 0x13,
+ 		.page_size = 256,
+ 		.pages_per_sector = 256,
+ 		.nr_sectors = 8,
+ 		.name = "M25P40",
+ 	},
+ 	{
+-		.idcode1 = STM_ID_M25P64,
++		.idcode1 = 0x17,
+ 		.page_size = 256,
+ 		.pages_per_sector = 256,
+ 		.nr_sectors = 128,
+ 		.name = "M25P64",
+ 	},
+ 	{
+-		.idcode1 = STM_ID_M25P80,
++		.idcode1 = 0x14,
+ 		.page_size = 256,
+ 		.pages_per_sector = 256,
+ 		.nr_sectors = 16,
+ 		.name = "M25P80",
+ 	},
+ 	{
+-		.idcode1 = STM_ID_M25P128,
++		.idcode1 = 0x18,
+ 		.page_size = 256,
+ 		.pages_per_sector = 1024,
+ 		.nr_sectors = 64,
+@@ -128,193 +113,30 @@
+ 	},
+ };
+ 
+-static int stmicro_wait_ready(struct spi_flash *flash, unsigned long timeout)
++static int stmicro_erase(struct spi_flash *flash, u32 offset, size_t len)
+ {
+-	struct spi_slave *spi = flash->spi;
+-	unsigned long timebase;
+-	int ret;
+-	u8 cmd = CMD_M25PXX_RDSR;
+-	u8 status;
+-
+-	ret = spi_xfer(spi, 8, &cmd, NULL, SPI_XFER_BEGIN);
+-	if (ret) {
+-		debug("SF: Failed to send command %02x: %d\n", cmd, ret);
+-		return ret;
+-	}
+-
+-	timebase = get_timer(0);
+-	do {
+-		ret = spi_xfer(spi, 8, NULL, &status, 0);
+-		if (ret)
+-			return -1;
+-
+-		if ((status & STMICRO_SR_WIP) == 0)
+-			break;
+-
+-	} while (get_timer(timebase) < timeout);
+-
+-	spi_xfer(spi, 0, NULL, NULL, SPI_XFER_END);
+-
+-	if ((status & STMICRO_SR_WIP) == 0)
+-		return 0;
+-
+-	/* Timed out */
+-	return -1;
+-}
+-
+-static int stmicro_read_fast(struct spi_flash *flash,
+-			     u32 offset, size_t len, void *buf)
+-{
+-	struct stmicro_spi_flash *stm = to_stmicro_spi_flash(flash);
+-	unsigned long page_addr;
+-	unsigned long page_size;
+-	u8 cmd[5];
+-
+-	page_size = stm->params->page_size;
+-	page_addr = offset / page_size;
+-
+-	cmd[0] = CMD_READ_ARRAY_FAST;
+-	cmd[1] = page_addr >> 8;
+-	cmd[2] = page_addr;
+-	cmd[3] = offset % page_size;
+-	cmd[4] = 0x00;
+-
+-	return spi_flash_read_common(flash, cmd, sizeof(cmd), buf, len);
+-}
+-
+-static int stmicro_write(struct spi_flash *flash,
+-			 u32 offset, size_t len, const void *buf)
+-{
+-	struct stmicro_spi_flash *stm = to_stmicro_spi_flash(flash);
+-	unsigned long page_addr;
+-	unsigned long byte_addr;
+-	unsigned long page_size;
+-	size_t chunk_len;
+-	size_t actual;
+-	int ret;
+-	u8 cmd[4];
+-
+-	page_size = stm->params->page_size;
+-	page_addr = offset / page_size;
+-	byte_addr = offset % page_size;
+-
+-	ret = spi_claim_bus(flash->spi);
+-	if (ret) {
+-		debug("SF: Unable to claim SPI bus\n");
+-		return ret;
+-	}
+-
+-	ret = 0;
+-	for (actual = 0; actual < len; actual += chunk_len) {
+-		chunk_len = min(len - actual, page_size - byte_addr);
+-
+-		cmd[0] = CMD_M25PXX_PP;
+-		cmd[1] = page_addr >> 8;
+-		cmd[2] = page_addr;
+-		cmd[3] = byte_addr;
+-
+-		debug
+-		    ("PP: 0x%p => cmd = { 0x%02x 0x%02x%02x%02x } chunk_len = %d\n",
+-		     buf + actual, cmd[0], cmd[1], cmd[2], cmd[3], chunk_len);
+-
+-		ret = spi_flash_cmd(flash->spi, CMD_M25PXX_WREN, NULL, 0);
+-		if (ret < 0) {
+-			debug("SF: Enabling Write failed\n");
+-			break;
+-		}
+-
+-		ret = spi_flash_cmd_write(flash->spi, cmd, 4,
+-					  buf + actual, chunk_len);
+-		if (ret < 0) {
+-			debug("SF: STMicro Page Program failed\n");
+-			break;
+-		}
+-
+-		ret = stmicro_wait_ready(flash, SPI_FLASH_PROG_TIMEOUT);
+-		if (ret < 0) {
+-			debug("SF: STMicro page programming timed out\n");
+-			break;
+-		}
+-
+-		page_addr++;
+-		byte_addr = 0;
+-	}
+-
+-	debug("SF: STMicro: Successfully programmed %u bytes @ 0x%x\n",
+-	      len, offset);
+-
+-	spi_release_bus(flash->spi);
+-	return ret;
+-}
+-
+-int stmicro_erase(struct spi_flash *flash, u32 offset, size_t len)
+-{
+-	struct stmicro_spi_flash *stm = to_stmicro_spi_flash(flash);
+-	unsigned long sector_size;
+-	size_t actual;
+-	int ret;
+-	u8 cmd[4];
+-
+-	/*
+-	 * This function currently uses sector erase only.
+-	 * probably speed things up by using bulk erase
+-	 * when possible.
+-	 */
+-
+-	sector_size = stm->params->page_size * stm->params->pages_per_sector;
+-
+-	if (offset % sector_size || len % sector_size) {
+-		debug("SF: Erase offset/length not multiple of sector size\n");
+-		return -1;
+-	}
+-
+-	len /= sector_size;
+-	cmd[0] = CMD_M25PXX_SE;
+-	cmd[2] = 0x00;
+-	cmd[3] = 0x00;
+-
+-	ret = spi_claim_bus(flash->spi);
+-	if (ret) {
+-		debug("SF: Unable to claim SPI bus\n");
+-		return ret;
+-	}
+-
+-	ret = 0;
+-	for (actual = 0; actual < len; actual++) {
+-		cmd[1] = (offset / sector_size) + actual;
+-
+-		ret = spi_flash_cmd(flash->spi, CMD_M25PXX_WREN, NULL, 0);
+-		if (ret < 0) {
+-			debug("SF: Enabling Write failed\n");
+-			break;
+-		}
+-
+-		ret = spi_flash_cmd_write(flash->spi, cmd, 4, NULL, 0);
+-		if (ret < 0) {
+-			debug("SF: STMicro page erase failed\n");
+-			break;
+-		}
+-
+-		ret = stmicro_wait_ready(flash, SPI_FLASH_PAGE_ERASE_TIMEOUT);
+-		if (ret < 0) {
+-			debug("SF: STMicro page erase timed out\n");
+-			break;
+-		}
+-	}
+-
+-	debug("SF: STMicro: Successfully erased %u bytes @ 0x%x\n",
+-	      len * sector_size, offset);
+-
+-	spi_release_bus(flash->spi);
+-	return ret;
++	return spi_flash_cmd_erase(flash, CMD_M25PXX_SE, offset, len);
+ }
+ 
+ struct spi_flash *spi_flash_probe_stmicro(struct spi_slave *spi, u8 * idcode)
+ {
+ 	const struct stmicro_spi_flash_params *params;
+-	struct stmicro_spi_flash *stm;
++	struct spi_flash *flash;
+ 	unsigned int i;
+ 
++	if (idcode[0] == 0xff) {
++		i = spi_flash_cmd(spi, CMD_M25PXX_RES,
++				  idcode, 4);
++		if (i)
++			return NULL;
++		if ((idcode[3] & 0xf0) == 0x10) {
++			idcode[0] = 0x20;
++			idcode[1] = 0x20;
++			idcode[2] = idcode[3] + 1;
++		} else
++			return NULL;
++	}
++
+ 	for (i = 0; i < ARRAY_SIZE(stmicro_spi_flash_table); i++) {
+ 		params = &stmicro_spi_flash_table[i];
+ 		if (params->idcode1 == idcode[2]) {
+@@ -327,24 +149,21 @@
+ 		return NULL;
+ 	}
+ 
+-	stm = malloc(sizeof(struct stmicro_spi_flash));
+-	if (!stm) {
++	flash = malloc(sizeof(*flash));
++	if (!flash) {
+ 		debug("SF: Failed to allocate memory\n");
+ 		return NULL;
+ 	}
+ 
+-	stm->params = params;
+-	stm->flash.spi = spi;
+-	stm->flash.name = params->name;
+-
+-	stm->flash.write = stmicro_write;
+-	stm->flash.erase = stmicro_erase;
+-	stm->flash.read = stmicro_read_fast;
+-	stm->flash.size = params->page_size * params->pages_per_sector
+-	    * params->nr_sectors;
++	flash->spi = spi;
++	flash->name = params->name;
+ 
+-	debug("SF: Detected %s with page size %u, total %u bytes\n",
+-	      params->name, params->page_size, stm->flash.size);
++	flash->write = spi_flash_cmd_write_multi;
++	flash->erase = stmicro_erase;
++	flash->read = spi_flash_cmd_read_fast;
++	flash->page_size = params->page_size;
++	flash->sector_size = params->page_size * params->pages_per_sector;
++	flash->size = flash->sector_size * params->nr_sectors;
+ 
+-	return &stm->flash;
++	return flash;
+ }
+diff -Naur u-boot-2009.08/drivers/mtd/spi/winbond.c u-boot-stamps//drivers/mtd/spi/winbond.c
+--- u-boot-2009.08/drivers/mtd/spi/winbond.c	1969-12-31 19:00:00.000000000 -0500
++++ u-boot-stamps//drivers/mtd/spi/winbond.c	2011-11-08 17:39:36.000000000 -0500
+@@ -0,0 +1,150 @@
++/*
++ * Copyright 2008, Network Appliance Inc.
++ * Author: Jason McMullan <mcmullan <at> netapp.com>
++ * Licensed under the GPL-2 or later.
++ */
++
++#include <common.h>
++#include <malloc.h>
++#include <spi_flash.h>
++
++#include "spi_flash_internal.h"
++
++/* M25Pxx-specific commands */
++#define CMD_W25_WREN		0x06	/* Write Enable */
++#define CMD_W25_WRDI		0x04	/* Write Disable */
++#define CMD_W25_RDSR		0x05	/* Read Status Register */
++#define CMD_W25_WRSR		0x01	/* Write Status Register */
++#define CMD_W25_READ		0x03	/* Read Data Bytes */
++#define CMD_W25_FAST_READ	0x0b	/* Read Data Bytes at Higher Speed */
++#define CMD_W25_PP		0x02	/* Page Program */
++#define CMD_W25_SE		0x20	/* Sector (4K) Erase */
++#define CMD_W25_BE		0xd8	/* Block (64K) Erase */
++#define CMD_W25_CE		0xc7	/* Chip Erase */
++#define CMD_W25_DP		0xb9	/* Deep Power-down */
++#define CMD_W25_RES		0xab	/* Release from DP, and Read Signature */
++
++struct winbond_spi_flash_params {
++	uint16_t	id;
++	/* Log2 of page size in power-of-two mode */
++	uint8_t		l2_page_size;
++	uint16_t	pages_per_sector;
++	uint16_t	sectors_per_block;
++	uint16_t	nr_blocks;
++	const char	*name;
++};
++
++static const struct winbond_spi_flash_params winbond_spi_flash_table[] = {
++	{
++		.id			= 0x3013,
++		.l2_page_size		= 8,
++		.pages_per_sector	= 16,
++		.sectors_per_block	= 16,
++		.nr_blocks		= 8,
++		.name			= "W25X40",
++	},
++	{
++		.id			= 0x3015,
++		.l2_page_size		= 8,
++		.pages_per_sector	= 16,
++		.sectors_per_block	= 16,
++		.nr_blocks		= 32,
++		.name			= "W25X16",
++	},
++	{
++		.id			= 0x3016,
++		.l2_page_size		= 8,
++		.pages_per_sector	= 16,
++		.sectors_per_block	= 16,
++		.nr_blocks		= 64,
++		.name			= "W25X32",
++	},
++	{
++		.id			= 0x3017,
++		.l2_page_size		= 8,
++		.pages_per_sector	= 16,
++		.sectors_per_block	= 16,
++		.nr_blocks		= 128,
++		.name			= "W25X64",
++	},
++	{
++		.id			= 0x4015,
++		.l2_page_size		= 8,
++		.pages_per_sector	= 16,
++		.sectors_per_block	= 16,
++		.nr_blocks		= 32,
++		.name			= "W25Q16",
++	},
++	{
++		.id			= 0x4016,
++		.l2_page_size		= 8,
++		.pages_per_sector	= 16,
++		.sectors_per_block	= 16,
++		.nr_blocks		= 64,
++		.name			= "W25Q32",
++	},
++	{
++		.id			= 0x4017,
++		.l2_page_size		= 8,
++		.pages_per_sector	= 16,
++		.sectors_per_block	= 16,
++		.nr_blocks		= 128,
++		.name			= "W25Q64",
++	},
++	{
++		.id			= 0x4018,
++		.l2_page_size		= 8,
++		.pages_per_sector	= 16,
++		.sectors_per_block	= 16,
++		.nr_blocks		= 256,
++		.name			= "W25Q128",
++	},
++};
++
++static int winbond_erase(struct spi_flash *flash, u32 offset, size_t len)
++{
++	return spi_flash_cmd_erase(flash, CMD_W25_SE, offset, len);
++}
++
++struct spi_flash *spi_flash_probe_winbond(struct spi_slave *spi, u8 *idcode)
++{
++	const struct winbond_spi_flash_params *params;
++	struct spi_flash *flash;
++	unsigned int i;
++	unsigned page_size;
++
++	for (i = 0; i < ARRAY_SIZE(winbond_spi_flash_table); i++) {
++		params = &winbond_spi_flash_table[i];
++		if (params->id == ((idcode[1] << 8) | idcode[2]))
++			break;
++	}
++
++	if (i == ARRAY_SIZE(winbond_spi_flash_table)) {
++		debug("SF: Unsupported Winbond ID %02x%02x\n",
++				idcode[1], idcode[2]);
++		return NULL;
++	}
++
++	flash = malloc(sizeof(*flash));
++	if (!flash) {
++		debug("SF: Failed to allocate memory\n");
++		return NULL;
++	}
++
++	flash->spi = spi;
++	flash->name = params->name;
++
++	/* Assuming power-of-two page size initially. */
++	page_size = 1 << params->l2_page_size;
++
++	flash->write = spi_flash_cmd_write_multi;
++	flash->erase = winbond_erase;
++	flash->read = spi_flash_cmd_read_fast;
++	flash->page_size = page_size;
++	flash->sector_size = page_size * params->pages_per_sector;
++	flash->size = page_size * params->pages_per_sector
++				* params->sectors_per_block
++				* params->nr_blocks;
++
++	return flash;
++}
+diff -Naur u-boot-2009.08/drivers/spi/spimxs u-boot-stamps//drivers/spi/spimxs
+--- u-boot-2009.08/drivers/spi/spimxs	1969-12-31 19:00:00.000000000 -0500
++++ u-boot-stamps//drivers/spi/spimxs	2011-10-28 23:14:41.000000000 -0500
+@@ -0,0 +1,40 @@
++if(dout!=NULL){
++		for (i = 0; i < bitlen/8; i++) {
++			printf("%d\n",i);
++			/* Check if it is last data byte to transfer */
++			if (flags & SPI_XFER_END && i == ((bitlen/8) - 1)){
++				spi_unlock_cs();
++				debug("CS TX unlocked\n");	
++			}
++			tmpdout = *(u8 *) dout;
++			spi_write(tmpdout);
++			debug("out:%x, %x\n",tmpdout,*(u8 *) dout);
++			dout++;
++		}
++	}
++	
++
++	if(din!=NULL){
++		for (i = 0; i < bitlen/8; i++) {
++			printf("%d\n",i);
++			/* Check if it is last data byte to transfer */
++			if (flags & SPI_XFER_END && i == ((bitlen/8)-1)){
++				spi_unlock_cs();
++				debug("CS RX unlocked\n");		
++			}
++			tmpdin = spi_read();
++			*((u8*)din) = tmpdin;
++			debug("in: %x, %x\n",*((u8*)din),tmpdin);
++			din++;
++		}
++	}
++	else{
++	printf("i: %d", i);
++			if (i==(bitlen/8)){
++				spi_unlock_cs();
++				debug("CS RX unlocked\n");		
++			}	
++	}	
++
++				
++	debug("return\n");
+diff -Naur u-boot-2009.08/include/asm-arm/mach-types.h u-boot-stamps//include/asm-arm/mach-types.h
+--- u-boot-2009.08/include/asm-arm/mach-types.h	2011-09-16 16:17:53.000000000 -0500
++++ u-boot-stamps//include/asm-arm/mach-types.h	2011-11-11 11:40:29.000000000 -0500
+@@ -2512,6 +2512,7 @@
+ #define MACH_TYPE_DOLBY_CAT1021        2530
+ #define MACH_TYPE_MX28EVK              2531
+ #define MACH_TYPE_MX23EVK              2629
++#define MACH_TYPE_MX23STAMPS           2630
+ #define MACH_TYPE_MX53_EVK             2716
+ 
+ #ifdef CONFIG_ARCH_EBSA110
+diff -Naur u-boot-2009.08/include/asm-arm/proc u-boot-stamps//include/asm-arm/proc
+--- u-boot-2009.08/include/asm-arm/proc	2011-09-16 16:17:52.000000000 -0500
++++ u-boot-stamps//include/asm-arm/proc	1969-12-31 19:00:00.000000000 -0500
+@@ -1 +0,0 @@
+-proc-armv
+\ No newline at end of file
+diff -Naur u-boot-2009.08/include/config_cmd_all.h u-boot-stamps//include/config_cmd_all.h
+--- u-boot-2009.08/include/config_cmd_all.h	2009-08-31 12:57:42.000000000 -0500
++++ u-boot-stamps//include/config_cmd_all.h	2011-10-18 09:41:32.000000000 -0500
+@@ -59,7 +59,7 @@
+ #define CONFIG_CMD_MMC		/* MMC support			*/
+ #define CONFIG_CMD_MTDPARTS	/* mtd parts support		*/
+ #define CONFIG_CMD_NAND		/* NAND support			*/
+-#define CONFIG_CMD_NET		/* bootp, tftpboot, rarpboot	*/
++//#define CONFIG_CMD_NET		/* bootp, tftpboot, rarpboot	*/
+ #define CONFIG_CMD_NFS		/* NFS support			*/
+ #define CONFIG_CMD_ONENAND	/* OneNAND support		*/
+ #define CONFIG_CMD_PCI		/* pciinfo			*/
+diff -Naur u-boot-2009.08/include/configs/mx23_stamps.h u-boot-stamps//include/configs/mx23_stamps.h
+--- u-boot-2009.08/include/configs/mx23_stamps.h	1969-12-31 19:00:00.000000000 -0500
++++ u-boot-stamps//include/configs/mx23_stamps.h	2012-02-10 00:18:36.013636641 -0500
+@@ -0,0 +1,145 @@
++/*
++ * Copyright (C) 2008 Embedded Alley Solutions, Inc.
++ *
++ * (C) Copyright 2009-2010 Freescale Semiconductor, Inc.
++ *
++ * Adapted to STAMPS BOARD by Andrés Mauricio Asprilla Valdés (amasprillav@unal.edu.co)
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License as
++ * published by the Free Software Foundation; either version 2 of
++ * the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
++ * MA 02111-1307 USA
++ */
++
++#ifndef __CONFIG_H
++#define __CONFIG_H
++#include <asm/sizes.h>
++
++/*
++ * Define this to make U-Boot skip low level initialization when loaded
++ * by initial bootloader. Not required by NAND U-Boot version but IS
++ * required for a NOR version used to burn the real NOR U-Boot into
++ * NOR Flash. NAND and NOR support for DaVinci chips is mutually exclusive
++ * so it is NOT possible to build a U-Boot with both NAND and NOR routines.
++ * NOR U-Boot is loaded directly from Flash so it must perform all the
++ * low level initialization itself. NAND version is loaded by an initial
++ * bootloader (UBL in TI-ese) that performs such an initialization so it's
++ * skipped in NAND version. The third DaVinci boot mode loads a bootloader
++ * via UART0 and that bootloader in turn loads and runs U-Boot (or whatever)
++ * performing low level init prior to loading. All that means we can NOT use
++ * NAND version to put U-Boot into NOR because it doesn't have NOR support and
++ * we can NOT use NOR version because it performs low level initialization
++ * effectively destroying itself in DDR memory. That's why a separate NOR
++ * version with this define is needed. It is loaded via UART, then one uses
++ * it to somehow download a proper NOR version built WITHOUT this define to
++ * RAM (tftp?) and burn it to NOR Flash. I would be probably able to squeeze
++ * NOR support into the initial bootloader so it won't be needed but DaVinci
++ * static RAM might be too small for this (I have something like 2Kbytes left
++ * as of now, without NOR support) so this might've not happened...
++ *
++ */
++
++/*===================*/
++/* SoC Configuration */
++/*===================*/
++
++#define CONFIG_ARM926EJS			/* arm926ejs CPU core */
++#define CONFIG_MX23				/* MX23 SoC */
++#define CONFIG_MX23_STAMPS			/* MX23 STAMPS */
++#define CONFIG_SYS_CLK_FREQ	120000000	/* Arm Clock frequency */
++#define CONFIG_USE_TIMER0			/* use timer 0 */
++#define CONFIG_SYS_HZ		1000		/* Ticks per second */
++/*=============*/
++/* Memory Info */
++/*=============*/
++#define CONFIG_SYS_MALLOC_LEN	(0x10000 + 128*1024)	/* malloc() len */
++#define CONFIG_SYS_GBL_DATA_SIZE 128		/* reserved for initial data */
++#define CONFIG_SYS_MEMTEST_START 0x40000000	/* memtest start address */
++#define CONFIG_SYS_MEMTEST_END	 0x41000000	/* 16MB RAM test */
++#define CONFIG_NR_DRAM_BANKS	1		/* we have 1 bank of DRAM */
++#define CONFIG_STACKSIZE	(256*1024)	/* regular stack */
++#define PHYS_SDRAM_1		0x40000000	/* mDDR Start */
++#define PHYS_SDRAM_1_SIZE	0x02000000	/* mDDR size 32MB */
++
++/*====================*/
++/* Serial Driver info */
++/*====================*/
++#define CONFIG_STMP3XXX_DBGUART			/* 378x debug UART */
++#define CONFIG_DBGUART_CLK	24000000
++#define CONFIG_BAUDRATE		115200		/* Default baud rate */
++#define CONFIG_SYS_BAUDRATE_TABLE	{ 9600, 19200, 38400, 57600, 115200 }
++
++/*====================*/
++/* SPI Driver info */
++/*====================*/
++#define CONFIG_SSP_CLK          48000000
++#define CONFIG_SPI_CLK          12000000	
++#define CONFIG_SPI_SSP1		1
++#define CONFIG_SPI_SSP2		1
++#define CONFIG_CMD_SF		1
++#ifdef CONFIG_CMD_SF
++	#define CONFIG_FSL_SF		1
++	#define CONFIG_SPI_FLASH
++	#define CONFIG_SPI_FLASH_CS	1
++	#define MAX_SPI_BYTES		4000000
++	#define CONFIG_SPI_FLASH_STMICRO
++#endif
++/*=====================*/
++/* Flash & Environment */
++/*=====================*/
++#define CONFIG_SYS_NO_FLASH			/* Flash is not supported */
++#define CONFIG_ENV_IS_NOWHERE		/* Store ENV in memory only */
++#define CONFIG_ENV_SIZE		0x20000
++
++/*==============================*/
++/* U-Boot general configuration */
++/*==============================*/
++#undef	CONFIG_USE_IRQ				/* No IRQ/FIQ in U-Boot */
++#define CONFIG_BOOTDELAY	2
++#define CONFIG_BOOTFILE		"uImage"	/* Boot file name */
++#define CONFIG_SYS_PROMPT	"STAMPS U-Boot > "						/* Monitor Command Prompt */
++#define CONFIG_SYS_CBSIZE	1024		/* Console I/O Buffer Size  */
++#define CONFIG_SYS_PBSIZE	(CONFIG_SYS_CBSIZE+sizeof(CONFIG_SYS_PROMPT)+16)
++						/* Print buffer sz */
++#define CONFIG_SYS_MAXARGS	16		/* max number of command args */
++#define CONFIG_SYS_BARGSIZE	CONFIG_SYS_CBSIZE
++						/* Boot Argument Buffer Size */
++#define CONFIG_SYS_LOAD_ADDR	0x40400000
++				/* default Linux kernel load address */
++#define CONFIG_VERSION_VARIABLE
++#define CONFIG_AUTO_COMPLETE	/* Won't work with hush so far, may be later */
++#define CFG_HUSH_PARSER
++#define CFG_PROMPT_HUSH_PS2	"> "
++#define CONFIG_CMDLINE_EDITING
++#define CFG_LONGHELP
++#define CONFIG_CRC32_VERIFY
++#define CONFIG_MX_CYCLIC
++
++/*===================*/
++/* Linux Information */
++/*===================*/
++#define LINUX_BOOT_PARAM_ADDR	0x40000100
++#define CONFIG_CMDLINE_TAG
++#define CONFIG_SETUP_MEMORY_TAGS
++#define CONFIG_BOOTARGS		"setenv bootargs mem=32M console=ttyAM0,115200n8 ssp1=spi1 root=/dev/ram0 rw initrd=0x40400000,8M rootfstype=ext2 init=/bin/sh"
++#define CONFIG_BOOTCOMMAND	"sf probe 0:0; sf read 0x40000100 0x20000 0x140000; sf read 0x40400000 0x1a0000 0xf1000; bootm 0x40000100"
++
++/*=================*/
++/* U-Boot commands */
++/*=================*/
++#include <config_cmd_default.h>
++#undef CONFIG_CMD_ASKENV
++#undef CONFIG_CMD_DHCP
++#undef CONFIG_CMD_NET
++#undef CONFIG_CMD_PING
++#endif /* __CONFIG_H */
+diff -Naur u-boot-2009.08/include/imx_spi.h u-boot-stamps//include/imx_spi.h
+--- u-boot-2009.08/include/imx_spi.h	2011-09-16 16:17:52.000000000 -0500
++++ u-boot-stamps//include/imx_spi.h	2011-09-14 12:39:41.000000000 -0500
+@@ -68,6 +68,16 @@
+ 	#define SPI_DMA_REG		0x14
+ 	#define SPI_STAT_REG		0x18
+ 	#define SPI_PERIOD_REG		0x1C
++#elif defined(IMX_SPI)
++	#define	SPI_RX_DATA		0x0
++	#define SPI_TX_DATA		0x4
++	#define SPI_CON_REG		0x8
++	#define SPI_CFG_REG		0xC
++	#define SPI_INT_REG		0x10
++	#define SPI_DMA_REG		0x14
++	#define SPI_STAT_REG		0x18
++	#define SPI_PERIOD_REG		0x1C
++
+ #endif
+ 
+ struct spi_reg_t {
+diff -Naur u-boot-2009.08/include/spi_flash.h u-boot-stamps//include/spi_flash.h
+--- u-boot-2009.08/include/spi_flash.h	2009-08-31 12:57:42.000000000 -0500
++++ u-boot-stamps//include/spi_flash.h	2011-11-08 17:39:36.000000000 -0500
+@@ -24,18 +24,19 @@
+ #define _SPI_FLASH_H_
+ 
+ #include <spi.h>
+-
+-struct spi_flash_region {
+-	unsigned int	count;
+-	unsigned int	size;
+-};
++#include <linux/types.h>
+ 
+ struct spi_flash {
+ 	struct spi_slave *spi;
+ 
+ 	const char	*name;
+ 
++	/* Total flash size */
+ 	u32		size;
++	/* Write (page) size */
++	u32		page_size;
++	/* Erase (sector) size */
++	u32		sector_size;
+ 
+ 	int		(*read)(struct spi_flash *flash, u32 offset,
+ 				size_t len, void *buf);
+diff -Naur u-boot-2009.08/Makefile u-boot-stamps//Makefile
+--- u-boot-2009.08/Makefile	2011-09-16 16:17:53.000000000 -0500
++++ u-boot-stamps//Makefile	2011-11-18 10:20:36.000000000 -0500
+@@ -3207,6 +3207,9 @@
+ mx23_evk_config : unconfig
+ 	@$(MKCONFIG) $(@:_config=) arm arm926ejs mx23_evk freescale mx23
+ 
++mx23_stamps_config : unconfig
++	@$(MKCONFIG) $(@:_config=) arm arm926ejs mx23_stamps freescale mx23
++
+ mx25_3stack_mfg_config \
+ mx25_3stack_config	:	unconfig
+ 	@$(MKCONFIG) $(@:_config=) arm arm926ejs mx25_3stack freescale mx25

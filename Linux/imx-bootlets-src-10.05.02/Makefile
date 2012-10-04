@@ -1,4 +1,4 @@
-export CROSS_COMPILE=arm-linux-
+export CROSS_COMPILE=arm-none-eabi-
 MEM_TYPE ?= MEM_DDR1
 export MEM_TYPE
 
